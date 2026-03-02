@@ -11,7 +11,7 @@ The `Send()` method is used to make chat completion requests to the Edgee AI Gat
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-5.2"`) |
 | `input` | `any` | The input for the completion. Can be a `string`, `InputObject`, `*InputObject`, or `map[string]interface{}` |
 
 ### Input Types
@@ -23,7 +23,7 @@ The `Send()` method accept multiple input types:
 When `input` is a string, it's automatically converted to a user message:
 
 ```go
-response, err := client.Send("gpt-4o", "What is the capital of France?")
+response, err := client.Send("gpt-5.2", "What is the capital of France?")
 if err != nil {
     log.Fatal(err)
 }
@@ -57,7 +57,7 @@ input := edgee.InputObject{
     },
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 if err != nil {
     log.Fatal(err)
 }
@@ -76,7 +76,7 @@ input := edgee.InputObject{
     Tags: []string{"summarization", "production", "user-123"},
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 ```
 
 #### Map Input
@@ -90,7 +90,7 @@ input := map[string]interface{}{
     },
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 if err != nil {
     log.Fatal(err)
 }
@@ -128,7 +128,7 @@ input := edgee.InputObject{
     },
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 if err != nil {
     log.Fatal(err)
 }
@@ -168,7 +168,7 @@ Each choice in the `Choices` array contains:
 **Example - Handling Multiple Choices:**
 
 ```go
-response, err := client.Send("gpt-4o", "Give me a creative idea.")
+response, err := client.Send("gpt-5.2", "Give me a creative idea.")
 if err != nil {
     log.Fatal(err)
 }
@@ -205,7 +205,7 @@ Token usage information (when available):
 **Example - Accessing Token Usage:**
 
 ```go
-response, err := client.Send("gpt-4o", "Explain quantum computing briefly.")
+response, err := client.Send("gpt-5.2", "Explain quantum computing briefly.")
 if err != nil {
     log.Fatal(err)
 }
@@ -230,7 +230,7 @@ Token compression metrics (when compression is applied):
 **Example - Accessing Compression Metrics:**
 
 ```go
-response, err := client.Send("gpt-4o", edgee.InputObject{
+response, err := client.Send("gpt-5.2", edgee.InputObject{
     Messages: []edgee.Message{
         {Role: "user", Content: "Analyze this long document with lots of context..."},
     },
@@ -266,7 +266,7 @@ The `SendResponse` struct provides convenience methods for easier access:
 **Example - Using Convenience Methods:**
 
 ```go
-response, err := client.Send("gpt-4o", "Hello!")
+response, err := client.Send("gpt-5.2", "Hello!")
 if err != nil {
     log.Fatal(err)
 }
@@ -294,7 +294,7 @@ if toolCalls := response.ToolCalls(); len(toolCalls) > 0 {
 The `Send()` method return Go errors:
 
 ```go
-response, err := client.Send("gpt-4o", "Hello!")
+response, err := client.Send("gpt-5.2", "Hello!")
 if err != nil {
     // Handle errors
     log.Fatalf("Request failed: %v", err)

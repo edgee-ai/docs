@@ -11,7 +11,7 @@ The `Stream()` method is used to make streaming chat completion requests to the 
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-5.2"`) |
 | `input` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `any` | The input for the completion. Can be a `string`, `InputObject`, `*InputObject`, or `map[string]interface{}` |
 
 ### Input Types
@@ -23,7 +23,7 @@ The `Stream()` method accepts the same input types as `Send()`:
 When `input` is a string, it's automatically converted to a user message:
 
 ```go
-chunkChan, errChan := client.Stream("gpt-4o", "Tell me a story")
+chunkChan, errChan := client.Stream("gpt-5.2", "Tell me a story")
 
 for {
     select {
@@ -75,7 +75,7 @@ input := edgee.InputObject{
     },
 }
 
-chunkChan, errChan := client.Stream("gpt-4o", input)
+chunkChan, errChan := client.Stream("gpt-5.2", input)
 
 for {
     select {
@@ -127,7 +127,7 @@ Each choice in the `Choices` array contains:
 **Example - Handling Multiple Choices:**
 
 ```go
-chunkChan, errChan := client.Stream("gpt-4o", "Give me creative ideas")
+chunkChan, errChan := client.Stream("gpt-5.2", "Give me creative ideas")
 
 for {
     select {
@@ -171,7 +171,7 @@ The `StreamChunk` struct provides convenience methods for easier access:
 **Example - Using Convenience Methods:**
 
 ```go
-chunkChan, errChan := client.Stream("gpt-4o", "Explain quantum computing")
+chunkChan, errChan := client.Stream("gpt-5.2", "Explain quantum computing")
 
 for {
     select {
@@ -213,7 +213,7 @@ for {
 **Example - Collecting Full Response:**
 
 ```go
-chunkChan, errChan := client.Stream("gpt-4o", "Tell me a story")
+chunkChan, errChan := client.Stream("gpt-5.2", "Tell me a story")
 var fullText strings.Builder
 
 for {
@@ -282,7 +282,7 @@ The `Stream()` method can return errors in two ways:
 2. **Stream errors**: Individual errors sent through the `errChan` channel
 
 ```go
-chunkChan, errChan := client.Stream("gpt-4o", "Hello!")
+chunkChan, errChan := client.Stream("gpt-5.2", "Hello!")
 
 for {
     select {

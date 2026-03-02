@@ -13,7 +13,7 @@ The `stream()` method accepts two arguments:
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-5.2"`) |
 | `input` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string \| InputObject` | The input for the completion. Can be a simple string or a structured `InputObject` |
 
 ### Input Types
@@ -23,7 +23,7 @@ The `stream()` method accepts two arguments:
 When `input` is a string, it's automatically converted to a user message:
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', 'Tell me a story')) {
+for await (const chunk of edgee.stream('gpt-5.2', 'Tell me a story')) {
   if (chunk.text) {
     process.stdout.write(chunk.text);
   }
@@ -55,7 +55,7 @@ For details about `Tool` and `ToolChoice` types, see the [Tools documentation](/
 **Example - Streaming with Messages:**
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', {
+for await (const chunk of edgee.stream('gpt-5.2', {
   messages: [
     { role: 'system', content: 'You are a helpful assistant.' },
     { role: 'user', content: 'Write a poem about coding' }
@@ -93,7 +93,7 @@ Each choice in the `choices` array contains:
 **Example - Handling Multiple Choices:**
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', 'Give me creative ideas')) {
+for await (const chunk of edgee.stream('gpt-5.2', 'Give me creative ideas')) {
   chunk.choices.forEach((choice, index) => {
     if (choice.delta.content) {
       console.log(`Choice ${index}: ${choice.delta.content}`);
@@ -125,7 +125,7 @@ The `StreamChunk` class provides convenience getters for easier access:
 **Example - Using Convenience Properties:**
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', 'Explain quantum computing')) {
+for await (const chunk of edgee.stream('gpt-5.2', 'Explain quantum computing')) {
   // Content chunks
   if (chunk.text) {
     process.stdout.write(chunk.text);
@@ -156,7 +156,7 @@ for await (const chunk of edgee.stream('gpt-4o', 'Explain quantum computing')) {
 ```typescript
 let fullText = '';
 
-for await (const chunk of edgee.stream('gpt-4o', 'Tell me a story')) {
+for await (const chunk of edgee.stream('gpt-5.2', 'Tell me a story')) {
   if (chunk.text) {
     fullText += chunk.text;
     process.stdout.write(chunk.text); // Also display as it streams
@@ -188,7 +188,7 @@ Some chunks may not contain `content`. This is normal and can happen when:
 Always check for `chunk.text` before using it:
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', 'Hello')) {
+for await (const chunk of edgee.stream('gpt-5.2', 'Hello')) {
   if (chunk.text) {  // ✅ Good: Check before using
     console.log(chunk.text);
   }
@@ -202,7 +202,7 @@ The `stream()` method can throw errors:
 
 ```typescript
 try {
-  for await (const chunk of edgee.stream('gpt-4o', 'Hello!')) {
+  for await (const chunk of edgee.stream('gpt-5.2', 'Hello!')) {
     if (chunk.text) {
       process.stdout.write(chunk.text);
     }

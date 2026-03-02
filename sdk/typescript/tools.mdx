@@ -54,7 +54,7 @@ The `parameters` field uses JSON Schema format:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'What is the weather in Paris?' }
@@ -111,7 +111,7 @@ type ToolChoice =
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'What is the weather?' }
@@ -139,7 +139,7 @@ const response = await edgee.send({
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'What is the weather?' }
@@ -203,7 +203,7 @@ async function getWeather(location: string, unit: string = 'celsius') {
 
 // Step 1: Initial request with tools
 const response1 = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'What is the weather in Paris and Tokyo?' }
@@ -257,7 +257,7 @@ if (response1.toolCalls) {
 
 // Step 3: Send results back
 const response2 = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages,
     tools: [
@@ -292,7 +292,7 @@ You can provide multiple tools and let the model choose:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'Get the weather in Paris and send an email about it' }
@@ -339,7 +339,7 @@ const response = await edgee.send({
 The `stream()` method also supports tools. For details about streaming, see the [Stream Method documentation](/sdk/typescript/stream).
 
 ```typescript
-for await (const chunk of edgee.stream('gpt-4o', {
+for await (const chunk of edgee.stream('gpt-5.2', {
   messages: [
     { role: 'user', content: 'What is the weather in Paris?' }
   ],
@@ -486,7 +486,7 @@ Include tools in follow-up requests so the model can call them again if needed:
 
 ```typescript
 const response2 = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [...messagesWithToolResults],
     tools: [

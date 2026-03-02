@@ -313,7 +313,7 @@ With Edgee, you can access models from multiple providers using the same Anthrop
 
     # Use GPT-4 through the same client
     gpt_response = client.messages.create(
-        model="gpt-4o",
+        model="gpt-5.2",
         max_tokens=1024,
         messages=[{"role": "user", "content": "Hello!"}]
     )
@@ -345,7 +345,7 @@ With Edgee, you can access models from multiple providers using the same Anthrop
 
     // Use GPT-4 through the same client
     const gptResponse = await client.messages.create({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       max_tokens: 1024,
       messages: [{ role: 'user', content: 'Hello!' }]
     });

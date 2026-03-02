@@ -101,7 +101,7 @@ let input = InputObject::new(vec![
 ])
 .with_tools(vec![Tool::function(function)]);
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 ```
 
 ## Tool Choice
@@ -128,7 +128,7 @@ let input = InputObject::new(vec![
     "function": {"name": "get_weather"}
 }));
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 // Model will always call get_weather
 ```
 
@@ -143,7 +143,7 @@ let input = InputObject::new(vec![
 .with_tools(vec![Tool::function(function)])
 .with_tool_choice(json!("none"));
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 // Model will not call tools, even though they're available
 ```
 
@@ -215,7 +215,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     ])
     .with_tools(vec![Tool::function(function)]);
 
-    let response1 = client.send("gpt-4o", input).await?;
+    let response1 = client.send("gpt-5.2", input).await?;
 
     // Step 2: Execute all tool calls
     let mut messages = vec![
@@ -268,7 +268,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input2 = InputObject::new(messages)
         .with_tools(vec![Tool::function(function2)]);
 
-    let response2 = client.send("gpt-4o", input2).await?;
+    let response2 = client.send("gpt-5.2", input2).await?;
     println!("{}", response2.text().unwrap_or(""));
 
     Ok(())
@@ -297,7 +297,7 @@ let input = InputObject::new(vec![
 ])
 .with_tools(vec![get_weather_tool, send_email_tool]);
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 ```
 
 ## Streaming with Tools
@@ -312,7 +312,7 @@ let input = InputObject::new(vec![
 ])
 .with_tools(vec![Tool::function(function)]);
 
-let mut stream = client.stream("gpt-4o", input).await?;
+let mut stream = client.stream("gpt-5.2", input).await?;
 
 while let Some(result) = stream.next().await {
     match result {
@@ -496,7 +496,7 @@ let input2 = InputObject::new(messages_with_tool_results)
         Tool::function(function)
     ]);
 
-let response2 = client.send("gpt-4o", input2).await?;
+let response2 = client.send("gpt-5.2", input2).await?;
 ```
 
 **Example - Checking for Tool Calls:**
@@ -541,7 +541,7 @@ if let Some(tool_calls) = response.tool_calls() {
     let input2 = InputObject::new(messages)
         .with_tools(vec![Tool::function(function)]);
 
-    let response2 = client.send("gpt-4o", input2).await?;
+    let response2 = client.send("gpt-5.2", input2).await?;
     println!("{}", response2.text().unwrap_or(""));
     // "The weather in Paris is 15°C and sunny."
 }

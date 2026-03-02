@@ -11,7 +11,7 @@ The `send()` method is used to make non-streaming chat completion requests to th
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `str` | The model identifier to use (e.g., `"gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `str` | The model identifier to use (e.g., `"gpt-5.2"`) |
 | `input` | `str \| InputObject \| dict` | The input for the completion. Can be a simple string or a structured `InputObject` or dictionary |
 | `stream` | `bool` | If `True`, returns a generator yielding `StreamChunk` objects. If `False` (default), returns a `SendResponse` object |
 
@@ -23,7 +23,7 @@ When `input` is a string, it's automatically converted to a user message:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input="What is the capital of France?"
 )
 
@@ -49,7 +49,7 @@ When `input` is an `InputObject` or dictionary, you have full control over the c
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is 2+2?"}
@@ -65,7 +65,7 @@ print(response.text)
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "Summarize this article"}
@@ -99,7 +99,7 @@ Each message in the `messages` array has the following structure:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "system", "content": "You are a helpful assistant."},
@@ -142,7 +142,7 @@ Each choice in the `choices` array contains:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input="Give me a creative idea."
 )
 
@@ -176,7 +176,7 @@ Token usage information (when available):
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input="Explain quantum computing briefly."
 )
 
@@ -200,7 +200,7 @@ Token compression metrics (when compression is applied):
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "Analyze this long document with lots of context..."}
@@ -235,7 +235,7 @@ The `SendResponse` class provides convenience properties for easier access:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input="Hello!"
 )
 
@@ -258,7 +258,7 @@ if response.tool_calls:
 You can use `send()` with `stream=True` to get streaming responses. This returns a generator yielding `StreamChunk` objects:
 
 ```python
-for chunk in edgee.send("gpt-4o", "Tell me a story", stream=True):
+for chunk in edgee.send("gpt-5.2", "Tell me a story", stream=True):
     if chunk.text:
         print(chunk.text, end="", flush=True)
 ```
@@ -272,7 +272,7 @@ The `send()` method can raise exceptions in several scenarios:
 ```python
 try:
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input="Hello!"
     )
 except RuntimeError as error:

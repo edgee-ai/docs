@@ -17,7 +17,7 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
     const edgee = new Edgee("your-api-key");
     
     const response = await edgee.send({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       input: 'What is the capital of France?',
     });
 
@@ -35,7 +35,7 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
     edgee = Edgee("your-api-key")
     
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input="What is the capital of France?"
     )
     
@@ -58,7 +58,7 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
     func main() {
         client, _ := edgee.NewClient("your-api-key")
 
-        response, err := client.Send("gpt-4o", "What is the capital of France?")
+        response, err := client.Send("gpt-5.2", "What is the capital of France?")
         if err != nil {
             log.Fatal(err)
         }
@@ -76,7 +76,7 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
     use edgee::Edgee;
 
     let client = Edgee::with_api_key("your-api-key");
-    let response = client.send("gpt-4o", "What is the capital of France?").await.unwrap();
+    let response = client.send("gpt-5.2", "What is the capital of France?").await.unwrap();
 
     println!("{}", response.text().unwrap_or(""));
     if let Some(compression) = &response.compression {

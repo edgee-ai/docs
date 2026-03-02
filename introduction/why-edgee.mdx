@@ -101,7 +101,7 @@ With a single Edgee API key, you get instant access to every supported model; Op
 const edgee = new Edgee();
 
 // Access any model with the same key
-await edgee.send({ model: 'gpt-4o', input: 'Hello, world!' });
+await edgee.send({ model: 'gpt-5.2', input: 'Hello, world!' });
 await edgee.send({ model: 'claude-sonnet-4.5', input: 'Hello, world!' });
 await edgee.send({ model: 'gemini-3-pro', input: 'Hello, world!' });
 ```
@@ -112,7 +112,7 @@ from edgee import Edgee
 edgee = Edgee()
 
 # Access any model with the same key
-edgee.send(model='gpt-4o', input='Hello, world!')
+edgee.send(model='gpt-5.2', input='Hello, world!')
 edgee.send(model='claude-sonnet-4.5', input='Hello, world!')
 edgee.send(model='gemini-3-pro', input='Hello, world!')
 ```
@@ -123,7 +123,7 @@ use edgee::Edgee;
 let client = Edgee::from_env()?;
 
 // Access any model with the same key
-client.send("gpt-4o", "Hello, world!").await?;
+client.send("gpt-5.2", "Hello, world!").await?;
 client.send("claude-sonnet-4.5", "Hello, world!").await?;
 client.send("gemini-3-pro", "Hello, world!").await?;
 ```
@@ -134,7 +134,7 @@ import "github.com/edgee-ai/go-sdk/edgee"
 client, _ := edgee.NewClient(nil)
 
 // Access any model with the same key
-client.Send("gpt-4o", "Hello, world!")
+client.Send("gpt-5.2", "Hello, world!")
 client.Send("claude-sonnet-4.5", "Hello, world!")
 client.Send("gemini-3-pro", "Hello, world!")
 ```

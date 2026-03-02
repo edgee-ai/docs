@@ -76,7 +76,7 @@
                   "id": "chatcmpl-123",
                   "object": "chat.completion",
                   "created": 1677652288,
-                  "model": "openai/gpt-4o",
+                  "model": "openai/gpt-5.2",
                   "choices": [
                     {
                       "index": 0,
@@ -114,13 +114,13 @@
                 },
                 "examples": {
                   "contentChunk": {
-                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-4o\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"Hello\"},\"finish_reason\":null}]}\n\n"
+                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-5.2\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\"Hello\"},\"finish_reason\":null}]}\n\n"
                   },
                   "roleChunk": {
-                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-4o\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\"},\"finish_reason\":null}]}\n\n"
+                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-5.2\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\"},\"finish_reason\":null}]}\n\n"
                   },
                   "finalChunk": {
-                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-4o\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":10,\"completion_tokens\":10,\"total_tokens\":20,\"input_tokens_details\":{\"cached_tokens\":0},\"output_tokens_details\":{\"reasoning_tokens\":0}}}\n\n"
+                    "value": "data: {\"id\":\"chatcmpl-123\",\"object\":\"chat.completion.chunk\",\"created\":1677652288,\"model\":\"openai/gpt-5.2\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":10,\"completion_tokens\":10,\"total_tokens\":20,\"input_tokens_details\":{\"cached_tokens\":0},\"output_tokens_details\":{\"reasoning_tokens\":0}}}\n\n"
                   }
                 }
               }
@@ -154,7 +154,7 @@
                     "value": {
                       "error": {
                         "code": "provider_not_supported",
-                        "message": "Provider 'anthropic' is not supported for model 'openai/gpt-4o'"
+                        "message": "Provider 'anthropic' is not supported for model 'openai/gpt-5.2'"
                       }
                     }
                   }
@@ -206,7 +206,7 @@
                     "value": {
                       "error": {
                         "code": "forbidden",
-                        "message": "Model 'openai/gpt-4o' is not allowed for this API key"
+                        "message": "Model 'openai/gpt-5.2' is not allowed for this API key"
                       }
                     }
                   }
@@ -351,13 +351,13 @@
                   "object": "list",
                   "data": [
                     {
-                      "id": "openai/gpt-4o",
+                      "id": "openai/gpt-5.2",
                       "object": "model",
                       "created": 1677610602,
                       "owned_by": "openai"
                     },
                     {
-                      "id": "anthropic/claude-3-opus",
+                      "id": "anthropic/claude--opus",
                       "object": "model",
                       "created": 1677610602,
                       "owned_by": "anthropic"
@@ -492,7 +492,7 @@
           "model": {
             "type": "string",
             "description": "Optional model hint to improve tokenizer selection. When provided, the gateway uses this to choose the most appropriate tokenizer for the target model.",
-            "example": "openai/gpt-4o"
+            "example": "openai/gpt-5.2"
           }
         }
       },
@@ -519,8 +519,8 @@
         "properties": {
           "model": {
             "type": "string",
-            "description": "ID of the model to use. Format: `{author_id}/{model_id}` (e.g. `openai/gpt-4o`)",
-            "example": "openai/gpt-4o"
+            "description": "ID of the model to use. Format: `{author_id}/{model_id}` (e.g. `openai/gpt-5.2`)",
+            "example": "openai/gpt-5.2"
           },
           "messages": {
             "type": "array",
@@ -782,7 +782,7 @@
           "model": {
             "type": "string",
             "description": "The model used for the chat completion.",
-            "example": "openai/gpt-4o"
+            "example": "openai/gpt-5.2"
           },
           "choices": {
             "type": "array",
@@ -917,7 +917,7 @@
           "id": {
             "type": "string",
             "description": "The model identifier, which can be referenced in the API. Format: `{author_id}/{model_id}`.",
-            "example": "openai/gpt-4o"
+            "example": "openai/gpt-5.2"
           },
           "object": {
             "type": "string",
@@ -969,7 +969,7 @@
           "model": {
             "type": "string",
             "description": "The model used for the chat completion.",
-            "example": "openai/gpt-4o"
+            "example": "openai/gpt-5.2"
           },
           "choices": {
             "type": "array",

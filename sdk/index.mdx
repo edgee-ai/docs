@@ -22,7 +22,7 @@ Choose your language and get started in minutes:
     const edgee = new Edgee("your-api-key");
     
     const response = await edgee.send({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       input: 'What is the capital of France?',
     });
     
@@ -44,7 +44,7 @@ Choose your language and get started in minutes:
     edgee = Edgee("your-api-key")
     
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input="What is the capital of France?"
     )
     
@@ -71,7 +71,7 @@ Choose your language and get started in minutes:
     func main() {
         client, _ := edgee.NewClient("your-api-key")
 
-        response, err := client.Send("gpt-4o", "What is the capital of France?")
+        response, err := client.Send("gpt-5.2", "What is the capital of France?")
         if err != nil {
             log.Fatal(err)
         }
@@ -93,7 +93,7 @@ Choose your language and get started in minutes:
     use edgee::Edgee;
 
     let client = Edgee::with_api_key("your-api-key");
-    let response = client.send("gpt-4o", "What is the capital of France?").await.unwrap();
+    let response = client.send("gpt-5.2", "What is the capital of France?").await.unwrap();
 
     println!("{}", response.text().unwrap_or(""));
     if let Some(compression) = &response.compression {

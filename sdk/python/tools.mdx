@@ -62,7 +62,7 @@ The `parameters` field uses JSON Schema format:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is the weather in Paris?"}
@@ -110,7 +110,7 @@ The `tool_choice` parameter controls when and which tools the model should call:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is the weather?"}
@@ -138,7 +138,7 @@ response = edgee.send(
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is the weather?"}
@@ -204,7 +204,7 @@ async def get_weather(location: str, unit: str = "celsius"):
 
 # Step 1: Initial request with tools
 response1 = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is the weather in Paris and Tokyo?"}
@@ -256,7 +256,7 @@ if response1.tool_calls:
 
 # Step 3: Send results back
 response2 = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": messages,
         "tools": [
@@ -289,7 +289,7 @@ You can provide multiple tools and let the model choose which ones to call:
 
 ```python
 response = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "Get the weather in Paris and send an email about it"}
@@ -336,7 +336,7 @@ response = edgee.send(
 The `stream()` method also supports tools. For details about streaming, see the [Stream Method documentation](/sdk/python/stream).
 
 ```python
-for chunk in edgee.stream("gpt-4o", {
+for chunk in edgee.stream("gpt-5.2", {
     "messages": [
         {"role": "user", "content": "What is the weather in Paris?"}
     ],
@@ -499,7 +499,7 @@ Include tools in follow-up requests so the model can call them again if needed:
 
 ```python
 response2 = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [...messages_with_tool_results],
         "tools": [
@@ -530,7 +530,7 @@ weather_result = await get_weather(args["location"], args.get("unit"))
 
 # Send the result back
 response2 = edgee.send(
-    model="gpt-4o",
+    model="gpt-5.2",
     input={
         "messages": [
             {"role": "user", "content": "What is the weather in Paris?"},

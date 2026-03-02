@@ -49,7 +49,7 @@ const openai = new OpenAI({
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
+    model: "gpt-5.2",
     messages: [
       { role: "user", content: "What is the capital of France?" }
     ],
@@ -72,7 +72,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-  model="gpt-4o",
+  model="gpt-5.2",
   messages=[
     {
       "role": "user",
@@ -101,7 +101,7 @@ const openai = new OpenAI({
 });
 
 const completion = await openai.chat.completions.create({
-  model: "gpt-4o",
+  model: "gpt-5.2",
   messages: [
     { role: "user", content: "Summarize this long document..." }
   ],
@@ -123,7 +123,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-  model="gpt-4o",
+  model="gpt-5.2",
   messages=[
     {"role": "user", "content": "Summarize this long document..."}
   ],
@@ -163,7 +163,7 @@ const openai = new OpenAI({
 
 // All requests will use compression with 80% target rate
 const completion = await openai.chat.completions.create({
-  model: "gpt-4o",
+  model: "gpt-5.2",
   messages: [
     { role: "user", content: "Analyze this long document..." }
   ],
@@ -185,7 +185,7 @@ client = OpenAI(
 
 # All requests will use compression
 completion = client.chat.completions.create(
-  model="gpt-4o",
+  model="gpt-5.2",
   messages=[
     {"role": "user", "content": "Analyze this long document..."}
   ],
@@ -261,7 +261,7 @@ const openai = new OpenAI({
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
+    model: "gpt-5.2",
     messages: [
       { role: "user", content: "What's the weather in Paris?" }
     ],
@@ -307,7 +307,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-  model="gpt-4o",
+  model="gpt-5.2",
   messages=[
     {
       "role": "user",
@@ -360,7 +360,7 @@ const openai = new OpenAI({
 
 async function main() {
   const stream = await openai.chat.completions.create({
-    model: "gpt-4o",
+    model: "gpt-5.2",
     messages: [
       { role: "user", content: "Tell me a short story" }
     ],
@@ -386,7 +386,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-  model="gpt-4o",
+  model="gpt-5.2",
   messages=[
     {
       "role": "user",

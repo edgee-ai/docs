@@ -125,7 +125,7 @@ import os
 llm = ChatOpenAI(
     base_url="https://api.edgee.ai/v1",
     api_key=os.getenv("API_KEY"),
-    model="gpt-4o",
+    model="gpt-5.2",
     default_headers={
         "x-edgee-enable-compression": "true",
         "x-edgee-compression-rate": "0.8",  # Target 80% compression

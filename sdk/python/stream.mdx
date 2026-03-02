@@ -11,7 +11,7 @@ The `stream()` method is used to make streaming chat completion requests to the 
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `str` | The model identifier to use (e.g., `"gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `str` | The model identifier to use (e.g., `"gpt-5.2"`) |
 | `input` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `str \| InputObject \| dict` | The input for the completion. Can be a simple string or a structured `InputObject` or dictionary |
 
 ### Input Types
@@ -21,7 +21,7 @@ The `stream()` method is used to make streaming chat completion requests to the 
 When `input` is a string, it's automatically converted to a user message:
 
 ```python
-for chunk in edgee.stream("gpt-4o", "Tell me a story"):
+for chunk in edgee.stream("gpt-5.2", "Tell me a story"):
     if chunk.text:
         print(chunk.text, end="", flush=True)
     
@@ -49,7 +49,7 @@ For details about `Tool` and `ToolChoice` types, see the [Tools documentation](/
 **Example - Streaming with Messages:**
 
 ```python
-for chunk in edgee.stream("gpt-4o", {
+for chunk in edgee.stream("gpt-5.2", {
     "messages": [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Write a poem about coding"}
@@ -85,7 +85,7 @@ Each choice in the `choices` array contains:
 **Example - Handling Multiple Choices:**
 
 ```python
-for chunk in edgee.stream("gpt-4o", "Give me creative ideas"):
+for chunk in edgee.stream("gpt-5.2", "Give me creative ideas"):
     for choice in chunk.choices:
         if choice.delta.content:
             print(f"Choice {choice.index}: {choice.delta.content}")
@@ -114,7 +114,7 @@ The `StreamChunk` class provides convenience properties for easier access:
 **Example - Using Convenience Properties:**
 
 ```python
-for chunk in edgee.stream("gpt-4o", "Explain quantum computing"):
+for chunk in edgee.stream("gpt-5.2", "Explain quantum computing"):
     # Content chunks
     if chunk.text:
         print(chunk.text, end="", flush=True)
@@ -141,7 +141,7 @@ for chunk in edgee.stream("gpt-4o", "Explain quantum computing"):
 ```python
 full_text = ""
 
-for chunk in edgee.stream("gpt-4o", "Tell me a story"):
+for chunk in edgee.stream("gpt-5.2", "Tell me a story"):
     if chunk.text:
         full_text += chunk.text
         print(chunk.text, end="", flush=True)  # Also display as it streams
@@ -170,7 +170,7 @@ Some chunks may not contain `content`. This is normal and can happen when:
 Always check for `chunk.text` before using it:
 
 ```python
-for chunk in edgee.stream("gpt-4o", "Hello"):
+for chunk in edgee.stream("gpt-5.2", "Hello"):
     if chunk.text:  # ✅ Good: Check before using
         print(chunk.text)
     # ❌ Bad: print(chunk.text) - may print None
@@ -181,7 +181,7 @@ for chunk in edgee.stream("gpt-4o", "Hello"):
 You can also use the `send()` method with `stream=True` to get streaming responses:
 
 ```python
-for chunk in edgee.send("gpt-4o", "Tell me a story", stream=True):
+for chunk in edgee.send("gpt-5.2", "Tell me a story", stream=True):
     if chunk.text:
         print(chunk.text, end="", flush=True)
 ```
@@ -194,7 +194,7 @@ The `stream()` method can raise exceptions:
 
 ```python
 try:
-    for chunk in edgee.stream("gpt-4o", "Hello!"):
+    for chunk in edgee.stream("gpt-5.2", "Hello!"):
         if chunk.text:
             print(chunk.text, end="", flush=True)
 except RuntimeError as error:

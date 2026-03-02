@@ -12,7 +12,7 @@ The `stream()` method is used to make streaming chat completion requests to the 
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `impl Into<String>` | The model identifier to use (e.g., `"gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `impl Into<String>` | The model identifier to use (e.g., `"gpt-5.2"`) |
 | `input` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `impl Into<Input>` | The input for the completion. Can be a string (`&str` or `String`), `Vec<Message>`, or `InputObject` |
 
 ### Input Types
@@ -26,7 +26,7 @@ When `input` is a string, it's automatically converted to a user message:
 ```rust
 use tokio_stream::StreamExt;
 
-let mut stream = client.stream("gpt-4o", "Tell me a story").await?;
+let mut stream = client.stream("gpt-5.2", "Tell me a story").await?;
 
 while let Some(result) = stream.next().await {
     match result {
@@ -72,7 +72,7 @@ let messages = vec![
     Message::user("Write a poem about coding"),
 ];
 
-let mut stream = client.stream("gpt-4o", messages).await?;
+let mut stream = client.stream("gpt-5.2", messages).await?;
 
 while let Some(result) = stream.next().await {
     if let Ok(chunk) = result {
@@ -115,7 +115,7 @@ Each choice in the `choices` array contains:
 ```rust
 use tokio_stream::StreamExt;
 
-let mut stream = client.stream("gpt-4o", "Give me creative ideas").await?;
+let mut stream = client.stream("gpt-5.2", "Give me creative ideas").await?;
 
 while let Some(result) = stream.next().await {
     if let Ok(chunk) = result {
@@ -153,7 +153,7 @@ The `StreamChunk` struct provides convenience methods for easier access:
 ```rust
 use tokio_stream::StreamExt;
 
-let mut stream = client.stream("gpt-4o", "Explain quantum computing").await?;
+let mut stream = client.stream("gpt-5.2", "Explain quantum computing").await?;
 
 while let Some(result) = stream.next().await {
     match result {
@@ -191,7 +191,7 @@ while let Some(result) = stream.next().await {
 ```rust
 use tokio_stream::StreamExt;
 
-let mut stream = client.stream("gpt-4o", "Tell me a story").await?;
+let mut stream = client.stream("gpt-5.2", "Tell me a story").await?;
 let mut full_text = String::new();
 
 while let Some(result) = stream.next().await {
@@ -232,7 +232,7 @@ Always check for `chunk.text()` before using it:
 ```rust
 use tokio_stream::StreamExt;
 
-let mut stream = client.stream("gpt-4o", "Hello").await?;
+let mut stream = client.stream("gpt-5.2", "Hello").await?;
 
 while let Some(result) = stream.next().await {
     if let Ok(chunk) = result {
@@ -256,7 +256,7 @@ use edgee::Error;
 use tokio_stream::StreamExt;
 
 // Handle initial error
-let mut stream = match client.stream("gpt-4o", "Hello!").await {
+let mut stream = match client.stream("gpt-5.2", "Hello!").await {
     Ok(stream) => stream,
     Err(Error::Api { status, message }) => {
         eprintln!("API error {}: {}", status, message);
