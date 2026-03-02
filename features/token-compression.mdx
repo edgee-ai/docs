@@ -78,7 +78,7 @@ Enable compression for specific requests using the SDK:
   <Tab title="TypeScript">
     ```typescript
     const response = await edgee.send({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       input: {
         "messages": [
           {"role": "user", "content": "Your prompt here"}
@@ -93,7 +93,7 @@ Enable compression for specific requests using the SDK:
   <Tab title="Python">
     ```python
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input={
             "messages": [
                 {"role": "user", "content": "Your prompt here"}
@@ -107,7 +107,7 @@ Enable compression for specific requests using the SDK:
 
   <Tab title="Go">
     ```go
-    response, err := client.Send("gpt-4o", edgee.InputObject{
+    response, err := client.Send("gpt-5.2", edgee.InputObject{
         Messages: []edgee.Message{
             {Role: "user", Content: "Your prompt here"},
         },
@@ -123,7 +123,7 @@ Enable compression for specific requests using the SDK:
         .with_compression(true)
         .with_compression_rate(0.8); // Target ratio: compressed = 80% of original (optional)
 
-    let response = client.send("gpt-4o", input).await?;
+    let response = client.send("gpt-5.2", input).await?;
     ```
   </Tab>
 </Tabs>
@@ -215,7 +215,7 @@ const documents = [
 ];
 
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: `Answer the question based on these documents:\n\n${documents.join('\n\n')}\n\nQuestion: What is the main topic?`,
   enable_compression: true, // Enable compression for this request
   compression_rate: 0.8, // Target ratio (0-1): 0.8 = compressed is 80% of original
@@ -246,10 +246,10 @@ Here's what token compression means for your monthly AI bill:
 
 | Use Case | Monthly Requests | Without Edgee | With Edgee (50% compression) | **Monthly Savings** |
 |----------|-----------------|---------------|------------------------------|---------------------|
-| RAG Q&A (GPT-4o) | 100,000 @ 2,000 tokens | $3,000 | $1,500 | **$1,500** |
+| RAG Q&A (GPT-5.2) | 100,000 @ 2,000 tokens | $3,000 | $1,500 | **$1,500** |
 | Document Analysis (Claude 3.5) | 50,000 @ 4,000 tokens | $1,800 | $900 | **$900** |
 | Chatbot (GPT-4o-mini) | 500,000 @ 500 tokens | $375 | $188 | **$187** |
-| Multi-turn Agent (GPT-4o) | 200,000 @ 1,000 tokens | $3,000 | $1,500 | **$1,500** |
+| Multi-turn Agent (GPT-5.2) | 200,000 @ 1,000 tokens | $3,000 | $1,500 | **$1,500** |
 
 <Note>
   Savings calculations use list pricing for GPT-4o ($5/1M input tokens), Claude 3.5 Sonnet ($3/1M input tokens), and GPT-4o-mini ($0.15/1M input tokens). Actual compression ratios vary by use case.

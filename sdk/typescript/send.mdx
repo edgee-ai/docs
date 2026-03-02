@@ -13,7 +13,7 @@ The `send()` method accepts a single `SendOptions` object with the following pro
 
 | Property | Type | Description |
 |----------|------|---------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `string` | The model identifier to use (e.g., `"openai/gpt-5.2"`) |
 | `input` | `string \| InputObject` | The input for the completion. Can be a simple string or a structured `InputObject` |
 
 
@@ -26,7 +26,7 @@ When `input` is a string, it's automatically converted to a user message:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'What is the capital of France?'
 });
 
@@ -52,7 +52,7 @@ When `input` is an `InputObject`, you have full control over the conversation:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'What is 2+2?' }
@@ -68,7 +68,7 @@ console.log(response.text);
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'Summarize this article' }
@@ -102,7 +102,7 @@ Each message in the `messages` array has the following structure:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'system', content: 'You are a helpful assistant.' },
@@ -145,7 +145,7 @@ Each choice in the `choices` array contains:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'Give me a creative idea.'
 });
 
@@ -180,7 +180,7 @@ Token usage information (when available):
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'Explain quantum computing briefly.'
 });
 
@@ -205,7 +205,7 @@ Token compression metrics (when compression is applied):
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: {
     messages: [
       { role: 'user', content: 'Analyze this long document with lots of context...' }
@@ -241,7 +241,7 @@ The `SendResponse` class provides convenience getters for easier access:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'Hello!'
 });
 
@@ -267,7 +267,7 @@ The `send()` method can throw errors in several scenarios:
 ```typescript
 try {
   const response = await edgee.send({
-    model: 'gpt-4o',
+    model: 'gpt-5.2',
     input: 'Hello!'
   });
 } catch (error) {

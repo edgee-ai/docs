@@ -102,7 +102,7 @@ input := edgee.InputObject{
     ToolChoice: "auto",
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 if err != nil {
     log.Fatal(err)
 }
@@ -136,7 +136,7 @@ input := edgee.InputObject{
     },
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 // Model will always call get_weather
 ```
 
@@ -153,7 +153,7 @@ input := edgee.InputObject{
     ToolChoice: "none",
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 // Model will not call tools, even though they're available
 ```
 
@@ -250,7 +250,7 @@ func main() {
         ToolChoice: "auto",
     }
 
-    response1, err := client.Send("gpt-4o", input)
+    response1, err := client.Send("gpt-5.2", input)
     if err != nil {
         log.Fatal(err)
     }
@@ -299,7 +299,7 @@ func main() {
         },
     }
 
-    response2, err := client.Send("gpt-4o", input2)
+    response2, err := client.Send("gpt-5.2", input2)
     if err != nil {
         log.Fatal(err)
     }
@@ -331,7 +331,7 @@ input := edgee.InputObject{
     ToolChoice: "auto",
 }
 
-response, err := client.Send("gpt-4o", input)
+response, err := client.Send("gpt-5.2", input)
 if err != nil {
     log.Fatal(err)
 }
@@ -352,7 +352,7 @@ input := edgee.InputObject{
     ToolChoice: "auto",
 }
 
-chunkChan, errChan := client.Stream("gpt-4o", input)
+chunkChan, errChan := client.Stream("gpt-5.2", input)
 
 for {
     select {
@@ -557,7 +557,7 @@ input2 := edgee.InputObject{
     },
 }
 
-response2, err := client.Send("gpt-4o", input2)
+response2, err := client.Send("gpt-5.2", input2)
 ```
 
 **Example - Checking for Tool Calls:**
@@ -608,7 +608,7 @@ if len(toolCalls) > 0 {
         },
     }
 
-    response2, err := client.Send("gpt-4o", input2)
+    response2, err := client.Send("gpt-5.2", input2)
     if err != nil {
         log.Fatal(err)
     }

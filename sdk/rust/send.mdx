@@ -11,7 +11,7 @@ The `send()` method is used to make non-streaming chat completion requests to th
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `impl Into<String>` | The model identifier to use (e.g., `"gpt-4o"`) |
+| `model` <Tooltip headline="Required" tip="The field is required."><Icon icon="asterisk" size={15} color="#8924A6" /></Tooltip> | `impl Into<String>` | The model identifier to use (e.g., `"gpt-5.2"`) |
 | `input` | `impl Into<Input>` | The input for the completion. Can be a string (`&str` or `String`), `Vec<Message>`, or `InputObject` |
 
 ### Input Types
@@ -23,7 +23,7 @@ The `send()` method accepts multiple input types through the `Into<Input>` trait
 When `input` is a string (`&str` or `String`), it's automatically converted to a user message:
 
 ```rust
-let response = client.send("gpt-4o", "What is the capital of France?").await?;
+let response = client.send("gpt-5.2", "What is the capital of France?").await?;
 
 // Equivalent to: input: InputObject::new(vec![Message::user("What is the capital of France?")])
 println!("{}", response.text().unwrap_or(""));
@@ -42,7 +42,7 @@ let messages = vec![
     Message::user("What is 2+2?"),
 ];
 
-let response = client.send("gpt-4o", messages).await?;
+let response = client.send("gpt-5.2", messages).await?;
 println!("{}", response.text().unwrap_or(""));
 // "2+2 equals 4."
 ```
@@ -69,7 +69,7 @@ let input = InputObject::new(vec![
     Message::user("What is 2+2?")
 ]);
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 println!("{}", response.text().unwrap_or(""));
 // "2+2 equals 4."
 ```
@@ -87,7 +87,7 @@ let input = InputObject::new(vec![
     "user-123".to_string()
 ]);
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 ```
 
 ### Message Object
@@ -123,7 +123,7 @@ let messages = vec![
     Message::user("What about 3+3?"),
 ];
 
-let response = client.send("gpt-4o", messages).await?;
+let response = client.send("gpt-5.2", messages).await?;
 println!("{}", response.text().unwrap_or(""));
 // "3+3 equals 6."
 ```
@@ -159,7 +159,7 @@ Each choice in the `choices` array contains:
 **Example - Handling Multiple Choices:**
 
 ```rust
-let response = client.send("gpt-4o", "Give me a creative idea.").await?;
+let response = client.send("gpt-5.2", "Give me a creative idea.").await?;
 
 // Process all choices
 for choice in &response.choices {
@@ -191,7 +191,7 @@ Token usage information (when available):
 **Example - Accessing Token Usage:**
 
 ```rust
-let response = client.send("gpt-4o", "Explain quantum computing briefly.").await?;
+let response = client.send("gpt-5.2", "Explain quantum computing briefly.").await?;
 
 if let Some(usage) = &response.usage {
     println!("Prompt tokens: {}", usage.prompt_tokens);
@@ -219,7 +219,7 @@ let input = InputObject::new(vec![
 .with_enable_compression(true)
 .with_compression_rate(0.8); // Target 80% compression
 
-let response = client.send("gpt-4o", input).await?;
+let response = client.send("gpt-5.2", input).await?;
 println!("{}", response.text().unwrap_or(""));
 
 if let Some(compression) = &response.compression {
@@ -247,7 +247,7 @@ The `SendResponse` struct provides convenience methods for easier access:
 **Example - Using Convenience Methods:**
 
 ```rust
-let response = client.send("gpt-4o", "Hello!").await?;
+let response = client.send("gpt-5.2", "Hello!").await?;
 
 // Instead of: response.choices[0].message.content.as_deref()
 if let Some(text) = response.text() {
@@ -277,7 +277,7 @@ The `send()` method returns a `Result<SendResponse>`, which can contain various 
 ```rust
 use edgee::{Edgee, Error};
 
-match client.send("gpt-4o", "Hello!").await {
+match client.send("gpt-5.2", "Hello!").await {
     Ok(response) => {
         println!("{}", response.text().unwrap_or(""));
     }

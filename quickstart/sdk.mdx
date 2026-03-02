@@ -39,7 +39,7 @@ icon: chevrons-right
     const edgee = new Edgee(process.env.EDGEE_API_KEY);
 
     const response = await edgee.send({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       input: 'What is the capital of France?',
     });
 
@@ -54,7 +54,7 @@ icon: chevrons-right
     edgee = Edgee(api_key=os.environ["EDGEE_API_KEY"])
 
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input="What is the capital of France?"
     )
 
@@ -76,7 +76,7 @@ icon: chevrons-right
         client := edgee.NewClient(os.Getenv("EDGEE_API_KEY"))
 
         response, _ := client.Send(edgee.SendParams{
-            Model: "gpt-4o",
+            Model: "gpt-5.2",
             Input: "What is the capital of France?",
         })
 
@@ -93,7 +93,7 @@ icon: chevrons-right
     let edgee = Edgee::new(api_key);
 
     let response = edgee.send(edgee::SendRequest {
-        model: "gpt-4o".to_string(),
+        model: "gpt-5.2".to_string(),
         input: "What is the capital of France?".to_string(),
     });
 

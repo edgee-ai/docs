@@ -12,7 +12,7 @@ Every Edgee response includes detailed token usage information for tracking and 
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'Your prompt here',
 });
 
@@ -29,7 +29,7 @@ if (response.compression) {
 ```
 
 **Track usage by:**
-- Model (GPT-4o vs Claude vs Gemini)
+- Model (GPT-5.2 vs Claude vs Gemini)
 - Project or application
 - Environment (production vs staging)
 - User or tenant (for multi-tenant apps)
@@ -53,7 +53,7 @@ Tags allow you to categorize and label requests for filtering and grouping in yo
     const edgee = new Edgee("your-api-key");
 
     const response = await edgee.send({
-      model: 'gpt-4o',
+      model: 'gpt-5.2',
       input: {
         messages: [{ role: 'user', content: 'Hello!' }],
         tags: ['production', 'chat-feature', 'user-123', 'team-backend']
@@ -69,7 +69,7 @@ Tags allow you to categorize and label requests for filtering and grouping in yo
     edgee = Edgee("your-api-key")
 
     response = edgee.send(
-        model="gpt-4o",
+        model="gpt-5.2",
         input=InputObject(
             messages=[Message(role="user", content="Hello!")],
             tags=["production", "chat-feature", "user-123", "team-backend"]
@@ -84,7 +84,7 @@ Tags allow you to categorize and label requests for filtering and grouping in yo
 
     client, _ := edgee.NewClient("your-api-key")
 
-    response, err := client.Send("gpt-4o", edgee.InputObject{
+    response, err := client.Send("gpt-5.2", edgee.InputObject{
         Messages: []edgee.Message{
             {Role: "user", Content: "Hello!"},
         },
@@ -107,7 +107,7 @@ Tags allow you to categorize and label requests for filtering and grouping in yo
             "team-backend".to_string(),
         ]);
 
-    let response = client.send("gpt-4o", input).await?;
+    let response = client.send("gpt-5.2", input).await?;
     ```
   </Tab>
 </Tabs>
@@ -184,7 +184,7 @@ See exactly how much token compression is saving you on every request:
 
 ```typescript
 const response = await edgee.send({
-  model: 'gpt-4o',
+  model: 'gpt-5.2',
   input: 'Long prompt with lots of context...',
   enable_compression: true,
 });
