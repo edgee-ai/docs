@@ -387,7 +387,6 @@
                   {
                     "group": "Server Side Tagging",
                     "pages": [
-                      "proxy/components/js-gateway/meta-signals-gateway",
                       "proxy/components/js-gateway/google-tag-gateway"
                     ]
                   }
