@@ -30,9 +30,21 @@ Token compression analyzes your prompt structure to:
 - Preserve critical instructions and few-shot examples
 - Maintain output quality while reducing input costs
 
-<Note>
-  Compression is most effective for prompts with repeated context (RAG), long system instructions, or verbose multi-turn histories. Simple queries may see minimal compression.
-</Note>
+### Multiple Compression Engines
+
+Edgee offers multiple compression engines optimized for different workloads:
+
+<Columns cols={2}>
+  <Card title="Agentic Token Compression" img="/images/banner-agentic-compression.png" href="/features/agentic-compression">
+    Combines several strategies: semantic analysis, lossless tool compression, JSON crusher, and cache optimizer... works with all models.
+    
+  </Card>
+  <Card title="Claude Token Compression (Beta)" img="/images/banner-claude-compression.png" href="/features/claude-compression">
+    Provides fully lossless compression for Claude Code.
+    
+  </Card>
+</Columns>
+
 
 ## Edge-First Architecture
 
@@ -59,11 +71,8 @@ Traditional AI gateways route all traffic through centralized servers. Edgee pro
   <Step title="Token compression">
     Prompts are compressed by up to 50% while preserving semantic meaning.
   </Step>
-  <Step title="Intelligent routing">
-    Our engine selects the optimal model based on cost, performance, or your custom rules.
-  </Step>
   <Step title="Automatic failover">
-    If a provider fails, we instantly retry with your backup models.
+    If a provider fails, we instantly retry with backup models.
   </Step>
   <Step title="Response streams back">
     Results stream directly to your app with full observability and cost tracking logged.

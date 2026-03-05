@@ -36,6 +36,18 @@
     {
       "source": "/introduction/privacy",
       "destination": "/introduction/why-edgee"
+    },
+    {
+      "source": "/features/token-compression",
+      "destination": "/features/agentic-compression"
+    },
+    {
+      "source": "/quickstart/sdk",
+      "destination": "/quickstart/integration"
+    },
+    {
+      "source": "/features/overview",
+      "destination": "/features/agentic-compression"
     }
   ],
 
@@ -73,16 +85,17 @@
               "quickstart/index",
               "quickstart/account-creation",
               "quickstart/api-key",
-              "quickstart/sdk"
+              "quickstart/integration"
             ]
           },
           {
             "group": "Features",
             "pages": [
-              "features/overview",
-              "features/token-compression",
+              "features/agentic-compression",
+              "features/claude-compression",
               "features/observability",
-              "features/edge-tools"
+              "features/edge-tools",
+              "features/byok"
             ]
           },
           {

@@ -4,7 +4,7 @@ description: Use Edgee with LangChain for building AI applications with chains, 
 icon: /images/icons/langchain.svg
 ---
 
-Edgee's OpenAI-compatible API works seamlessly with LangChain, allowing you to leverage LangChain's powerful features like chains, agents, memory, and RAG while maintaining control over your LLM infrastructure.
+Edgee's OpenAI-compatible API works seamlessly with LangChain, allowing you to leverage LangChain's powerful features like chains, agents, memory, and RAG while **reducing token costs by up to 50%** through intelligent compression and maintaining control over your LLM infrastructure.
 
 ## Installation
 
@@ -116,7 +116,7 @@ uv run langchain_script.py \
 
 ## Compression & Tags via Headers
 
-Control token compression and add tags for observability using the `default_headers` parameter:
+Control **Agentic Token Compression** and add tags for observability using the `default_headers` parameter:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -143,7 +143,7 @@ llm = ChatOpenAI(
 | `x-edgee-tags` | `string` | Comma-separated tags for analytics and filtering |
 
 <Tip>
-  You can also enable compression organization-wide or per API key in the [Edgee console](/features/token-compression#enabling-token-compression). Headers override console settings.
+  You can also enable compression per API key in the [Edgee console](/features/agentic-compression). Headers override console settings.
 </Tip>
 
 ## Advanced Features
@@ -223,29 +223,3 @@ The `api_key` parameter in `ChatOpenAI` automatically formats the header as:
 ```
 Authorization: Bearer {api_key}
 ```
-
-## Benefits of Using LangChain with Edgee
-
-<CardGroup cols={2}>
-  <Card title="Unified Infrastructure" icon="server">
-    Access all LLM providers through Edgee while using LangChain's developer-friendly interface.
-  </Card>
-
-  <Card title="Cost Control" icon="dollar-sign">
-    Leverage Edgee's cost tracking and routing while building complex LangChain applications.
-  </Card>
-
-  <Card title="Reliability" icon="shield-check">
-    Combine LangChain's agent capabilities with Edgee's automatic failover and load balancing.
-  </Card>
-
-  <Card title="Observability" icon="chart-line">
-    Monitor your LangChain applications with Edgee's built-in observability features.
-  </Card>
-</CardGroup>
-
-## Next Steps
-
-- Explore [LangChain's documentation](https://python.langchain.com/) for advanced features
-- Check out [Edgee's routing capabilities](/features/automatic-model-selection) for intelligent model selection
-- Set up [observability](/features/observability) to monitor your LangChain applications

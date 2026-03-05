@@ -84,6 +84,73 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
     }
     ```
   </Tab>
+
+  <Tab title="OpenAI SDK">
+    ```typescript
+    import OpenAI from "openai";
+
+    const openai = new OpenAI({
+      baseURL: "https://api.edgee.ai/v1",
+      apiKey: process.env.EDGEE_API_KEY,
+    });
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-5.2",
+      messages: [
+        { role: "user", content: "What is the capital of France?" }
+      ],
+    });
+
+    console.log(completion.choices[0].message.content);
+    ```
+  </Tab>
+
+  <Tab title="Anthropic SDK">
+    ```typescript
+    import Anthropic from '@anthropic-ai/sdk';
+
+    const client = new Anthropic({
+      baseURL: 'https://api.edgee.ai',
+      apiKey: process.env.EDGEE_API_KEY,
+    });
+
+    const message = await client.messages.create({
+      model: 'claude-sonnet-4.5',
+      max_tokens: 1024,
+      messages: [
+        { role: 'user', content: 'What is the capital of France?' }
+      ]
+    });
+
+    console.log(message.content);
+    ```
+  </Tab>
+
+  <Tab title="LangChain">
+    ```python
+    from langchain_openai import ChatOpenAI
+    from langchain_core.messages import HumanMessage
+    import os
+
+    llm = ChatOpenAI(
+        base_url="https://api.edgee.ai/v1",
+        api_key=os.getenv("EDGEE_API_KEY"),
+        model="gpt-5.2",
+    )
+
+    response = llm.invoke([HumanMessage(content="What is the capital of France?")])
+    print(response.content)
+    ```
+  </Tab>
+
+  <Tab title="cURL">
+    ```bash
+    curl https://api.edgee.ai/v1/chat/completions \
+      -H "Authorization: Bearer $EDGEE_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{"model":"gpt-5.2","messages":[{"role":"user","content":"What is the capital of France?"}]}'
+    ```
+  </Tab>
 </Tabs>
 
 That's it. You now have access to every major LLM provider, automatic failovers, cost tracking, and full observability, all through one simple API.
@@ -103,7 +170,7 @@ That's it. You now have access to every major LLM provider, automatic failovers,
 
 Building with LLMs is powerful, but comes with challenges:
 
-- **Exploding AI costs**: Token usage adds up fast with RAG, long contexts, and multi-turn conversations
+- **Exploding AI costs**: Token usage adds up fast, whether you're running RAG pipelines, coding with Claude Code, or building multi-turn agents
 - **Cost opacity**: Bills spike with no visibility into what's driving costs
 - **Vendor lock-in**: Your code is tightly coupled to a single provider's API
 - **No fallbacks**: When OpenAI goes down, your app goes down
@@ -116,19 +183,12 @@ Building with LLMs is powerful, but comes with challenges:
 ## Core Capabilities
 
 <CardGroup cols={2}>
-  <Card title="Token Compression" icon="dollar-sign" iconType="duotone" href="/features/token-compression">
-    Reduce prompt size by up to 50% without losing intent.
-    Ideal for RAG, long contexts, and multi-turn agents.
+  <Card title="Token Compression for Agentic Workloads" icon="/images/icons/agentic-comp.svg" iconType="duotone" href="/features/agentic-compression">
+    AI-powered context optimization that reduces token usage. Perfect for long-context prompts and agentic workloads where context windows matter.
   </Card>
 
-  <Card title="Unified API" icon="plug" iconType="duotone" href="/quickstart">
-    One SDK, access to 200+ models from OpenAI, Anthropic, Google, Mistral, and more.
-    Switch providers with a single line change.
-  </Card>
-
-  <Card title="Intelligent Routing" icon="route" iconType="duotone" href="/features/automatic-model-selection">
-    Automatic failover, load balancing, and smart model selection.
-    Optimize for cost, performance, or both.
+  <Card title="Token Compression for Claude Code" icon="/images/icons/claude.svg" iconType="duotone" href="/features/claude-compression">
+    Lossless compression for Claude Code, extending your plan's session duration by 3 times.
   </Card>
 
   <Card title="Cost & Observability" icon="chart-line" iconType="duotone" href="/features/observability">
@@ -136,8 +196,8 @@ Building with LLMs is powerful, but comes with challenges:
     Know exactly what your AI is doing and costing.
   </Card>
 
-  <Card title="Privacy Controls" icon="shield" iconType="duotone" href="/features/privacy">
-    Control how your data flows with configurable logging and retention.
-    Enable provider-side ZDR where available, and apply privacy layers to prompts.
+  <Card title="Unified API" icon="plug" iconType="duotone" href="/quickstart">
+    One SDK, access to 200+ models from OpenAI, Anthropic, Google, Mistral, and more.
+    Switch providers with a single line change.
   </Card>
 </CardGroup>

@@ -145,6 +145,10 @@ print(f"Total tokens: {completion.usage.total_tokens}")
 
 When using the OpenAI SDK with Edgee, you can control token compression and add tags using HTTP headers:
 
+<Note>
+  The compression headers below control **Agentic Token Compression**, which works with all models. For an overview of all available compression engines, see [Token Compression for Agentic Workloads](/features/agentic-compression).
+</Note>
+
 ### Enabling Compression
 
 <CodeGroup>
@@ -240,7 +244,7 @@ client = OpenAI(
 | `x-edgee-tags` | `string` | Comma-separated tags for analytics and filtering |
 
 <Tip>
-  You can also enable compression organization-wide or per API key in the [Edgee console](/features/token-compression#enabling-token-compression). Headers override console settings for specific requests.
+  You can also enable compression per API key in the [Edgee console](/features/agentic-compression). Headers override console settings for specific requests.
 </Tip>
 
 ## Advanced Usage
@@ -415,20 +419,3 @@ If you're already using the OpenAI SDK, migrating to Edgee is straightforward:
 <Tip>
   All OpenAI SDK features are supported, including streaming, function calling, and response formatting. Edgee maintains full compatibility with the OpenAI API specification.
 </Tip>
-
-## What's Next?
-
-<CardGroup cols={2}>
-  <Card title="Get API Key" icon="key" href="/quickstart/api-key">
-    Create an account and get your Edgee API key to start using the OpenAI SDK.
-  </Card>
-  <Card title="Supported Models" icon="brain" href="https://www.edgee.ai/models">
-    Browse 200+ models available through Edgee from multiple providers.
-  </Card>
-  <Card title="Edgee SDK" icon="code" href="/sdk/typescript">
-    Check out the native Edgee SDKs for TypeScript, Python, Go, and Rust.
-  </Card>
-  <Card title="API Reference" icon="terminal" href="/api-reference">
-    Explore the full REST API documentation.
-  </Card>
-</CardGroup>

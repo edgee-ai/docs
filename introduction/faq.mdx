@@ -6,40 +6,45 @@ icon: message-circle-question-mark
 
 <AccordionGroup>
   <Accordion title="How much can I save with Edgee?">
-    Edgee reduces LLM costs through two mechanisms:
+    Edgee reduces LLM costs up to 50% through token compression.
 
-    **Token Compression (up to 50% input token reduction):**
+    
     - **RAG pipelines**: 40-50% reduction on document-heavy contexts
     - **Long contexts**: 30-45% reduction on conversation histories
     - **Document analysis**: 35-50% reduction on summarization tasks
     - **Multi-turn agents**: 25-40% reduction as conversations grow
+    - **Claude Code / tool-heavy workflows**: Significant savings on tool call results (file reads, search outputs) with lossless Claude compression
 
-    **Cost-Aware Routing (20-60% additional savings):**
-    - Automatically routes to cheaper models when quality thresholds are met
-    - Combines with compression for 60-70% total cost reduction
-
-    Example: A RAG Q&A system using GPT-4o with 100,000 monthly requests at 2,000 tokens each would save $1,500/month with compression alone.
+    Example: A RAG Q&A system using GPT-5.2 with 500,000 monthly requests at 10,000 input tokens each would save $3000/month with compression alone.
   </Accordion>
 
   <Accordion title="How does token compression work?">
-    Token compression happens automatically at the edge on every request through a four-step process:
+    Token compression happens automatically at the edge on every request through several compression strategies:
 
-    1. **Semantic Analysis**: Identify redundant context and compressible sections
-    2. **Context Optimization**: Compress repeated context (common in RAG) and remove unnecessary formatting
-    3. **Instruction Preservation**: Keep critical instructions, few-shot examples, and task requirements intact
-    4. **Quality Verification**: Ensure compressed prompts maintain semantic equivalence
+    - **Semantic Analysis**: Identify redundant context and compressible sections
+    - **Context Optimization**: Compress repeated context (common in RAG) and remove unnecessary formatting
+    - **Instruction Preservation**: Keep critical instructions, few-shot examples, and task requirements intact
+    - **Quality Verification**: Ensure compressed prompts maintain semantic equivalence
 
-    Compression is most effective for:
-    - Prompts with repeated context (RAG document chunks)
-    - Long system instructions with verbose formatting
-    - Multi-turn conversations with growing history
-    - Document analysis with redundant information
+    Every response includes a `compression` field with metrics (`saved_tokens`, `cost_savings`, `reduction`, `time_ms`) so you can track your savings in real-time.
 
-    Every response includes a `compression` field with metrics (`input_tokens`, `saved_tokens`, `rate`) so you can track your savings in real-time.
   </Accordion>
 
-  <Accordion title="What is Edgee?">
-    Edgee is an **edge-native AI Gateway that reduces LLM costs by up to 50%** through token compression. It sits between your application and LLM providers like OpenAI, Anthropic, Google, and Mistral, providing a single API to access 200+ models with built-in intelligent routing, cost tracking, automatic failovers, and full observability.
+  <Accordion title="What compression engines does Edgee offer?">
+    Edgee offers multiple compression engines that can be enabled independently:
+
+    **Agentic Token Compression** uses multiple strategies — including semantic analysis, context optimization, tool compression, JSON crusher, and cache optimizer — to reduce input tokens by up to 50%. It works with all models (OpenAI, Anthropic, Google, Mistral, etc.) and is ideal for RAG pipelines, long contexts, and multi-turn agents.
+
+    **Claude Token Compression (Beta)** provides fully lossless compression of tool call results in Claude workflows. It's optimized for Claude Code and tool-heavy Claude applications — no configuration needed, just enable it per API key.
+
+    More compression engines for additional coding assistants are coming soon.
+
+    [Learn more about compression engines](/features/agentic-compression)
+  </Accordion>
+
+  <Accordion title="Which compression should I use for Claude Code?">
+    There is only one compression engine for Claude Code: **Claude Token Compression**! 
+    It's fully lossless, requires no configuration, and is specifically optimized for the tool-heavy workflows that Claude Code generates (file reads, search results, command output).
   </Accordion>
 
   <Accordion title="How is Edgee different from using LLM APIs directly?">
@@ -61,31 +66,22 @@ icon: message-circle-question-mark
     - **Anthropic**
     - **Google**
     - **Mistral**
-    - **Meta**
-    - **Cohere**
+    - **DeepSeek**
+    - **xAI (Grok)**
+    - **zAI**
     - **AWS Bedrock**
     - **Azure OpenAI**
     - **And more**
 
     To see the full list of supported models, [see our dedicated models page](https://www.edgee.ai/models).
 
-    We regularly add new providers and models. If there's a model you need that we don't support, [let us know](https://www.edgee.ai/~/me/models?display-request-dialog=true).
+    We regularly add new providers and models. If there's a model you need that we don't support, let us know.
   </Accordion>
 
   <Accordion title="How much latency does Edgee add?">
-    Edgee adds less than 10ms of latency at the p99 level. Our edge network processes requests at the point of presence closest to your application, minimizing round-trip time.
+    Edgee adds less than 20ms of latency at the p99 level. Our edge network processes requests at the point of presence closest to your application, minimizing round-trip time.
 
     For most AI applications, where LLM inference takes 500ms-5s, this overhead is negligible — typically less than 1-2% of total request time.
-  </Accordion>
-
-  <Accordion title="How does intelligent routing work?">
-    Edgee's routing engine analyzes each request and selects the optimal model based on your configuration:
-
-    - **Cost strategy**: Routes to the cheapest model capable of handling the request
-    - **Performance strategy**: Always uses the fastest, most capable model
-    - **Balanced strategy**: Finds the optimal trade-off within your latency and cost budgets
-
-    You can also define fallback chains — if your primary model is unavailable (rate limited, outage, etc.), Edgee automatically retries with your backup models.
   </Accordion>
 
   <Accordion title="What happens when a provider goes down?">
@@ -110,13 +106,9 @@ icon: message-circle-question-mark
   </Accordion>
 
   <Accordion title="Can I use my own API keys for LLM providers?">
-    Yes! Edgee supports two modes:
+    Yes! You can use **Bring Your Own Key (BYOK)** to use your own provider API keys while still using Edgee for routing, observability, budgets, and controls.
 
-    1. **Edgee-managed keys**: We handle provider accounts and billing. Simple, but you pay our prices (with volume discounts available).
-
-    2. **Bring Your Own Key (BYOK)**: Use your existing provider API keys. You get your negotiated rates, we just route and observe.
-
-    You can mix both approaches — use your own OpenAI key while we handle Anthropic, for example.
+    More information on BYOK [here](/features/byok).
   </Accordion>
 
   <Accordion title="Is Edgee compliant with GDPR, SOC 2?">
@@ -126,7 +118,6 @@ icon: message-circle-question-mark
     - **GDPR** compliant with DPA available
     - **Regional routing** to keep data in specific jurisdictions
 
-    Zero Data Retention mode ensures no personal data is ever stored on Edgee servers.
   </Accordion>
 
   <Accordion title="How can I contact support?">

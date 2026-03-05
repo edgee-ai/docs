@@ -1,12 +1,13 @@
 ---
-title: Token Compression
-description: Reduce LLM costs by up to 50% with edge-native prompt compression.
-icon: dollar-sign
+title: Agentic Token Compression
+sidebarTitle: Agentic Compression
+description: Reduce LLM costs with intelligent compression engines that combine lossy and lossless strategies.
+icon: /images/icons/agentic-comp.svg
 ---
 
-# Reduce LLM costs by up to 50%
+<img src="/images/banner-agentic-compression.png" alt="Agentic token compression" />
 
-Edgee's token compression runs at the edge before every request reaches LLM providers, automatically reducing prompt size by up to 50% while preserving semantic meaning and output quality.
+Edgee's agentic token compression runs at the edge before every request reaches LLM providers, automatically reducing prompt size by up to 50% while preserving semantic meaning and output quality.
 
 This is particularly effective for:
 - RAG pipelines with large document contexts
@@ -14,9 +15,13 @@ This is particularly effective for:
 - Verbose system instructions and formatting
 - Document analysis and summarization tasks
 
+<Note>
+  Looking for lossless compression for Claude Code? See [Claude Token Compression (Beta)](/features/claude-compression).
+</Note>
+
 ## How It Works
 
-Token compression happens automatically on every request through a four-step process:
+Agentic token compression uses multiple strategies that work together on every request. The core semantic compression strategy follows a four-step process; other strategies (tool compression, smart crusher, cache aligner) work in parallel, some fully lossless.
 
 <Steps>
   <Step title="Semantic Analysis">
@@ -24,7 +29,7 @@ Token compression happens automatically on every request through a four-step pro
   </Step>
 
   <Step title="Context Optimization">
-    Compress repeated context (common in RAG), condense verbose formatting, and remove unnecessary whitespace while maintaining semantic relationships.
+    Compress repeated context (common in RAG), condense verbose formatting, and remove unnecessary elements while maintaining semantic relationships.
   </Step>
 
   <Step title="Instruction Preservation">
@@ -50,7 +55,10 @@ The **compression ratio** (sometimes called *compression rate* in APIs) is **com
 In the console you choose **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)**. The compressor aims for that ratio; the actual ratio per request may vary. Strong (0.7) asks for more compression; Light (0.9) is more conservative and keeps more of the original text.
 
 <Tip>
-  **Ratio vs reduction:** Ratio = compressed/original (e.g. 0.75). Reduction = 1 − ratio (e.g. 25%). When we say "50% reduction," that corresponds to a ratio of 0.50.
+  **Ratio vs reduction:** 
+  
+  Ratio = compressed/original (e.g. 0.75). <br />
+  Reduction = 1 − ratio (e.g. 25%). When we say "50% reduction," that corresponds to a ratio of 0.50.
 </Tip>
 
 ## Semantic preservation and BERT score
@@ -66,13 +74,13 @@ This way you can allow aggressive compression (low ratio) while still guaranteei
   In the Activity table, when we fell back to the original prompt because the similarity was below the threshold, the input token count is shown in red with a tooltip: "Didn't match the semantic threshold – original prompt was used."
 </Tip>
 
-## Enabling Token Compression
+## Enabling Agentic Token Compression
 
-Token compression can be enabled in three ways, giving you flexibility to control compression at the request, API key, or organization level:
+Agentic token compression can be enabled in three ways, giving you flexibility to control compression at the request, API key, or organization level.
 
-### 1. Per Request (SDK)
+### 1. Per Request (SDK or Headers)
 
-Enable compression for specific requests using the SDK:
+Enable compression for specific requests using the SDK or headers:
 
 <Tabs>
   <Tab title="TypeScript">
@@ -126,6 +134,17 @@ Enable compression for specific requests using the SDK:
     let response = client.send("gpt-5.2", input).await?;
     ```
   </Tab>
+
+  <Tab title="cURL">
+    ```bash
+    curl -X POST "https://api.edgee.ai/v1/chat/completions" \
+    -H "Authorization: Bearer $EDGEE_API_KEY" \
+    -H "Content-Type: application/json" \
+    -H "x-edgee-enable-compression: true" \
+    -H "x-edgee-compression-rate: 0.8" \
+    -d '{"model": "gpt-5.2", "messages": [{"role": "user", "content": "Your prompt here"}]}'
+    ```
+  </Tab>
 </Tabs>
 
 ### 2. Per API Key (Console)
@@ -133,40 +152,16 @@ Enable compression for specific requests using the SDK:
 Enable compression for specific API keys in your organization settings. This is useful when you want different compression settings for different applications or environments.
 
 <Frame>
-<img src="/images/compression-enabled-by-tag-light.png" alt="Enable compression for specific API keys" className="dark:hidden" />
-<img src="/images/compression-enabled-by-tag-dark.png" alt="Enable compression for specific API keys" className="hidden dark:block" />
+<img src="/images/compression-by-tag-light.png" alt="Enable compression for specific API keys" className="dark:hidden" />
+<img src="/images/compression-by-tag-dark.png" alt="Enable compression for specific API keys" className="hidden dark:block" />
 </Frame>
 
 In the **Edge Models** section of your console:
-1. Toggle **Enable token compression** on
-2. Set **Compression** to **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)** — see [Understanding compression ratio](#understanding-compression-ratio)
-3. Set **Semantic preservation threshold** to **Off**, **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)** — see [Semantic preservation and BERT score](#semantic-preservation-and-bert-score)
-4. Under **Scope**, select **Apply to specific API keys**
-5. Choose which API keys should use compression
+1. Set **Compression** to **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)** — see [Understanding compression ratio](#understanding-compression-ratio)
+2. Set **Semantic preservation threshold** to **Off**, **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)** — see [Semantic preservation and BERT score](#semantic-preservation-and-bert-score)
+3. Under **Scope**, select **Apply to specific API keys**
+4. Choose which API keys should use compression
 
-### 3. Organization-Wide (Console)
-
-Enable compression for all requests across your entire organization. This is the recommended setting for most users to maximize savings automatically.
-
-<Frame>
-<img src="/images/compression-enabled-org-light.png" alt="Enable compression organization-wide" className="dark:hidden" />
-<img src="/images/compression-enabled-org-dark.png" alt="Enable compression organization-wide" className="hidden dark:block" />
-</Frame>
-
-In the **Edge Models** section of your console:
-1. Toggle **Enable token compression** on
-2. Set **Compression** to **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)**
-3. Set **Semantic preservation threshold** to **Off**, **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)**
-4. Under **Scope**, select **Apply to all org requests**
-5. All API keys will now use compression by default
-
-<Tip>
-  **Compression** controls how aggressively Edgee compresses prompts: **Strong (0.7)** aims for more compression; **Light (0.9)** is more conservative. **Medium (0.8)** is the default. See [Understanding compression ratio](#understanding-compression-ratio).
-</Tip>
-
-<Note>
-  SDK-level configuration takes precedence over console settings. If you enable compression in your code with `enable_compression: true`, it will override the console configuration for that specific request.
-</Note>
 
 ## When It Works Best
 
@@ -242,56 +237,19 @@ Compression time: 14ms
 
 ## Real-World Savings
 
-Here's what token compression means for your monthly AI bill:
+Here's what token compression means for your monthly AI bill with 50% compression:
 
-| Use Case | Monthly Requests | Without Edgee | With Edgee (50% compression) | **Monthly Savings** |
-|----------|-----------------|---------------|------------------------------|---------------------|
-| RAG Q&A (GPT-5.2) | 100,000 @ 2,000 tokens | $3,000 | $1,500 | **$1,500** |
-| Document Analysis (Claude 3.5) | 50,000 @ 4,000 tokens | $1,800 | $900 | **$900** |
-| Chatbot (GPT-4o-mini) | 500,000 @ 500 tokens | $375 | $188 | **$187** |
-| Multi-turn Agent (GPT-5.2) | 200,000 @ 1,000 tokens | $3,000 | $1,500 | **$1,500** |
+| Use Case | Monthly Requests | Without Edgee | With Edgee |
+|----------|-----------------|---------------|-------------|
+| RAG Q&A (GPT-5.2) | 1,000,000 @ 2,000 input tokens | $3,500 | **$1,750** |
+| Document Analysis (Sonnet 4.6) | 50,000 @ 20,000 input tokens | $3,000 | **$1,500** |
+| Chatbot (Haiku) | 5,000,000 @ 500 input tokens | $2,500 | **$1,250** |
 
-<Note>
-  Savings calculations use list pricing for GPT-4o ($5/1M input tokens), Claude 3.5 Sonnet ($3/1M input tokens), and GPT-4o-mini ($0.15/1M input tokens). Actual compression ratios vary by use case.
-</Note>
 
-## Best Practices
-
-<AccordionGroup>
-  <Accordion title="Optimize prompts for compression">
-    - Structure RAG contexts with clear sections
-    - Use consistent formatting in document chunks
-    - Avoid excessive whitespace in system prompts
-    - Group similar information together
-  </Accordion>
-
-  <Accordion title="Track savings over time">
-    - Monitor `compression.saved_tokens` and `compression.cost_savings` across requests
-    - Use `compression.reduction` to gauge effectiveness per request
-    - Calculate cumulative savings weekly or monthly
-    - Use observability tools to identify high-compression opportunities
-    - Compare costs across different use cases
-  </Accordion>
-
-  <Accordion title="Configure compression per use case">
-    - Enable compression by default for all requests
-    - Compression happens automatically without configuration
-    - Track `compression.reduction` to understand effectiveness (e.g. `48` = 48% fewer tokens)
-    - Monitor `compression.time_ms` to ensure compression latency fits your SLA
-    - Use response metrics to optimize prompt design
-  </Accordion>
-
-  <Accordion title="Combine with cost-aware routing">
-    - Use [automatic model selection](/features/automatic-model-selection) for additional savings
-    - Route to cheaper models when appropriate
-    - Compression + routing can reduce costs by 60-70% total
-    - Monitor both compression and routing savings
-  </Accordion>
-</AccordionGroup>
 
 ## Response Fields
 
-Every Edgee response includes detailed compression metrics:
+Every Edgee response includes the standard usage information, and detailed compression metrics (if compression was applied):
 
 ```typescript
 // Usage information
@@ -311,23 +269,3 @@ Use these fields to:
 - Build cost dashboards and budgeting tools
 - Identify high-value compression opportunities
 - Optimize prompt design for maximum compression
-
-## What's Next
-
-<CardGroup cols={2}>
-  <Card title="Observability" icon="chart-line" iconType="duotone" href="/features/observability">
-    Monitor token savings, costs, and compression ratios across all requests.
-  </Card>
-
-  <Card title="Intelligent Routing" icon="route" iconType="duotone" href="/features/automatic-model-selection">
-    Combine compression with cost-aware model routing for even greater savings.
-  </Card>
-
-  <Card title="Quick Start" icon="rocket" iconType="duotone" href="/quickstart">
-    Get started in 5 minutes and start saving on your next request.
-  </Card>
-
-  <Card title="SDK Documentation" icon="code" iconType="duotone" href="/sdk">
-    Explore SDKs in TypeScript, Python, Go, and Rust with built-in compression support.
-  </Card>
-</CardGroup>

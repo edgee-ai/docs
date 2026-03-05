@@ -1,0 +1,65 @@
+Claude Code supports custom API endpoints through its settings. You can configure it to use Edgee as your AI provider in two ways:
+
+### Option 1: Environment Variables
+
+The configuration differs depending on whether you're using Claude Pro/Max or API billing:
+
+#### For Claude Pro/Max Users
+
+Set the following environment variables in your shell configuration (`~/.bashrc`, `~/.zshrc`, etc.):
+
+```bash
+export ANTHROPIC_BASE_URL="https://api.edgee.ai"
+export ANTHROPIC_CUSTOM_HEADERS="x-edgee-api-key:sk-edgee-..."
+```
+
+#### For API Billing Users
+
+Set the following environment variables in your shell configuration (`~/.bashrc`, `~/.zshrc`, etc.):
+
+```bash
+export ANTHROPIC_BASE_URL="https://api.edgee.ai"
+export ANTHROPIC_AUTH_TOKEN="sk-edgee-..."
+export ANTHROPIC_API_KEY=""
+```
+
+<Note>
+  Replace `sk-edgee-...` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+</Note>
+
+Then restart your terminal or run:
+
+```bash
+source ~/.zshrc  # or ~/.bashrc
+```
+
+### Option 2: Claude Code Settings
+
+You can also configure Claude Code through its settings file. Create or edit `~/.claude/settings.json`:
+
+#### For Claude Pro/Max Users
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.edgee.ai",
+    "ANTHROPIC_CUSTOM_HEADERS": "x-edgee-api-key:sk-edgee-..."
+  }
+}
+```
+
+#### For API Billing Users
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.edgee.ai",
+    "ANTHROPIC_AUTH_TOKEN": "sk-edgee-...",
+    "ANTHROPIC_API_KEY": ""
+  }
+}
+```
+
+<Note>
+  Make sure to replace `sk-edgee-...` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+</Note>

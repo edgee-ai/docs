@@ -1,0 +1,182 @@
+---
+title: Integrate Edgee to your stack
+description: Learn how to integrate Edgee to your stack and start using Edgee services in your application.
+icon: chevrons-right
+---
+
+Edgee can be integrated to your stack in different ways. You can use our SDKs, use our API directly, or use our official integrations with other tools.
+
+## Use our SDKs
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```bash
+    npm install edgee
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```bash
+    pip install edgee
+    ```
+  </Tab>
+  <Tab title="Go">
+    ```bash
+    go get github.com/edgee-ai/go-sdk
+    ```
+  </Tab>
+  <Tab title="Rust">
+    ```bash
+    cargo install edgee
+    ```
+  </Tab>
+</Tabs>
+
+Then, you can start using Edgee in your application. Here is a quick example:
+
+<Tabs>
+  <Tab title="TypeScript">
+    ```typescript
+    import Edgee from 'edgee';
+
+    const edgee = new Edgee(process.env.EDGEE_API_KEY);
+
+    const response = await edgee.send({
+      model: 'gpt-5.2',
+      input: 'What is the capital of France?',
+    });
+
+    console.log(response.content);
+    // "The capital of France is Paris."
+
+    if (response.compression) {
+      console.log(`Tokens saved: ${response.compression.saved_tokens}`);
+      console.log(`Reduction: ${response.compression.reduction}%`);
+      console.log(`Cost savings: ${(response.compression.cost_savings / 1_000_000).toFixed(4)}`);
+      console.log(`Compression time: ${response.compression.time_ms}ms`);
+    }
+    // "Tokens saved: 100"
+    // "Reduction: 50%"
+    // "Cost savings: $0.0093"
+    // "Compression time: 100ms"
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    from edgee import Edgee
+
+    edgee = Edgee(api_key=os.environ["EDGEE_API_KEY"])
+
+    response = edgee.send(
+        model="gpt-5.2",
+        input="What is the capital of France?"
+    )
+
+    print(response.content)
+    # "The capital of France is Paris."
+
+    if response.compression:
+        print(f"Tokens saved: {response.compression.saved_tokens}")
+        print(f"Reduction: {response.compression.reduction}%")
+        print(f"Cost savings: ${response.compression.cost_savings / 1_000_000:.4f}")
+        print(f"Compression time: {response.compression.time_ms}ms")
+    # "Tokens saved: 100"
+    # "Reduction: 50%"
+    # "Cost savings: $0.0093"
+    # "Compression time: 12ms"
+    ```
+  </Tab>
+  <Tab title="Go">
+    ```go
+    package main
+
+    import (
+        "fmt"
+        "os"
+        "github.com/edgee-ai/go-sdk"
+    )
+
+    func main() {
+        client := edgee.NewClient(os.Getenv("EDGEE_API_KEY"))
+
+        response, _ := client.Send(edgee.SendParams{
+            Model: "gpt-5.2",
+            Input: "What is the capital of France?",
+        })
+
+        fmt.Println(response.Content)
+        // "The capital of France is Paris."
+
+        if response.Compression != nil {
+            fmt.Printf("Tokens saved: %d\n", response.Compression.SavedTokens)
+            fmt.Printf("Reduction: %f%%\n", response.Compression.Reduction)
+            fmt.Printf("Cost savings: $%.4f\n", float64(response.Compression.CostSavings)/1_000_000)
+            fmt.Printf("Compression time: %dms\n", response.Compression.TimeMs)
+        }
+        // "Tokens saved: 100"
+        // "Reduction: 50%"
+        // "Cost savings: $0.0093"
+        // "Compression time: 12ms"
+    }
+    ```
+  </Tab>
+  <Tab title="Rust">
+    ```rust
+    use edgee::Edgee;
+
+    let api_key = std::env::var("EDGEE_API_KEY").expect("EDGEE_API_KEY not set");
+    let edgee = Edgee::new(api_key);
+
+    let response = edgee.send(edgee::SendRequest {
+        model: "gpt-5.2".to_string(),
+        input: "What is the capital of France?".to_string(),
+    });
+
+    println!("{}", response.output_text);
+    // "The capital of France is Paris."
+
+    if response.compression {
+        println!("Tokens saved: {}", response.compression.saved_tokens);
+        println!("Reduction: {}", response.compression.reduction);
+        println!("Cost savings: ${}", response.compression.cost_savings / 1_000_000);
+        println!("Compression time: {}ms", response.compression.time_ms);
+    }
+    // "Tokens saved: 100"
+    // "Reduction: 50%"
+    // "Cost savings: $0.0093"
+    // "Compression time: 12ms"
+    ```
+  </Tab>
+</Tabs>
+
+To learn more about the SDKs, see the [individual SDK pages](/sdk).
+
+## Use Edgee in your Coding Assistant
+
+You can use Edgee in your preferred Coding Assistant by using our official integrations.
+
+<CardGroup>
+  <Card title="Claude Code" icon="/images/icons/claude.svg" href="/features/claude-compression">
+    Route Claude Code traffic through Edgee for token compression and observability over every coding session.
+  </Card>
+  <Card title="OpenCode" icon="/images/icons/opencode.svg" href="/integrations/opencode">
+    Connect OpenCode's CLI agent to Edgee for cost savings and unified access to multiple models.
+  </Card>
+</CardGroup>
+
+## Use Edgee in your Framework
+
+You can use Edgee in your preferred Framework by using our official integrations.
+
+<CardGroup>
+  <Card title="OpenAI SDK" icon="/images/icons/openai.svg" href="/integrations/openai-sdk">
+    Point your existing OpenAI SDK at Edgee — no code changes, just swap the base URL and API key.
+  </Card>
+  <Card title="Anthropic SDK" icon="/images/icons/anthropic.svg" href="/integrations/anthropic-sdk">
+    Use the Anthropic SDK with Edgee to access Claude and other models through one gateway.
+  </Card>
+  <Card title="LangChain" icon="/images/icons/langchain.svg" href="/integrations/langchain">
+    Run chains, agents, and RAG pipelines through Edgee for cost tracking and compression.
+  </Card>
+</CardGroup>
+
+

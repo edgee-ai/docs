@@ -194,6 +194,10 @@ When using the Anthropic SDK with Edgee, you can control token compression and a
 
 ### Enabling Compression
 
+<Note>
+  The headers below control **Agentic Token Compression**.
+</Note>
+
 <Tabs>
   <Tab title="Python">
     ```python
@@ -287,7 +291,7 @@ Combine compression with tags to track requests in your dashboard:
 | `x-edgee-tags` | `string` | Comma-separated tags for analytics and filtering |
 
 <Tip>
-  You can also enable compression organization-wide or per API key in the [Edgee console](/features/token-compression#enabling-token-compression). Headers override console settings for specific requests.
+  You can also enable compression per API key in the [Edgee console](/features/agentic-compression). Headers override console settings for specific requests.
 </Tip>
 
 ## Multi-Provider Access
@@ -499,44 +503,6 @@ The Anthropic SDK includes built-in retry logic, which works seamlessly with Edg
   </Tab>
 </Tabs>
 
-## Authentication
-
-Edgee uses standard Bearer token authentication. Set your API key as an environment variable:
-
-```bash
-export EDGEE_API_KEY="sk-edgee-..."
-```
-
-Or in your `.env` file:
-
-```bash
-EDGEE_API_KEY=sk-edgee-...
-```
-
-The SDK automatically formats the authentication header as:
-```
-Authorization: Bearer {api_key}
-```
-
-## Benefits of Using Anthropic SDK with Edgee
-
-<CardGroup cols={2}>
-  <Card title="Up to 50% Cost Reduction" icon="dollar-sign">
-    Automatic token compression on every request reduces input tokens by up to 50% while preserving output quality.
-  </Card>
-
-  <Card title="Multi-Provider Cost Comparison" icon="chart-mixed">
-    Compare costs across Claude, GPT-4, Mistral, and 200+ models. Track compression savings per provider.
-  </Card>
-
-  <Card title="Automatic Failover" icon="shield-check">
-    If Claude is rate-limited or unavailable, Edgee automatically routes to backup models without code changes.
-  </Card>
-
-  <Card title="Full Observability" icon="chart-line">
-    Monitor latency, token usage, compression ratios, error rates, and costs for all requests in one dashboard.
-  </Card>
-</CardGroup>
 
 ## Complete Example
 
@@ -666,9 +632,3 @@ Here's a complete application example:
   </Tab>
 </Tabs>
 
-## Next Steps
-
-- Explore [Anthropic SDK documentation](https://docs.anthropic.com/claude/reference/getting-started-with-the-api) for advanced features
-- Check out [Edgee's routing capabilities](/features/automatic-model-selection) for intelligent model selection
-- Set up [observability](/features/observability) to monitor your applications
-- Configure [privacy controls](/features/privacy) to manage data retention
