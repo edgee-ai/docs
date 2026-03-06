@@ -101,7 +101,7 @@
                   "compression": {
                     "saved_tokens": 450,
                     "cost_savings": 27000,
-                    "reduction": 48,
+                    "reduction": 48.99884991374353,
                     "time_ms": 12
                   }
                 }
@@ -1378,11 +1378,11 @@
             "example": 27000
           },
           "reduction": {
-            "type": "integer",
+            "type": "number",
             "description": "Percentage reduction in input tokens. For example, `48` means the compressed prompt was 48% smaller than the original.",
             "minimum": 0,
             "maximum": 100,
-            "example": 48
+            "example": 48.99884991374353
           },
           "time_ms": {
             "type": "integer",
