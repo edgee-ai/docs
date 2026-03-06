@@ -47,25 +47,22 @@ In the **Edge Models** section of your console, find the **Claude Token Compress
 
 ## Per-Request Override
 
-You can also enable Claude or OpenCode compression directly in the request body, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
+You can also enable Claude compression directly in the request body using the `compression_model` field, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
 
 ```json
 {
   "model": "anthropic/claude-sonnet-4-20250514",
   "messages": [...],
-  "enable_claude_compression": true
+  "compression_model": "claude"
 }
 ```
 
-For OpenCode agents:
-
-```json
-{
-  "model": "anthropic/claude-sonnet-4-20250514",
-  "messages": [...],
-  "enable_opencode_compression": true
-}
-```
+Available compression models:
+- `claude` — tool compression with Claude-specific compressors
+- `opencode` — tool compression with OpenCode-specific compressors
+- `agentic` — LLMLingua + tool compression + smartcrusher
+- `cursor` — tool compression with Cursor-specific compressors
+- `customer` — generic customer compression
 
 These fields are gateway-internal and are never forwarded to providers. When present, they take priority over your API key-level compression settings.
 
@@ -77,7 +74,7 @@ const response = await edgee.send({
   model: "anthropic/claude-sonnet-4-20250514",
   input: {
     messages: [...],
-    enable_claude_compression: true,
+    compression_model: "claude",
   },
 });
 ```
@@ -87,14 +84,14 @@ response = edgee.send(
     model="anthropic/claude-sonnet-4-20250514",
     input=InputObject(
         messages=[...],
-        enable_claude_compression=True,
+        compression_model="claude",
     ),
 )
 ```
 
 ```rust Rust
 let input = InputObject::new(messages)
-    .with_claude_compression(true);
+    .with_compression_model("claude");
 ```
 </CodeGroup>
 
