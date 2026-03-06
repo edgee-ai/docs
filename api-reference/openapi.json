@@ -594,6 +594,25 @@
               "type": "string"
             },
             "description": "Optional tags to categorize and label the request. Useful for filtering and grouping requests in analytics and logs. Can also be sent via the `x-edgee-tags` header as a comma-separated string."
+          },
+          "enable_compression": {
+            "type": "boolean",
+            "description": "Enable token compression for this request. Overrides API key settings when present. When `true`, the gateway compresses the prompt before forwarding to the provider."
+          },
+          "compression_rate": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Compression rate for this request (0.0-1.0). Overrides API key settings when present. Only applies when compression is enabled."
+          },
+          "enable_claude_compression": {
+            "type": "boolean",
+            "description": "Enable Claude-specific tool output compression for this request. Overrides API key settings when present. Applies lossless compression to tool call results when the request comes from a Claude Code agent."
+          },
+          "enable_opencode_compression": {
+            "type": "boolean",
+            "description": "Enable OpenCode-specific tool output compression for this request. Overrides API key settings when present. Applies lossless compression to tool call results when the request comes from an OpenCode agent."
           }
         }
       },
