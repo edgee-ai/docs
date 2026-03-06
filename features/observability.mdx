@@ -218,9 +218,9 @@ const response = await edgee.send({
 
 // Compression details
 if (response.compression) {
-  console.log(response.compression.input_tokens); // Original token count
-  console.log(response.usage.prompt_tokens); // After compression
   console.log(response.compression.saved_tokens); // Tokens saved
-  console.log(`${(response.compression.rate * 100).toFixed(1)}%`); // Compression rate (e.g., 61.0%)
+  console.log(response.compression.cost_savings); // Cost savings in micro-units (e.g. 27000 = $0.027)
+  console.log(response.compression.reduction); // Percentage reduction (e.g. 48 = 48%)
+  console.log(response.compression.time_ms); // Time taken for compression in milliseconds
 }
 ```
