@@ -206,9 +206,10 @@ Token compression metrics (when compression is applied):
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `input_tokens` | `u32` | Original number of input tokens before compression |
 | `saved_tokens` | `u32` | Number of tokens saved by compression |
-| `rate` | `f64` | Compression rate as a decimal (0-1). For example, `0.61` means 61% compression |
+| `cost_savings` | `u64` | Estimated cost savings in micro-units (e.g. 27000 = $0.027) |
+| `reduction` | `f64` | Percentage reduction (e.g. 48 = 48%, may be fractional) |
+| `time_ms` | `u32` | Time taken for compression in milliseconds |
 
 **Example - Accessing Compression Metrics:**
 
@@ -216,16 +217,17 @@ Token compression metrics (when compression is applied):
 let input = InputObject::new(vec![
     Message::user("Analyze this long document with lots of context...")
 ])
-.with_enable_compression(true)
+.with_compression(true)
 .with_compression_rate(0.8); // Target 80% compression
 
 let response = client.send("gpt-5.2", input).await?;
 println!("{}", response.text().unwrap_or(""));
 
 if let Some(compression) = &response.compression {
-    println!("Original input tokens: {}", compression.input_tokens);
-    println!("Tokens saved: {}", compression.saved_tokens);
-    println!("Compression rate: {:.1}%", compression.rate * 100.0);
+    println!("Saved tokens: {}", compression.saved_tokens);
+    println!("Reduction: {:.1}%", compression.reduction);
+    println!("Cost savings: ${:.3}", compression.cost_savings as f64 / 1_000_000.0);
+    println!("Time: {} ms", compression.time_ms);
 }
 ```
 

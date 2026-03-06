@@ -223,9 +223,10 @@ Token compression metrics (when compression is applied):
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `InputTokens` | `int` | Original number of input tokens before compression |
 | `SavedTokens` | `int` | Number of tokens saved by compression |
-| `Rate` | `float64` | Compression rate as a decimal (0-1). For example, `0.61` means 61% compression |
+| `CostSavings` | `int` | Estimated cost savings in micro-units (e.g. 27000 = $0.027) |
+| `Reduction` | `float64` | Percentage reduction (e.g. 48 = 48%, may be fractional) |
+| `TimeMs` | `int` | Time taken for compression in milliseconds |
 
 **Example - Accessing Compression Metrics:**
 
@@ -242,9 +243,10 @@ if err != nil {
 }
 
 if response.Compression != nil {
-    fmt.Printf("Original input tokens: %d\n", response.Compression.InputTokens)
-    fmt.Printf("Tokens saved: %d\n", response.Compression.SavedTokens)
-    fmt.Printf("Compression rate: %.1f%%\n", response.Compression.Rate * 100)
+    fmt.Printf("Saved tokens: %d\n", response.Compression.SavedTokens)
+    fmt.Printf("Reduction: %.1f%%\n", response.Compression.Reduction)
+    fmt.Printf("Cost savings: $%.3f\n", float64(response.Compression.CostSavings)/1000000)
+    fmt.Printf("Time: %d ms\n", response.Compression.TimeMs)
 }
 ```
 
