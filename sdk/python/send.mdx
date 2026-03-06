@@ -192,9 +192,10 @@ Token compression metrics (when compression is applied):
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `input_tokens` | `int` | Original number of input tokens before compression |
 | `saved_tokens` | `int` | Number of tokens saved by compression |
-| `rate` | `float` | Compression rate as a decimal (0-1). For example, `0.61` means 61% compression |
+| `cost_savings` | `int` | Estimated cost savings in micro-units (e.g. 27000 = $0.027) |
+| `reduction` | `int` | Percentage reduction (e.g. 48 = 48%) |
+| `time_ms` | `int` | Time taken for compression in milliseconds |
 
 **Example - Accessing Compression Metrics:**
 
@@ -211,9 +212,10 @@ response = edgee.send(
 )
 
 if response.compression:
-    print(f"Original input tokens: {response.compression.input_tokens}")
-    print(f"Tokens saved: {response.compression.saved_tokens}")
-    print(f"Compression rate: {response.compression.rate * 100:.1f}%")
+    print(f"Saved tokens: {response.compression.saved_tokens}")
+    print(f"Reduction: {response.compression.reduction}%")
+    print(f"Cost savings: ${response.compression.cost_savings / 1_000_000:.3f}")
+    print(f"Time: {response.compression.time_ms} ms")
 ```
 
 <Note>

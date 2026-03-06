@@ -197,9 +197,10 @@ Token compression metrics (when compression is applied):
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `input_tokens` | `number` | Original number of input tokens before compression |
 | `saved_tokens` | `number` | Number of tokens saved by compression |
-| `rate` | `number` | Compression rate as a decimal (0-1). For example, `0.61` means 61% compression |
+| `cost_savings` | `number` | Estimated cost savings in micro-units (e.g. 27000 = $0.027) |
+| `reduction` | `number` | Percentage reduction (e.g. 48 = 48%, may be fractional) |
+| `time_ms` | `number` | Time taken for compression in milliseconds |
 
 **Example - Accessing Compression Metrics:**
 
@@ -216,9 +217,10 @@ const response = await edgee.send({
 });
 
 if (response.compression) {
-  console.log(`Original input tokens: ${response.compression.input_tokens}`);
-  console.log(`Tokens saved: ${response.compression.saved_tokens}`);
-  console.log(`Compression rate: ${(response.compression.rate * 100).toFixed(1)}%`);
+  console.log(`Saved tokens: ${response.compression.saved_tokens}`);
+  console.log(`Reduction: ${response.compression.reduction}%`);
+  console.log(`Cost savings: $${(response.compression.cost_savings / 1_000_000).toFixed(3)}`);
+  console.log(`Time: ${response.compression.time_ms} ms`);
 }
 ```
 
