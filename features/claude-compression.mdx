@@ -45,6 +45,59 @@ In the **Edge Models** section of your console, find the **Claude Token Compress
   There are no compression ratio or BERT threshold settings. Claude Token Compression is fully lossless by design. Just enable it and go.
 </Note>
 
+## Per-Request Override
+
+You can also enable Claude or OpenCode compression directly in the request body, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
+
+```json
+{
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "messages": [...],
+  "enable_claude_compression": true
+}
+```
+
+For OpenCode agents:
+
+```json
+{
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "messages": [...],
+  "enable_opencode_compression": true
+}
+```
+
+These fields are gateway-internal and are never forwarded to providers. When present, they take priority over your API key-level compression settings.
+
+The SDKs also support these fields:
+
+<CodeGroup>
+```typescript TypeScript
+const response = await edgee.send({
+  model: "anthropic/claude-sonnet-4-20250514",
+  input: {
+    messages: [...],
+    enable_claude_compression: true,
+  },
+});
+```
+
+```python Python
+response = edgee.send(
+    model="anthropic/claude-sonnet-4-20250514",
+    input=InputObject(
+        messages=[...],
+        enable_claude_compression=True,
+    ),
+)
+```
+
+```rust Rust
+let input = InputObject::new(messages)
+    .with_claude_compression(true);
+```
+</CodeGroup>
+
 ## Integration with Claude Code
 
 
