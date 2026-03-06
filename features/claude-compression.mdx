@@ -45,6 +45,113 @@ In the **Edge Models** section of your console, find the **Claude Token Compress
   There are no compression ratio or BERT threshold settings. Claude Token Compression is fully lossless by design. Just enable it and go.
 </Note>
 
+## Per-Request Override
+
+You can also enable Claude compression directly in the request body using the `compression_model` field, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
+
+```json
+{
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "messages": [...],
+  "compression_model": "claude"
+}
+```
+
+Available compression models:
+- `claude` — tool compression with Claude-specific compressors
+- `opencode` — tool compression with OpenCode-specific compressors
+- `agentic` — LLMLingua + tool compression + smartcrusher
+- `cursor` — tool compression with Cursor-specific compressors
+- `customer` — generic customer compression
+
+For the `agentic` model, you can optionally pass a `compression_configuration` object to control compression rate and semantic preservation:
+
+```json
+{
+  "model": "anthropic/claude-sonnet-4-20250514",
+  "messages": [...],
+  "compression_model": "agentic",
+  "compression_configuration": {
+    "rate": 0.7,
+    "semantic_preservation_threshold": 60
+  }
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `rate` | `float` | Compression rate between 0.0 and 1.0. Defaults to 0.8. |
+| `semantic_preservation_threshold` | `int` | Semantic preservation threshold between 0 and 100. |
+
+<Note>
+  `compression_configuration` is only relevant for the `agentic` compression model. Other models ignore it.
+</Note>
+
+These fields are gateway-internal and are never forwarded to providers. When present, they take priority over your API key-level compression settings.
+
+The SDKs also support these fields:
+
+<CodeGroup>
+```typescript TypeScript
+const response = await edgee.send({
+  model: "anthropic/claude-sonnet-4-20250514",
+  input: {
+    messages: [...],
+    compression_model: "claude",
+  },
+});
+
+// With agentic compression configuration
+const response = await edgee.send({
+  model: "anthropic/claude-sonnet-4-20250514",
+  input: {
+    messages: [...],
+    compression_model: "agentic",
+    compression_configuration: {
+      rate: 0.7,
+      semantic_preservation_threshold: 60,
+    },
+  },
+});
+```
+
+```python Python
+response = edgee.send(
+    model="anthropic/claude-sonnet-4-20250514",
+    input=InputObject(
+        messages=[...],
+        compression_model="claude",
+    ),
+)
+
+# With agentic compression configuration
+response = edgee.send(
+    model="anthropic/claude-sonnet-4-20250514",
+    input=InputObject(
+        messages=[...],
+        compression_model="agentic",
+        compression_configuration={
+            "rate": 0.7,
+            "semantic_preservation_threshold": 60,
+        },
+    ),
+)
+```
+
+```rust Rust
+let input = InputObject::new(messages)
+    .with_compression_model("claude");
+
+// With agentic compression configuration
+let input = InputObject::new(messages)
+    .with_compression_model("agentic")
+    .with_compression_configuration(CompressionConfiguration {
+        rate: Some(0.7),
+        semantic_preservation_threshold: Some(60),
+    });
+```
+</CodeGroup>
+
 ## Integration with Claude Code
 
 
