@@ -47,32 +47,7 @@ In the **Edge Models** section of your console, find the **Claude Token Compress
 
 ## Per-Request Override
 
-You can enable compression on a per-request basis using either a header or a request body field, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
-
-### Via Header
-
-Set the `X-Edgee-Compression-Model` header on your request. This works with both `/v1/chat/completions` and `/v1/messages` endpoints.
-
-```bash
-curl https://api.edgee.ai/v1/chat/completions \
-  -H "Authorization: Bearer $EDGEE_API_KEY" \
-  -H "X-Edgee-Compression-Model: claude" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "anthropic/claude-sonnet-4-20250514", "messages": [...]}'
-```
-
-You can also combine it with `X-Edgee-Compression-Rate` to override the default rate (only relevant for `agentic`):
-
-```bash
-curl https://api.edgee.ai/v1/chat/completions \
-  -H "X-Edgee-Compression-Model: agentic" \
-  -H "X-Edgee-Compression-Rate: 0.7" \
-  ...
-```
-
-### Via Request Body
-
-Alternatively, set the `compression_model` field directly in the request body:
+You can also enable compression directly in the request body using the `compression_model` field, overriding your API key settings. This is useful for testing or for enabling compression on specific requests without changing your API key configuration.
 
 ```json
 {
