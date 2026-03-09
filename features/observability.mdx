@@ -213,7 +213,7 @@ See exactly how much token compression is saving you on every request:
 const response = await edgee.send({
   model: 'gpt-5.2',
   input: 'Long prompt with lots of context...',
-  enable_compression: true,
+  compression_model: "agentic",
 });
 
 // Compression details

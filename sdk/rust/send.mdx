@@ -57,8 +57,8 @@ When `input` is an `InputObject`, you have full control over the conversation:
 | `tools` | `Option<Vec<Tool>>` | Array of function tools available to the model |
 | `tool_choice` | `Option<serde_json::Value>` | Controls which tool (if any) the model should call. See [Tools documentation](/sdk/rust/tools) for details |
 | `tags` | `Option<Vec<String>>` | Optional tags to categorize and label the request for analytics and filtering. Can also be sent via the `x-edgee-tags` header (comma-separated) |
-| `enable_compression` | `Option<bool>` | Enable token compression for this request (overrides console settings). If not set, uses the configuration from your API key or organization settings |
-| `compression_rate` | `Option<f64>` | Target compression rate (0.0-1.0, default 0.75). Only used if compression is enabled. Higher values attempt more aggressive compression |
+| `compression_model` | `Option<String>` | Compression model for this request: `"agentic"`, `"claude"`, `"opencode"`, `"cursor"`, or `"customer"`. Each model is a bundle of compression strategies. Overrides API key settings when present. |
+| `compression_configuration` | `Option<CompressionConfiguration>` | Configuration for the compression model. Currently only available for `agentic`. Contains optional `rate` (0.0-1.0, default 0.8) and `semantic_preservation_threshold` (0-100). |
 
 **Example with InputObject:**
 
@@ -217,8 +217,8 @@ Token compression metrics (when compression is applied):
 let input = InputObject::new(vec![
     Message::user("Analyze this long document with lots of context...")
 ])
-.with_compression(true)
-.with_compression_rate(0.8); // Target 80% compression
+.with_compression_model("agentic")
+.with_compression_configuration(CompressionConfiguration { rate: Some(0.8), semantic_preservation_threshold: None });
 
 let response = client.send("gpt-5.2", input).await?;
 println!("{}", response.text().unwrap_or(""));

@@ -45,8 +45,8 @@ When `input` is an `InputObject`, you have full control over the conversation:
 | `tools` | `Tool[]` | Array of function tools available to the model |
 | `tool_choice` | `ToolChoice` | Controls which tool (if any) the model should call. See [Tools documentation](/sdk/typescript/tools) for details |
 | `tags` | `string[]` | Optional tags to categorize and label the request for analytics and filtering. Can also be sent via the `x-edgee-tags` header (comma-separated) |
-| `enable_compression` | `bool` | Enable token compression for this request. If `true`, the request will be compressed to the compression rate specified in the API key settings. If `false`, the request will not be compressed. |
-| `compression_rate` | `number` | The compression rate to use for this request. If `enable_compression` is `true`, this value will be used to compress the request. The value should be between 0.0 and 1.0. The default value is 0.75. |
+| `compression_model` | `string` | Compression model for this request: `"agentic"`, `"claude"`, `"opencode"`, `"cursor"`, or `"customer"`. Each model is a bundle of compression strategies. Overrides API key settings when present. |
+| `compression_configuration` | `object` | Configuration for the compression model. Currently only available for `agentic`. Contains optional `rate` (0.0-1.0, default 0.8) and `semantic_preservation_threshold` (0-100). |
 
 **Example with InputObject:**
 
@@ -211,8 +211,8 @@ const response = await edgee.send({
     messages: [
       { role: 'user', content: 'Analyze this long document with lots of context...' }
     ],
-    enable_compression: true,
-    compression_rate: 0.8
+    compression_model: "agentic",
+    compression_configuration: { rate: 0.8 }
   }
 });
 
