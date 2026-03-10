@@ -94,6 +94,7 @@
               "features/agentic-compression",
               "features/claude-compression",
               "features/observability",
+              "features/debug",
               "features/edge-tools",
               "features/byok"
             ]
