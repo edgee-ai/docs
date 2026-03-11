@@ -19,4 +19,4 @@ nbproject
 #Specific
 node_modules
 .direnv
-.claude/launcher-config.json
+.claude
