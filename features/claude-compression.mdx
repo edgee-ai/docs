@@ -1,5 +1,5 @@
 ---
-title: Claude Token Compression (Beta)
+title: Claude Token Compression
 sidebarTitle: Claude Compression
 description: Fully lossless compression of tool call results for Claude Code and tool-heavy Claude workflows.
 icon: /images/icons/claude.svg
@@ -8,29 +8,28 @@ import ClaudeCodeIntegration from '/snippets/claude-code-integration.mdx';
 
 <img src="/images/banner-claude-compression.png" alt="Claude token compression" />
 
-Claude Token Compression (Beta) reduces token costs in Claude conversations by compressing tool call results — the large outputs from file reads, 
+Claude Token Compression reduces token costs in Claude conversations by compressing tool call results — the large outputs from file reads, 
 shell commands, search results, and other tools — before they reach Anthropic models. 
 
 Unlike Agentic compression, it is fully lossless: no information is lost, and no quality configuration is needed.
 
-For Claude Code users, this means **lower costs** when using API billing, and **up to 3× longer sessions** for Pro/Max subscribers: the same token budget goes further.
+For Claude Code users, this means **lower costs** when using API billing (up to 30% reduction), and **longer sessions** for Pro/Max subscribers (up to 35% longer): the same token budget goes further.
 
 ## What Gets Compressed
 
 Claude Token Compression targets `tool_result` messages in Claude API format. This includes:
 
-- **File contents** — output from Read tool and file system operations
-- **Grep and search outputs** — results from code search, ripgrep, and similar tools
-- **Shell command output** — stdout/stderr from Bash and terminal commands
-- **API responses** — large JSON or text payloads returned by tool calls
-- **Database query results** — rows and records returned from tool-executed queries
+- **File contents**: output from Read tool and file system operations
+- **Grep and search outputs**: results from code search, ripgrep, and similar tools
+- **Shell command output**: stdout/stderr from Bash and terminal commands
+- **API responses**: large JSON or text payloads returned by tool calls
+- **Database query results**: rows and records returned from tool-executed queries
 
 User messages and assistant turns are not modified, only tool results are compressed.
 
 ## How to Enable
 
 In the **Edge Models** section of your console, find the **Claude Token Compression** card and simply select which API keys should use Claude compression.
-
 
 <Frame>
 <img src="/images/claude-comp-by-key-light.png" alt="Enable compression for specific API keys" className="dark:hidden" />
@@ -51,10 +50,10 @@ In the **Edge Models** section of your console, find the **Claude Token Compress
 
 <ClaudeCodeIntegration />
 
-See [Claude Code integration](/integrations/claude-code) for more instructions.
 
 ## Benefits of Using Claude Code with Edgee
 
 Once you have configured Edgee for Claude Code, you can start using Claude Code normally.
 You will immediately see the savings by going to the console, on the dashboard or in the logs.
 
+See [Claude Code integration](/integrations/claude-code) for more instructions.

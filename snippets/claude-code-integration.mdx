@@ -10,8 +10,11 @@ Set the following environment variables in your shell configuration (`~/.bashrc`
 
 ```bash
 export ANTHROPIC_BASE_URL="https://api.edgee.ai"
-export ANTHROPIC_CUSTOM_HEADERS="x-edgee-api-key:sk-edgee-..."
+export ANTHROPIC_CUSTOM_HEADERS="x-edgee-api-key:<YOUR_EDGEE_API_KEY>"
 ```
+<Note>
+  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+</Note>
 
 #### For API Billing Users
 
@@ -19,12 +22,12 @@ Set the following environment variables in your shell configuration (`~/.bashrc`
 
 ```bash
 export ANTHROPIC_BASE_URL="https://api.edgee.ai"
-export ANTHROPIC_AUTH_TOKEN="sk-edgee-..."
+export ANTHROPIC_AUTH_TOKEN="<YOUR_EDGEE_API_KEY>"
 export ANTHROPIC_API_KEY=""
 ```
 
 <Note>
-  Replace `sk-edgee-...` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
 </Note>
 
 Then restart your terminal or run:
@@ -43,10 +46,13 @@ You can also configure Claude Code through its settings file. Create or edit `~/
 {
   "env": {
     "ANTHROPIC_BASE_URL": "https://api.edgee.ai",
-    "ANTHROPIC_CUSTOM_HEADERS": "x-edgee-api-key:sk-edgee-..."
+    "ANTHROPIC_CUSTOM_HEADERS": "x-edgee-api-key:<YOUR_EDGEE_API_KEY>"
   }
 }
 ```
+<Note>
+  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+</Note>
 
 #### For API Billing Users
 
@@ -54,12 +60,12 @@ You can also configure Claude Code through its settings file. Create or edit `~/
 {
   "env": {
     "ANTHROPIC_BASE_URL": "https://api.edgee.ai",
-    "ANTHROPIC_AUTH_TOKEN": "sk-edgee-...",
+    "ANTHROPIC_AUTH_TOKEN": "<YOUR_EDGEE_API_KEY>",
     "ANTHROPIC_API_KEY": ""
   }
 }
 ```
 
 <Note>
-  Make sure to replace `sk-edgee-...` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
+  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
 </Note>
