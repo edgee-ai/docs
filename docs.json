@@ -471,8 +471,8 @@
     "codeblocks": "dark"
   },
   "logo": {
-    "light": "/images/logos/edgee-light.svg",
-    "dark": "/images/logos/edgee-dark.svg",
+    "light": "/images/logos/logo-black.svg",
+    "dark": "/images/logos/logo-white.svg",
     "href": "https://www.edgee.ai"
   },
   "background": {
