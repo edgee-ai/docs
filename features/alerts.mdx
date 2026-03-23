@@ -1,0 +1,132 @@
+---
+title: Alerts & Budgets
+sidebarTitle: Alerts & Budgets
+description: Monitor your AI spending in real time with budget alerts, tag-based spend tracking, and instant notifications via email or Slack.
+icon: bell
+---
+
+Edgee Alerts let you set up automated monitoring rules to track your AI spending and usage. Get notified instantly when
+API key budgets are running low, tag-based spending exceeds a threshold, or your organization's remaining credits drop below a limit.
+
+## Alert Types
+
+Edgee supports three types of alerts, each designed for a different monitoring scenario:
+
+<CardGroup cols={3}>
+  <Card title="API Key Budget" icon="key">
+    Monitor individual API key usage relative to its credit limit. Get notified at **50%**, **80%**, or **100%** of the key's max credits.
+  </Card>
+
+  <Card title="Tag Spend" icon="tag">
+    Track spending on a specific tag over a rolling time window (**1h**, **3h**, **6h**, **12h**, or **24h**). Trigger when cumulative spend exceeds a dollar threshold.
+  </Card>
+
+  <Card title="Remaining Credits" icon="wallet">
+    Monitor your organization's total remaining credit balance. Get alerted when credits drop below a dollar threshold.
+  </Card>
+</CardGroup>
+
+## Creating an Alert Rule
+
+Navigate to **Alerts** in the console sidebar. Click **Create Alert Rule** and configure:
+
+<Steps>
+  <Step title="Choose alert type">
+    Select one of the three alert types: **API Key Budget**, **Tag Spend**, or **Total Remaining Credits**.
+  </Step>
+
+  <Step title="Select scope">
+    Depending on the alert type:
+    - **API Key Budget**: select the specific API key to monitor.
+    - **Tag Spend**: select the tag to track.
+    - **Total Remaining Credits**: automatically scoped to your organization.
+  </Step>
+
+  <Step title="Set threshold">
+    - **API Key Budget**: choose a trigger percentage — **50%**, **80%**, or **100%** of the key's max credits.
+    - **Tag Spend**: enter a dollar amount and select a time window (1h, 3h, 6h, 12h, or 24h).
+    - **Total Remaining Credits**: enter a minimum dollar amount.
+  </Step>
+
+  <Step title="Configure notifications">
+    Enable one or both notification channels:
+    - **Email**: enter the email address to receive alerts.
+    - **Slack**: sends notifications to your configured Slack webhook (see [Slack setup](#slack-webhook-setup) below).
+  </Step>
+</Steps>
+
+<Note>
+  At least one notification channel (email or Slack) must be enabled when creating a rule.
+</Note>
+
+## Notification Channels
+
+### Email
+
+Email notifications are configured per alert rule. Each rule can have its own recipient email address,
+allowing you to route different alerts to different team members or distribution lists.
+
+### Slack Webhook Setup
+
+To receive Slack notifications, configure a webhook URL for your organization:
+
+1. In Slack, create an [Incoming Webhook](https://api.slack.com/messaging/webhooks) for the channel where you want alerts.
+2. In the Edgee Console, go to **Alerts** and find the **Slack Webhook** configuration card.
+3. Paste your webhook URL (e.g. `https://hooks.slack.com/services/...`) and save.
+
+Once configured, any alert rule with Slack enabled will post notifications to this channel.
+
+<Tip>
+  You can configure both email and Slack on the same rule to ensure critical alerts are never missed.
+</Tip>
+
+## Alert History
+
+The **Alert History** table on the Alerts page shows every time an alert rule was triggered. Each entry includes:
+
+- The alert type and scope (which API key, tag, or organization)
+- The threshold value and the actual value that triggered the alert
+- Which notification channels were sent (email, Slack, or both)
+- The current status: **triggered** or **resolved**
+- When it was triggered and, if applicable, when it was resolved
+
+### Filtering History
+
+You can filter alert history by:
+- **Alert type**: API Key Budget, Tag Spend, or Total Remaining Credits
+- **Scope**: specific API key, tag, or organization
+- **Status**: triggered or resolved
+- **Time range**: last 24 hours, last 7 days, or last 30 days
+
+### Resolving Alerts
+
+Triggered alerts can be manually marked as resolved from the alert history. The sidebar badge shows the count of
+unresolved alerts, giving you a quick view of items that need attention.
+
+## Managing Alert Rules
+
+From the Alerts page, you can:
+
+- **Edit** a rule to change its threshold, notification channels, or enabled status.
+- **Disable** a rule temporarily without deleting it — useful during maintenance windows or testing.
+- **Delete** a rule when it's no longer needed.
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Layer your alerts" icon="layer-group">
+    Set multiple thresholds on the same API key (e.g. 50%, 80%, 100%) to get early warnings before hitting limits.
+  </Card>
+
+  <Card title="Use tag spend alerts for cost attribution" icon="chart-pie">
+    Combine [request tags](/features/observability#request-tags-for-analytics) with tag spend alerts to monitor costs per feature, team, or environment.
+  </Card>
+
+  <Card title="Monitor remaining credits" icon="gauge">
+    Set a remaining credits alert to avoid service interruptions when your balance gets low.
+  </Card>
+
+  <Card title="Use both channels" icon="bell-ring">
+    Enable both email and Slack notifications for critical alerts to ensure they're seen immediately.
+  </Card>
+</CardGroup>
