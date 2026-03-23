@@ -8,9 +8,26 @@ icon: /images/icons/openai.svg
 Route your Codex traffic through Edgee to gain **full observability** over every coding session
 and access **all LLM providers** through a single endpoint.
 
-## Configuration
+## Quickstart with the Edgee CLI
 
-To use Edgee with Codex, update your Codex configuration file at `~/.codex/config.toml` with the following:
+The fastest way to get started — no config files to edit:
+
+```bash
+# Install the Edgee CLI
+curl -fsSL https://install.edgee.ai | bash
+
+# Authenticate and configure Codex automatically
+edgee init
+
+# Launch Codex through Edgee
+edgee launch codex
+```
+
+That's it. See the [CLI quickstart](/quickstart/cli) for more details.
+
+## Manual Configuration
+
+To use Edgee with Codex manually, update your Codex configuration file at `~/.codex/config.toml` with the following:
 
 ```toml
 model_provider = "edgee"
