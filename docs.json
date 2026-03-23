@@ -83,6 +83,7 @@
             "group": "Quickstart",
             "pages": [
               "quickstart/index",
+              "quickstart/cli",
               "quickstart/account-creation",
               "quickstart/api-key",
               "quickstart/integration"
@@ -103,6 +104,7 @@
           {
             "group": "Integrations",
             "pages": [
+              "integrations/cli",
               "integrations/claude-code",
               "integrations/anthropic-sdk",
               "integrations/openai-sdk",

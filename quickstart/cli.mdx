@@ -1,0 +1,69 @@
+---
+title: Quickstart with the CLI
+sidebarTitle: Using the CLI
+description: The fastest way to get started with Edgee. Two commands to install, authenticate, and launch your coding assistant with compression.
+icon: chevrons-right
+---
+
+The Edgee CLI is the fastest way to use Edgee with your AI coding assistant. It handles account creation, authentication,
+and tool configuration automatically — no manual API key setup or environment variables needed.
+
+<Steps>
+  <Step title="Install the CLI">
+    <Tabs>
+      <Tab title="macOS / Linux">
+        ```bash
+        curl -fsSL https://install.edgee.ai | bash
+        ```
+      </Tab>
+      <Tab title="Homebrew">
+        ```bash
+        brew tap edgee-ai/tap
+        brew install edgee
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize and authenticate">
+    ```bash
+    edgee init
+    ```
+    This opens your browser to create an account or log in. Select your provider (Claude Code or Codex) and choose your connection mode.
+  </Step>
+
+  <Step title="Launch your coding assistant">
+    ```bash
+    edgee launch claude
+    ```
+    That's it. Claude Code is now running with Edgee compression and full observability enabled.
+
+    For Codex users:
+    ```bash
+    edgee launch codex
+    ```
+  </Step>
+</Steps>
+
+After your session ends, the CLI prints a link to view your session analytics — token usage, compression savings, and cost breakdown — directly in the [Edgee Console](https://www.edgee.ai).
+
+<Note>
+  The CLI requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) or [Codex](https://github.com/openai/codex) to be installed on your machine.
+</Note>
+
+## What's Next
+
+<CardGroup cols={2}>
+  <Card title="CLI Reference" icon="terminal" href="/integrations/cli">
+    Full documentation of all CLI commands, flags, and configuration options.
+  </Card>
+  <Card title="Claude Token Compression" icon="/images/icons/claude.svg" href="/features/claude-compression">
+    Learn how lossless compression extends your Claude Code sessions by up to 3x.
+  </Card>
+  <Card title="Observability" icon="chart-line" href="/features/observability">
+    Track token usage, costs, and latency across all your sessions.
+  </Card>
+  <Card title="Alerts & Budgets" icon="bell" href="/features/alerts">
+    Set up spending alerts to stay in control of your AI costs.
+  </Card>
+</CardGroup>
