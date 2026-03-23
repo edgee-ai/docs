@@ -96,7 +96,8 @@
               "features/observability",
               "features/debug",
               "features/edge-tools",
-              "features/byok"
+              "features/byok",
+              "features/alerts"
             ]
           },
           {
