@@ -1,0 +1,202 @@
+---
+title: Edgee CLI
+description: The fastest way to use Claude Code and Codex with Edgee. One command to authenticate, launch, and compress.
+icon: terminal
+---
+
+The Edgee CLI is the fastest way to route your AI coding assistant through Edgee. Instead of manually configuring environment variables
+and API keys, the CLI handles authentication, session tracking, and launching your tool in a single command.
+
+## Supported Tools
+
+<CardGroup cols={2}>
+  <Card title="Claude Code" icon="/images/icons/claude.svg">
+    Anthropic's official CLI for interactive coding with AI.
+  </Card>
+
+  <Card title="Codex" icon="code">
+    OpenAI's CLI agent for software engineering tasks.
+  </Card>
+</CardGroup>
+
+## Installation
+
+<Tabs>
+  <Tab title="macOS / Linux">
+    ```bash
+    curl -fsSL https://install.edgee.ai | bash
+    ```
+  </Tab>
+
+  <Tab title="Homebrew">
+    ```bash
+    brew tap edgee-ai/tap
+    brew install edgee
+    ```
+  </Tab>
+</Tabs>
+
+Verify the installation:
+
+```bash
+edgee --version
+```
+
+## Quick Start
+
+Get up and running in under a minute:
+
+<Steps>
+  <Step title="Initialize">
+    ```bash
+    edgee init
+    ```
+    This walks you through provider selection and authentication. A browser window opens for you to log in or create your Edgee account.
+  </Step>
+
+  <Step title="Launch your tool">
+    ```bash
+    edgee launch claude
+    ```
+    That's it. Claude Code is now running with Edgee compression and observability enabled.
+  </Step>
+</Steps>
+
+After your session ends, the CLI prints a link to view your session analytics in the Edgee Console.
+
+## Commands
+
+### `edgee init`
+
+Interactive setup wizard. Prompts you to select a provider (Claude Code or Codex), opens a browser for authentication,
+and saves your credentials locally.
+
+```bash
+edgee init
+```
+
+### `edgee auth login`
+
+Authenticate with Edgee for a specific provider. Opens a browser window for OAuth-based login. Your API key and credentials
+are saved to `~/.config/edgee/credentials.toml`.
+
+```bash
+edgee auth login
+```
+
+### `edgee auth status`
+
+Display the current authentication status for all configured providers, including the logged-in email and connection mode.
+
+```bash
+edgee auth status
+```
+
+### `edgee launch claude`
+
+Launch Claude Code with all Edgee configuration automatically injected. The CLI sets the required environment variables
+(`ANTHROPIC_BASE_URL`, authentication headers, session ID) and starts Claude Code.
+
+```bash
+edgee launch claude
+```
+
+You can pass any Claude Code arguments after the command:
+
+```bash
+edgee launch claude "How do I implement a binary search?"
+edgee launch claude --resume
+```
+
+If you haven't authenticated yet, the CLI will prompt you to log in first. It will also ask you to select a connection mode
+on first launch:
+
+- **Claude Pro/Max** — uses your Anthropic subscription, Edgee compresses traffic to extend session duration
+- **API Billing** — uses Edgee API keys for direct billing, reducing token costs
+
+### `edgee launch codex`
+
+Launch Codex with Edgee routing automatically configured. The CLI passes the required provider configuration to Codex
+and starts a new session.
+
+```bash
+edgee launch codex
+```
+
+You can pass any Codex arguments after the command:
+
+```bash
+edgee launch codex --model o4-mini
+```
+
+Connection modes for Codex:
+
+- **ChatGPT Plus/Pro** — uses your OpenAI subscription with Edgee compression
+- **API Billing** — uses Edgee API keys for direct billing
+
+### `edgee reset`
+
+Reset your credentials and connection mode for a provider. Useful if you need to switch accounts, change your connection mode,
+or re-authenticate.
+
+```bash
+edgee reset
+```
+
+### `edgee update`
+
+Check for updates and install the latest version of the Edgee CLI.
+
+```bash
+edgee update
+```
+
+## Configuration
+
+The CLI stores credentials in `~/.config/edgee/credentials.toml` with restricted file permissions (`600`).
+
+```toml
+version = 2
+
+[claude]
+api_key = "ek_..."
+email = "you@example.com"
+connection = "plan"  # or "api"
+
+[codex]
+api_key = "ek_..."
+email = "you@example.com"
+connection = "plan"  # or "api"
+```
+
+<Note>
+  You don't need to edit this file manually. The CLI manages it through `edgee init`, `edgee auth login`, and `edgee reset`.
+</Note>
+
+## Session Tracking
+
+Every `edgee launch` session is assigned a unique session ID. After your session ends, the CLI prints a link to view
+detailed analytics for that session in the Edgee Console, including:
+
+- Token usage and compression savings
+- Request count and latency
+- Cost breakdown
+
+## How It Works
+
+When you run `edgee launch claude` or `edgee launch codex`, the CLI:
+
+1. Verifies your authentication (prompts login if needed)
+2. Generates a unique session ID
+3. Configures the appropriate environment variables and headers
+4. Launches the AI tool as a child process with Edgee routing enabled
+5. Prints a session analytics URL when the session ends
+
+All requests from your coding session flow through Edgee's API, where token compression, cost tracking,
+and observability are applied automatically.
+
+## Next Steps
+
+- Learn about [Claude Token Compression](/features/claude-compression) and how it extends your sessions
+- Set up [alerts](/features/alerts) to monitor your AI spending
+- Explore [observability](/features/observability) to track usage across all your sessions

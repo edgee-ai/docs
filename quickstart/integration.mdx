@@ -152,11 +152,25 @@ To learn more about the SDKs, see the [individual SDK pages](/sdk).
 
 ## Use Edgee in your Coding Assistant
 
-You can use Edgee in your preferred Coding Assistant by using our official integrations.
+The easiest way is to use the [Edgee CLI](/quickstart/cli) — it handles authentication and configuration automatically:
+
+```bash
+curl -fsSL https://install.edgee.ai | bash
+edgee init
+edgee launch claude
+```
+
+You can also configure your coding assistant manually:
 
 <CardGroup>
-  <Card title="Claude Code" icon="/images/icons/claude.svg" href="/features/claude-compression">
-    Route Claude Code traffic through Edgee for token compression and observability over every coding session.
+  <Card title="Edgee CLI" icon="terminal" href="/integrations/cli">
+    The fastest path: install, authenticate, and launch in two commands. Supports Claude Code and Codex.
+  </Card>
+  <Card title="Claude Code" icon="/images/icons/claude.svg" href="/integrations/claude-code">
+    Manual configuration for Claude Code via environment variables or settings file.
+  </Card>
+  <Card title="Codex" icon="code" href="/integrations/cli#edgee-launch-codex">
+    Launch Codex through Edgee using the CLI.
   </Card>
   <Card title="OpenCode" icon="/images/icons/opencode.svg" href="/integrations/opencode">
     Connect OpenCode's CLI agent to Edgee for cost savings and unified access to multiple models.
