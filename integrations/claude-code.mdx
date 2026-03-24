@@ -6,11 +6,28 @@ icon: /images/icons/claude.svg
 
 import ClaudeCodeIntegration from '/snippets/claude-code-integration.mdx';
 
-Claude Code is Anthropic's official CLI tool for interactive coding with AI assistance. 
-Route your Claude Code traffic through Edgee to **reduce token costs by up to 30%** with intelligent compression and 
+Claude Code is Anthropic's official CLI tool for interactive coding with AI assistance.
+Route your Claude Code traffic through Edgee to **reduce token costs by up to 30%** with intelligent compression and
 gain **full observability** over every coding session. Edgee's OpenAI-compatible API works seamlessly with Claude Code, set up once, save automatically.
 
-## Configuration
+## Quickstart with the Edgee CLI
+
+The fastest way to get started — no config files, no environment variables:
+
+```bash
+# Install the Edgee CLI
+curl -fsSL https://install.edgee.ai | bash
+
+# Authenticate and configure Claude Code automatically
+edgee init
+
+# Launch Claude Code through Edgee
+edgee launch claude
+```
+
+That's it. See the [CLI quickstart](/quickstart/cli) for more details.
+
+## Manual Configuration
 
 <ClaudeCodeIntegration />
 

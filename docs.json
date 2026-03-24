@@ -106,6 +106,7 @@
             "pages": [
               "integrations/cli",
               "integrations/claude-code",
+              "integrations/codex",
               "integrations/anthropic-sdk",
               "integrations/openai-sdk",
               "integrations/opencode",
