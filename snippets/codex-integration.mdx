@@ -1,0 +1,47 @@
+## Edgee CLI setup (recommended)
+
+The fastest way to connect Codex to Edgee is through the CLI, no config files to edit manually.
+
+<Steps>
+  <Step title="Install the Edgee CLI">
+    <Tabs>
+      <Tab title="macOS / Linux">
+        ```bash
+        curl -fsSL https://install.edgee.ai | bash
+        ```
+      </Tab>
+      <Tab title="Homebrew">
+        ```bash
+        brew install edgee-ai/tap/edgee
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Launch Codex through Edgee">
+    ```bash
+    edgee launch codex
+    ```
+    The CLI authenticates, writes the Codex config, and starts Codex, all in one command. Token compression is enabled automatically.
+  </Step>
+</Steps>
+
+After the session ends, the CLI prints a link to view token usage, compression savings, and cost breakdown in the Edgee Console.
+
+## Manual setup (advanced)
+
+If you prefer to configure Codex without the CLI, update your Codex configuration file at `~/.codex/config.toml`:
+
+```toml
+model_provider = "edgee"
+
+[model_providers.edgee]
+name = "EDGEE"
+base_url = "https://api.edgee.ai/v1"
+http_headers = { "x-edgee-api-key" = "<YOUR_EDGEE_API_KEY>" }
+wire_api = "responses"
+```
+
+<Note>
+  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai). You'll also need to enable Codex Token Compression on that key from the **Edge Models** section.
+</Note>

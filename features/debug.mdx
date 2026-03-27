@@ -18,7 +18,7 @@ A confirmation dialog will appear:
   When debug mode is enabled, **full request and response data** (including headers, message bodies, and model outputs) is logged and stored temporarily. This data may contain sensitive or personal information and is accessible to all members of your organization. Enable it only when actively debugging.
 </Note>
 
-Click **Enable Debug Mode** to confirm. The badge turns **ON** (green). To stop capturing debug logs, click the badge again — disabling does not require confirmation.
+Click **Enable Debug Mode** to confirm. The badge turns **ON** (green). To stop capturing debug logs, click the badge again, disabling does not require confirmation.
 
 ## View the debug dialog
 
@@ -26,7 +26,7 @@ Once debug mode is on, every request made with that API key will have a bug icon
 
 Go to **Logs** in the console sidebar. Each row in the request table represents one LLM call. For requests captured with debug mode, click the **bug icon** in the rightmost column to open the debug dialog.
 
-<Frame caption="The Logs page — click the bug icon on any debug-enabled row to inspect the full request.">
+<Frame caption="The Logs page, click the bug icon on any debug-enabled row to inspect the full request.">
   <img className="block dark:hidden" src="/images/logs-light.png" alt="Logs table with debug icon" />
   <img className="hidden dark:block" src="/images/logs-dark.png" alt="Logs table with debug icon" />
 </Frame>
@@ -52,11 +52,11 @@ A 3-column grid at the top shows at a glance:
 
 The **HTTP Request** section (collapsible, open by default) shows everything Edgee sent to the provider. It is organized in tabs:
 
-- **Full Body** — The complete request body as an interactive JSON tree. You can expand/collapse nodes, switch to raw JSON view, and copy the content.
-- **Headers** — All request headers in a key/value table. Sensitive values (such as authorization tokens) are displayed as `[REDACTED]`.
-- **Messages** — The input messages array extracted from the body.
-- **Compressed** — The compressed version of the messages, shown only when token compression was applied to this request.
-- **Compare** — A side-by-side diff of the original and compressed messages. Each row corresponds to one message by index, so you can see exactly what was changed, shortened, or removed by the compression engine.
+- **Full Body**: The complete request body as an interactive JSON tree. You can expand/collapse nodes, switch to raw JSON view, and copy the content.
+- **Headers**: All request headers in a key/value table. Sensitive values (such as authorization tokens) are displayed as `[REDACTED]`.
+- **Messages**: The input messages array extracted from the body.
+- **Compressed**: The compressed version of the messages, shown only when token compression was applied to this request.
+- **Compare**: A side-by-side diff of the original and compressed messages. Each row corresponds to one message by index, so you can see exactly what was changed, shortened, or removed by the compression engine.
 
 <Tip>
   The **Compare** tab is the fastest way to audit compression quality: you can verify that the semantic meaning of each message was preserved before sending it to the provider.
@@ -66,13 +66,13 @@ The **HTTP Request** section (collapsible, open by default) shows everything Edg
 
 The **Output** section (collapsible, open by default) shows what the provider returned:
 
-- **Output (Response)** — The full response body for non-streaming requests, as an interactive JSON tree.
-- **Output (Accumulated Content)** — The concatenated streamed content for streaming requests.
-- **Output (Error)** — The raw error message in red if the provider returned an error or the request failed.
+- **Output (Response)**: The full response body for non-streaming requests, as an interactive JSON tree.
+- **Output (Accumulated Content)**: The concatenated streamed content for streaming requests.
+- **Output (Error)**: The raw error message in red if the provider returned an error or the request failed.
 
 ### Request ID
 
-The dialog footer displays the request ID in monospace. Use the **Copy** button to copy it — useful when filing a support ticket or correlating logs with your application code.
+The dialog footer displays the request ID in monospace. Use the **Copy** button to copy it, useful when filing a support ticket or correlating logs with your application code.
 
 ## Compression comparison in practice
 

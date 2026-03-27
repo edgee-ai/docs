@@ -1,79 +1,40 @@
 ---
 title: Codex
-description: Use Edgee with Codex, OpenAI's open-source coding agent that runs in your terminal.
-icon: /images/icons/openai.svg
+description: Use Edgee with Codex to cut token costs and extend sessions, with zero manual configuration.
+icon: /images/icons/codex.svg
 ---
 
+import CodexIntegration from '/snippets/codex-integration.mdx';
+
 [Codex](https://github.com/openai/codex) is OpenAI's open-source CLI coding agent.
-Route your Codex traffic through Edgee to gain **full observability** over every coding session
-and access **all LLM providers** through a single endpoint.
+Route your Codex traffic through Edgee to **reduce token costs by up to 30%** with lossless compression,
+and gain **full observability** over every coding session.
 
-## Quickstart with the Edgee CLI
-
-The fastest way to get started — no config files to edit:
-
-```bash
-# Install the Edgee CLI
-curl -fsSL https://install.edgee.ai | bash
-
-# Authenticate and configure Codex automatically
-edgee init
-
-# Launch Codex through Edgee
-edgee launch codex
-```
-
-That's it. See the [CLI quickstart](/quickstart/cli) for more details.
-
-## Manual Configuration
-
-To use Edgee with Codex manually, update your Codex configuration file at `~/.codex/config.toml` with the following:
-
-```toml
-model_provider = "edgee"
-
-[model_providers.edgee]
-name = "EDGEE"
-base_url = "https://api.edgee.ai/v1"
-http_headers = { "x-edgee-api-key" = "<YOUR_EDGEE_API_KEY>" }
-wire_api = "responses"
-```
-
-<Note>
-  Replace `<YOUR_EDGEE_API_KEY>` with your actual Edgee API key from the [Edgee Console](https://www.edgee.ai).
-</Note>
+<CodexIntegration />
 
 ## Usage
 
-Once configured, Codex will automatically route all requests through Edgee. You can use Codex normally:
+Once launched, use Codex normally, compression is transparent:
 
 ```bash
-# Start an interactive session
-codex
-
 # Ask a question directly
 codex "How do I implement a binary search tree in Python?"
 
 # Run in full-auto mode
 codex --approval-mode full-auto "Refactor this module to use async/await"
+
+# Resume a previous session
+edgee launch codex --resume
 ```
 
-## Benefits of Using Codex with Edgee
+## Benefits
 
 <CardGroup cols={2}>
-  <Card title="Unified Infrastructure" icon="server">
-    Access all LLM providers through Edgee while using Codex's developer-friendly CLI.
+  <Card title="Automatic Cost Reduction" icon="dollar-sign">
+    If you are using API billing, you will see a significant reduction in your token costs by up to 30%.
   </Card>
 
-  <Card title="Cost Control" icon="dollar-sign">
-    Leverage Edgee's cost tracking and intelligent routing to optimize your spending.
-  </Card>
-
-  <Card title="Reliability" icon="shield-check">
-    Combine Codex's agent capabilities with Edgee's automatic failover and load balancing.
-  </Card>
-
-  <Card title="Observability" icon="chart-line">
-    Monitor your Codex sessions with Edgee's built-in observability features.
+  <Card title="More Work Per Session" icon="chart-line">
+    Compression makes the effective context window stretch further, so Codex can tackle larger tasks before hitting limits.
   </Card>
 </CardGroup>

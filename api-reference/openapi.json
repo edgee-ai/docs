@@ -384,7 +384,7 @@
       "post": {
         "operationId": "countTokens",
         "summary": "Count tokens",
-        "description": "Estimates the number of input tokens for a set of messages without making an LLM call. Accepts both OpenAI chat format and Anthropic Messages format — the format is auto-detected from the message structure. Useful for pre-flight cost estimation, rate-limit planning, and prompt optimization.\n\n**Note:** Token counts are approximate and may differ from provider-native tokenizers (e.g. OpenAI tiktoken, Anthropic's tokenizer).",
+        "description": "Estimates the number of input tokens for a set of messages without making an LLM call. Accepts both OpenAI chat format and Anthropic Messages format, the format is auto-detected from the message structure. Useful for pre-flight cost estimation, rate-limit planning, and prompt optimization.\n\n**Note:** Token counts are approximate and may differ from provider-native tokenizers (e.g. OpenAI tiktoken, Anthropic's tokenizer).",
         "tags": [
           "Tokens"
         ],
@@ -458,7 +458,7 @@
         "properties": {
           "messages": {
             "type": "array",
-            "description": "Array of message objects to count tokens for. Accepts both OpenAI chat format (with `system`, `user`, `assistant` roles) and Anthropic Messages format — the format is auto-detected from the message structure. Provide `tokenizer` explicitly to override auto-detection.",
+            "description": "Array of message objects to count tokens for. Accepts both OpenAI chat format (with `system`, `user`, `assistant` roles) and Anthropic Messages format, the format is auto-detected from the message structure. Provide `tokenizer` explicitly to override auto-detection.",
             "items": {
               "type": "object",
               "required": [
@@ -504,7 +504,7 @@
         "properties": {
           "input_tokens": {
             "type": "integer",
-            "description": "Estimated number of input tokens for the provided messages. This is an approximation — counts may differ from provider-native tokenizers. Use for estimation and budgeting, not exact billing.",
+            "description": "Estimated number of input tokens for the provided messages. This is an approximation, counts may differ from provider-native tokenizers. Use for estimation and budgeting, not exact billing.",
             "minimum": 0,
             "example": 42
           }

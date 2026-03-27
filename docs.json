@@ -105,6 +105,7 @@
             "pages": [
               "features/cli",
               "features/claude-compression",
+              "features/codex-compression",
               "features/agentic-compression",
               "features/observability",
               "features/debug",

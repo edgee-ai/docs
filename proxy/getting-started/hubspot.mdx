@@ -23,7 +23,7 @@ Integrating Edgee with HubSpot involves four main steps:
 
 
 
-### Step 1 — Connect Your Domain to Edgee
+### Step 1: Connect Your Domain to Edgee
 
 <Note>See [Custom Domains](/proxy/getting-started/domains) for detailed instructions on configuring domains with Edgee.</Note>
 
@@ -34,7 +34,7 @@ Integrating Edgee with HubSpot involves four main steps:
 4. Save and activate your configuration.  
 
 
-### Step 2 — Create Secret Headers in Edgee
+### Step 2: Create Secret Headers in Edgee
 
 1. In Edgee, go to **Security → Secret Headers**.  
 2. Add the following headers so HubSpot accepts and processes requests correctly:  
@@ -50,23 +50,23 @@ Integrating Edgee with HubSpot involves four main steps:
    <img src="/images/hubspot/hubspotheaders.png" />
 
 
-### Step 3 — Connect the Domain in HubSpot
+### Step 3: Connect the Domain in HubSpot
 
 1. In HubSpot, go to **Settings → Content → Domains & URLs**.  
 2. Click **Connect a domain**.  
 3. Choose the type (Primary, Secondary, or Redirect) and select which content types you’ll host.  
 4. Disable HubSpot built-in CDN Configuration - **Toggle OFF**:  
-This ensures HubSpot does not manage SSL or CDN — Edgee will handle it instead.  
+This ensures HubSpot does not manage SSL or CDN, Edgee will handle it instead.  
    <img src="/images/hubspot/cdnoffs.png" />
 
 5. Follow HubSpot’s prompts to verify and complete the setup.  
 
 
-### Step 4 — Point Your Domain to Edgee
+### Step 4: Point Your Domain to Edgee
 
 1. Update your DNS settings so your domain routes traffic through **Edgee** instead of directly to HubSpot.  
 2. Follow the [Edgee Routing Guide](/proxy/getting-started/routing) to complete the configuration.  
 
 ---
 
-With this setup, Edgee sits in front of HubSpot to deliver faster performance, enhanced security, and seamless integration—while HubSpot continues to power your content and publishing workflow.
+With this setup, Edgee sits in front of HubSpot to deliver faster performance, enhanced security, and seamless integration, while HubSpot continues to power your content and publishing workflow.

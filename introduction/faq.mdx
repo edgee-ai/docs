@@ -33,9 +33,9 @@ icon: message-circle-question-mark
   <Accordion title="What compression engines does Edgee offer?">
     Edgee offers multiple compression engines that can be enabled independently:
 
-    **Agentic Token Compression** uses multiple strategies — including semantic analysis, context optimization, tool compression, JSON crusher, and cache optimizer — to reduce input tokens by up to 50%. It works with all models (OpenAI, Anthropic, Google, Mistral, etc.) and is ideal for RAG pipelines, long contexts, and multi-turn agents.
+    **Agentic Token Compression** uses multiple strategies, including semantic analysis, context optimization, tool compression, JSON crusher, and cache optimizer, to reduce input tokens by up to 50%. It works with all models (OpenAI, Anthropic, Google, Mistral, etc.) and is ideal for RAG pipelines, long contexts, and multi-turn agents.
 
-    **Claude Token Compression (Beta)** provides fully lossless compression of tool call results in Claude workflows. It's optimized for Claude Code and tool-heavy Claude applications — no configuration needed, just enable it per API key.
+    **Claude Token Compression** provides fully lossless compression of tool call results in Claude workflows. It's optimized for Claude Code and tool-heavy Claude applications, no configuration needed, just enable it per API key.
 
     More compression engines for additional coding assistants are coming soon.
 
@@ -51,13 +51,13 @@ icon: message-circle-question-mark
     When you use LLM APIs directly, you're locked into a single provider's API format, have no visibility into costs until your bill arrives, no automatic failovers when providers go down, and scattered logs across multiple dashboards.
 
     Edgee gives you:
-    - **Up to 50% cost reduction** — automatic token compression at the edge
-    - **Real-time savings tracking** — see exactly how many tokens and dollars you've saved
-    - **One API** for all providers — switch models with a single line change
-    - **Real-time cost tracking** — know exactly what each request costs
-    - **Automatic failovers** — when OpenAI is down, Claude takes over seamlessly
-    - **Unified observability** — all your AI logs in one place
-    - **Intelligent routing** — optimize for cost or performance automatically
+    - **Up to 50% cost reduction**: automatic token compression at the edge
+    - **Real-time savings tracking**: see exactly how many tokens and dollars you've saved
+    - **One API** for all providers: switch models with a single line change
+    - **Real-time cost tracking**: know exactly what each request costs
+    - **Automatic failovers**: when OpenAI is down, Claude takes over seamlessly
+    - **Unified observability**: all your AI logs in one place
+    - **Intelligent routing**: optimize for cost or performance automatically
   </Accordion>
 
   <Accordion title="Which LLM providers does Edgee support?">
@@ -81,7 +81,7 @@ icon: message-circle-question-mark
   <Accordion title="How much latency does Edgee add?">
     Edgee adds less than 20ms of latency at the p99 level. Our edge network processes requests at the point of presence closest to your application, minimizing round-trip time.
 
-    For most AI applications, where LLM inference takes 500ms-5s, this overhead is negligible — typically less than 1-2% of total request time.
+    For most AI applications, where LLM inference takes 500ms-5s, this overhead is negligible, typically less than 1-2% of total request time.
   </Accordion>
 
   <Accordion title="What happens when a provider goes down?">
@@ -91,7 +91,7 @@ icon: message-circle-question-mark
     2. **Retry**: For transient errors, we retry with exponential backoff
     3. **Failover**: For persistent issues, we route to your configured backup models
 
-    Your application sees a seamless response — no errors, no interruption.
+    Your application sees a seamless response, no errors, no interruption.
   </Accordion>
 
   <Accordion title="How does cost tracking work?">
