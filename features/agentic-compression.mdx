@@ -16,7 +16,7 @@ This is particularly effective for:
 - Document analysis and summarization tasks
 
 <Note>
-  Looking for lossless compression for Claude Code? See [Claude Token Compression (Beta)](/features/claude-compression).
+  Looking for lossless compression for Claude Code? See [Claude Token Compression](/features/claude-compression).
 </Note>
 
 ## How It Works
@@ -65,7 +65,7 @@ In the console you choose **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)**
 
 To avoid changing the meaning of the prompt, we compare the compressed text to the original using **BERT score** (F1). It measures how semantically similar the two texts are on a scale of 0–1 (0%–100%).
 
-- **Semantic preservation threshold** (0–100%) is the *minimum* similarity we require. If the BERT score is **below** this threshold, we **do not** use the compressed prompt—we send the original instead, so quality is preserved.
+- **Semantic preservation threshold** (0–100%) is the *minimum* similarity we require. If the BERT score is **below** this threshold, we **do not** use the compressed prompt, we send the original instead, so quality is preserved.
 - In the console you choose **Off** (no check), **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)**. Off = we always use the compressed prompt when compression runs; higher values = we only use the compressed prompt when it is very similar to the original; otherwise we fall back to the original.
 
 This way you can allow aggressive compression (low ratio) while still guaranteeing that we never send a compressed prompt that is too different from what the user wrote.
@@ -155,8 +155,8 @@ Enable compression for specific API keys in your organization settings. This is 
 </Frame>
 
 In the **Edge Models** section of your console:
-1. Set **Compression** to **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)** — see [Understanding compression ratio](#understanding-compression-ratio)
-2. Set **Semantic preservation threshold** to **Off**, **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)** — see [Semantic preservation and BERT score](#semantic-preservation-and-bert-score)
+1. Set **Compression** to **Light (0.9)**, **Medium (0.8)**, or **Strong (0.7)**, see [Understanding compression ratio](#understanding-compression-ratio)
+2. Set **Semantic preservation threshold** to **Off**, **Ultra Safe (0.95)**, **Safe (0.85)**, or **Edgy (0.75)**, see [Semantic preservation and BERT score](#semantic-preservation-and-bert-score)
 3. Under **Scope**, select **Apply to specific API keys**
 4. Choose which API keys should use compression
 

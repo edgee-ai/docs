@@ -1,0 +1,48 @@
+---
+title: Codex Token Compression
+sidebarTitle: Codex Compression
+description: Lossless compression for Codex sessions, using the same engine as Claude Token Compression but for the OpenAI-compatible wire format.
+icon: /images/icons/codex.svg
+---
+
+<img src="/images/banner-codex-compression.png" alt="Codex token compression" />
+
+Codex Token Compression works the same way as [Claude Token Compression](/features/claude-compression), applied to the OpenAI-compatible API format that Codex uses. Tool call outputs, file reads, shell commands, search results, are compressed before they reach the model. Fully lossless, no configuration.
+
+For Codex users on API billing, this means up to **30% lower costs**. For subscription users, the same token budget covers more work per session.
+
+## Get Started
+
+```bash
+edgee launch codex
+```
+
+If the Edgee CLI isn't installed yet:
+
+```bash
+curl -fsSL https://install.edgee.ai | bash
+```
+
+<Card title="CLI guide" icon="terminal" href="/features/cli">
+  Install, authenticate, and launch Codex in under a minute.
+</Card>
+
+## Codex-specific: OpenAI wire format
+
+Codex uses the OpenAI `responses` wire API. When routing through Edgee, the CLI automatically sets the correct provider config in `~/.codex/config.toml`:
+
+```toml
+model_provider = "edgee"
+
+[model_providers.edgee]
+name = "EDGEE"
+base_url = "https://api.edgee.ai/v1"
+http_headers = { "x-edgee-api-key" = "<YOUR_EDGEE_API_KEY>" }
+wire_api = "responses"
+```
+
+This is handled automatically by `edgee launch codex`. You never need to edit this file manually.
+
+<Accordion title="Manual setup (advanced)">
+  To configure Codex without the CLI, paste the config above into `~/.codex/config.toml` and replace `<YOUR_EDGEE_API_KEY>` with your key from the [Edgee Console](https://www.edgee.ai). Enable Codex Token Compression on that key from the **Edge Models** section.
+</Accordion>
