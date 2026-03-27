@@ -1,74 +1,33 @@
 ---
 title: Claude Code
-description: Use Edgee with Claude Code for building applications with Claude's official CLI tool.
+description: Use Edgee with Claude Code to cut token costs and extend sessions — with zero manual configuration.
 icon: /images/icons/claude.svg
 ---
 
 import ClaudeCodeIntegration from '/snippets/claude-code-integration.mdx';
 
 Claude Code is Anthropic's official CLI tool for interactive coding with AI assistance.
-Route your Claude Code traffic through Edgee to **reduce token costs by up to 30%** with intelligent compression and
-gain **full observability** over every coding session. Edgee's OpenAI-compatible API works seamlessly with Claude Code, set up once, save automatically.
-
-## Quickstart with the Edgee CLI
-
-The fastest way to get started — no config files, no environment variables:
-
-```bash
-# Install the Edgee CLI
-curl -fsSL https://install.edgee.ai | bash
-
-# Authenticate and configure Claude Code automatically
-edgee init
-
-# Launch Claude Code through Edgee
-edgee launch claude
-```
-
-That's it. See the [CLI quickstart](/quickstart/cli) for more details.
-
-## Manual Configuration
+Route your Claude Code traffic through Edgee to **reduce token costs by up to 30%** with lossless compression,
+and gain **full observability** over every coding session.
 
 <ClaudeCodeIntegration />
 
 ## Usage
 
-Once configured, Claude Code will automatically route all requests through Edgee. You can use Claude Code normally:
+Once launched, use Claude Code normally — compression is transparent:
 
 ```bash
-# Start an interactive session
-claude
-
 # Ask a question directly
 claude "How do I implement a binary search tree in Python?"
 
 # Work on a specific file
 claude --file src/main.py "Add error handling to this code"
+
+# Resume a previous session
+edgee launch claude --resume
 ```
 
-## Enable Token Compression for Claude Code
-
-
-Claude Token Compression provides **fully lossless** compression of tool call results, file reads, search outputs, command output, and more. 
-No information is lost, so your coding sessions behave exactly as they would without compression, but at a lower token cost.
-
-**How to enable:**
-
-1. Go to **Edge Models** in the [Edgee Console](https://www.edgee.ai).
-2. Find the **Claude Token Compression** card.
-3. Select which API keys to enable it for.
-
-<Frame>
-<img src="/images/claude-comp-by-key-light.png" alt="Enable compression for specific API keys" className="dark:hidden" />
-<img src="/images/claude-comp-by-key-dark.png" alt="Enable compression for specific API keys" className="hidden dark:block" />
-</Frame>
-
-<Note>
-  No additional configuration is needed. Claude Token Compression is fully lossless by design. Once enabled on an API key, it works automatically on every request.
-</Note>
-
-
-## Benefits of Using Claude Code with Edgee
+## Benefits
 
 <CardGroup cols={2}>
   <Card title="Automatic Cost Reduction" icon="dollar-sign">
@@ -76,6 +35,6 @@ No information is lost, so your coding sessions behave exactly as they would wit
   </Card>
 
   <Card title="Longer Sessions with the Same Token Budget" icon="chart-line">
-    If you are using Claude Pro/Max, Claude Code lets you enjoy sessions up to 35% longer with the same token budget.
+    If you are using Claude Pro/Max, enjoy sessions up to 35% longer with the same token budget.
   </Card>
 </CardGroup>

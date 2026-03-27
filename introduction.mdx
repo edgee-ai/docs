@@ -7,10 +7,23 @@ mode: "center"
 
 Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intelligent token compression. Behind a single OpenAI-compatible API, you get access to 200+ models with automatic cost optimization, intelligent routing, and full observability.
 
-## Get Started in 6 Lines
+## Get Started in Seconds
 
 <Tabs>
-  <Tab title="TypeScript">    
+  <Tab title="CLI (Coding Agents)">
+    ```bash
+    curl -fsSL https://install.edgee.ai | bash
+
+    # Then launch your coding agent
+    edgee launch claude
+    # or
+    edgee launch codex
+    # or
+    edgee launch opencode
+    ```
+  </Tab>
+
+  <Tab title="TypeScript">
     ```typescript
     import Edgee from 'edgee';
     
@@ -153,7 +166,7 @@ Edgee is an **AI Gateway** that reduces LLM costs by up to 50% through intellige
   </Tab>
 </Tabs>
 
-That's it. You now have access to every major LLM provider, automatic failovers, cost tracking, and full observability, all through one simple API.
+That's it. You now have access to every major LLM provider, automatic failovers, cost tracking, and full observability, all through Edgee's Gateway.
 
 
 
@@ -183,12 +196,12 @@ Building with LLMs is powerful, but comes with challenges:
 ## Core Capabilities
 
 <CardGroup cols={2}>
-  <Card title="Token Compression for Agentic Workloads" icon="/images/icons/agentic-comp.svg" iconType="duotone" href="/features/agentic-compression">
-    AI-powered context optimization that reduces token usage. Perfect for long-context prompts and agentic workloads where context windows matter.
+  <Card title="Token Compression for Coding Agents" icon="/images/icons/claude.svg" iconType="duotone" href="/introduction/coding-agents">
+    Lossless compression for Claude Code, Codex, and OpenCode. Extend your session duration or cut API costs — no code changes required.
   </Card>
 
-  <Card title="Token Compression for Claude Code" icon="/images/icons/claude.svg" iconType="duotone" href="/features/claude-compression">
-    Lossless compression for Claude Code, extending your plan's session duration by 3 times.
+  <Card title="Token Compression for Agentic Workloads" icon="/images/icons/agentic-comp.svg" iconType="duotone" href="/features/agentic-compression">
+    AI-powered context optimization that reduces token usage. Perfect for long-context prompts and agentic workloads where context windows matter.
   </Card>
 
   <Card title="Cost & Observability" icon="chart-line" iconType="duotone" href="/features/observability">

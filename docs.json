@@ -48,6 +48,10 @@
     {
       "source": "/features/overview",
       "destination": "/features/agentic-compression"
+    },
+    {
+      "source": "/integrations/cli",
+      "destination": "/features/cli"
     }
   ],
 
@@ -76,6 +80,7 @@
             "pages": [
               "introduction",
               "introduction/why-edgee",
+              "introduction/coding-agents",
               "introduction/faq"
             ]
           },
@@ -83,17 +88,24 @@
             "group": "Quickstart",
             "pages": [
               "quickstart/index",
-              "quickstart/cli",
-              "quickstart/account-creation",
-              "quickstart/api-key",
-              "quickstart/integration"
+              {
+                "group": "For your app",
+                "icon": "boxes",
+                "pages": [
+                  "quickstart/apps",
+                  "quickstart/account-creation",
+                  "quickstart/api-key",
+                  "quickstart/integration"
+                ]
+              }
             ]
           },
           {
             "group": "Features",
             "pages": [
-              "features/agentic-compression",
+              "features/cli",
               "features/claude-compression",
+              "features/agentic-compression",
               "features/observability",
               "features/debug",
               "features/byok",
@@ -103,12 +115,11 @@
           {
             "group": "Integrations",
             "pages": [
-              "integrations/cli",
               "integrations/claude-code",
               "integrations/codex",
+              "integrations/opencode",
               "integrations/anthropic-sdk",
               "integrations/openai-sdk",
-              "integrations/opencode",
               "integrations/langchain"
             ]
           }

@@ -1,0 +1,88 @@
+---
+title: Coding Agents
+description: Use Edgee to cut costs and extend sessions for Claude Code, Codex, and OpenCode, with zero code changes.
+icon: terminal
+---
+
+Coding agents are uniquely token-hungry. Every file read, grep result, shell output, and API response lands in the context window as a `tool_result`, and those payloads add up fast. A single Claude Code session can consume tens of thousands of tokens just from tool calls.
+
+Edgee compresses these `tool_result` messages **losslessly** before they reach the model. The agent sees identical output. You pay for fewer tokens.
+
+<Columns cols={3}>
+  <Card icon="clock" iconType="duotone" color="#8924A6">
+    **Up to 35% longer** sessions for Pro/Max users
+  </Card>
+  <Card icon="dollar-sign" iconType="duotone" color="#8924A6">
+    **Up to 50% lower** costs on API billing
+  </Card>
+  <Card icon="zap" iconType="duotone" color="#8924A6">
+    **Zero config**, the CLI handles everything
+  </Card>
+</Columns>
+
+## How It Works
+
+When you launch a coding agent through the Edgee CLI, all traffic is automatically routed through the Edgee gateway. Before each request reaches the LLM provider, Edgee compresses the `tool_result` content, file contents, grep outputs, bash responses, using lossless techniques that preserve every byte of meaning.
+
+The model receives the same information. You use fewer tokens.
+
+<Steps>
+  <Step title="Install the Edgee CLI">
+    ```bash
+    curl -fsSL https://install.edgee.ai | bash
+    ```
+  </Step>
+
+  <Step title="Launch your coding agent">
+    ```bash
+    edgee launch claude
+    # or
+    edgee launch codex
+    # or
+    edgee launch opencode
+    ```
+    That's it. Your agent now runs with Edgee compression enabled.
+  </Step>
+</Steps>
+
+After each session, the CLI prints a link to your session analytics, including tokens used, tokens saved, and cost breakdown.
+
+<img src="/images/session.png" alt="Edgee Coding Agent Session"/>
+
+## Supported Tools
+
+| Tool | Command | Status |
+|---|---|---|
+| Claude Code | `edgee launch claude` | ✅ Available |
+| Codex | `edgee launch codex` | ✅ Available |
+| OpenCode | `edgee launch opencode` | ✅ Available |
+| Cursor | `edgee launch cursor` | 🔜 Coming soon |
+
+
+
+## What Gets Compressed
+
+Edgee targets `tool_result` messages in Claude/Codex/OpenCode... API format:
+
+- **File contents**: output from Read and file system operations
+- **Grep and search results**: ripgrep, code search, similar tools
+- **Shell output**: stdout/stderr from Bash commands
+- **API responses**: large JSON or text payloads from tool calls
+- **Database results**: rows and records from tool-executed queries
+
+User messages and assistant turns are not modified.
+
+<Note>
+  Compression is **fully lossless** for coding agent traffic. There are no quality thresholds or configuration options, just enable it and go.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="CLI Quickstart" icon="terminal" href="/quickstart/cli">
+    Install the CLI and launch your first compressed session in under a minute.
+  </Card>
+  <Card title="Claude Token Compression" icon="/images/icons/claude.svg" href="/features/claude-compression">
+    Deep dive into the compression engine powering coding agent support.
+  </Card>
+</CardGroup>
