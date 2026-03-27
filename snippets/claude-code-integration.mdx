@@ -1,3 +1,35 @@
+## Edgee CLI setup (recommended)
+
+The fastest way to connect Claude Code to Edgee is through the CLI, no manual API key setup or environment variables needed.
+
+<Steps>
+  <Step title="Install the Edgee CLI">
+    <Tabs>
+      <Tab title="macOS / Linux">
+        ```bash
+        curl -fsSL https://install.edgee.ai | bash
+        ```
+      </Tab>
+      <Tab title="Homebrew">
+        ```bash
+        brew install edgee-ai/tap/edgee
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Launch Claude Code through Edgee">
+    ```bash
+    edgee launch claude
+    ```
+    The CLI authenticates, configures routing, and starts Claude Code — all in one command. Token compression is enabled automatically.
+  </Step>
+</Steps>
+
+After the session ends, the CLI prints a link to view token usage, compression savings, and cost breakdown in the Edgee Console.
+
+## Manual setup (advanced)
+
 Claude Code supports custom API endpoints through its settings. You can configure it to use Edgee as your AI provider in two ways:
 
 ### Option 1: Environment Variables

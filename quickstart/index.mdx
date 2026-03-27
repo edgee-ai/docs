@@ -1,60 +1,69 @@
 ---
-title: Quickstart
-description: Start using Edgee in minutes.
-icon: square-minus
+title: Quickstart for your coding agent
+sidebarTitle: For your coding agent
+description: The fastest way to get started with Edgee. Two commands to install, authenticate, and launch your coding assistant with compression.
+icon: terminal
 ---
 
-Choose the path that fits your use case:
+The Edgee CLI is the fastest way to use Edgee with your AI coding assistant. It handles account creation, authentication,
+and tool configuration automatically, no manual API key setup or environment variables needed.
 
-## Using a Coding Assistant?
+<Steps>
+  <Step title="Install the CLI">
+    <Tabs>
+      <Tab title="macOS / Linux">
+        ```bash
+        curl -fsSL https://install.edgee.ai | bash
+        ```
+      </Tab>
+      <Tab title="Homebrew">
+        ```bash
+        brew install edgee-ai/tap/edgee
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
 
-The **Edgee CLI** is the fastest way to get started. Two commands and you're done — no manual API key setup needed.
+  <Step title="Launch your coding assistant">
+    ```bash
+    edgee launch claude
+    ```
+    That's it. Claude Code is now running with Edgee compression and full observability enabled.
 
-```bash
-curl -fsSL https://install.edgee.ai | bash
-edgee init
-edgee launch claude
-```
+    For Codex users:
+    ```bash
+    edgee launch codex
+    ```
 
-<Card title="Quickstart with the CLI" icon="terminal" href="/quickstart/cli">
-  Install the CLI, authenticate, and launch Claude Code or Codex with Edgee in under a minute.
-</Card>
+    For OpenCode users:
+    ```bash
+    edgee launch opencode
+    ```
+  </Step>
+</Steps>
 
-## Building an Application?
+After your session ends, the CLI prints a link to view your session analytics, token usage, 
+compression savings, and cost breakdown, directly in the [Edgee Console](https://www.edgee.ai).
 
-Follow the step-by-step guide to create your account, generate an API key, and integrate Edgee into your stack.
+<img src="/images/session.png" alt="Edgee Coding Agent Session"/>
 
-| Step | Task    | Time          |
-| ---- |------- | ------------- |
-| 1    | [Account Creation](/quickstart/account-creation) | 1 min |
-| 2    | [Create an API Key](/quickstart/api-key) | 1 min |
-| 3    | [Integrate Edgee to your stack](/quickstart/integration) | 3 min |
-|      | **Total Time** | **~5 min** |
+<Note>
+  The CLI requires [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) or [Codex](https://github.com/openai/codex) to be installed on your machine.
+</Note>
 
-## Other ways to get started
+## What's Next
 
-<CardGroup>
-  <Card
-    title="Use one of our SDKs"
-    icon="boxes"
-    href="/sdk"
-  >
-    Use one of our SDKs to start using Edgee services in your application.
+<CardGroup cols={2}>
+  <Card title="CLI Reference" icon="terminal" href="/features/cli">
+    Full documentation of all CLI commands, flags, and configuration options.
   </Card>
-
-  <Card
-    title="API Reference"
-    icon="terminal"
-    href="/api-reference"
-  >
-    If you prefer to dive into the technical details, check out our API reference.
+  <Card title="Claude Token Compression" icon="/images/icons/claude.svg" href="/features/claude-compression">
+    Learn how lossless compression extends your Claude Code sessions by up to 3x.
   </Card>
-
-  <Card
-    title="Features"
-    icon="rocket"
-    href="/features"
-  >
-    Discover compression engines, intelligent routing, observability, and more.
+  <Card title="Observability" icon="chart-line" href="/features/observability">
+    Track token usage, costs, and latency across all your sessions.
+  </Card>
+  <Card title="Alerts & Budgets" icon="bell" href="/features/alerts">
+    Set up spending alerts to stay in control of your AI costs.
   </Card>
 </CardGroup>

@@ -1,10 +1,9 @@
 ---
 title: Claude Token Compression
 sidebarTitle: Claude Compression
-description: Fully lossless compression of tool call results for Claude Code and tool-heavy Claude workflows.
+description: Fully lossless compression of tool call results for Claude Code, Codex, OpenCode, and other tool-heavy coding agent workflows.
 icon: /images/icons/claude.svg
 ---
-import ClaudeCodeIntegration from '/snippets/claude-code-integration.mdx';
 
 <img src="/images/banner-claude-compression.png" alt="Claude token compression" />
 
@@ -27,33 +26,47 @@ Claude Token Compression targets `tool_result` messages in Claude API format. Th
 
 User messages and assistant turns are not modified, only tool results are compressed.
 
-## How to Enable
+## Get Started
 
-In the **Edge Models** section of your console, find the **Claude Token Compression** card and simply select which API keys should use Claude compression.
+The fastest way is the Edgee CLI — compression is enabled automatically, no console configuration needed:
 
-<Frame>
-<img src="/images/claude-comp-by-key-light.png" alt="Enable compression for specific API keys" className="dark:hidden" />
-<img src="/images/claude-comp-by-key-dark.png" alt="Enable compression for specific API keys" className="hidden dark:block" />
-</Frame>
+<Tabs>
+  <Tab title="Curl">
+    ```bash
+    curl -fsSL https://install.edgee.ai | bash
+    ```
+  </Tab>
+  <Tab title="Homebrew">
+    ```bash
+    brew install edgee-ai/tap/edgee
+    ```
+  </Tab>
+</Tabs>
 
-<Tip>
-  Claude Token Compression can also be enabled at API key creation time.
-</Tip>
+Verify the installation:
+
+```bash
+edgee --version
+```
+
+Then launch Claude Code through Edgee:
+
+```bash
+edgee launch claude
+```
+
+That's it. Claude Code is now running with lossless token compression. After your session, the CLI prints a link to view savings in the Edgee Console.
+
+That's it. Claude Code is now running with lossless token compression. After your session, the CLI prints a link to view savings in the Edgee Console.
+
+<Card title="Full CLI guide" icon="terminal" href="/features/cli">
+  Install the CLI, authenticate, and launch Claude Code or Codex in under a minute.
+</Card>
+
+<Accordion title="Manual setup (advanced)">
+  If you prefer not to use the CLI, enable Claude Token Compression from the **Edge Models** section of the [Edgee Console](https://www.edgee.ai): find the **Claude Token Compression** card and select which API keys to enable it for. Then configure Claude Code to route through Edgee, see [Manual setup](/integrations/claude-code#manual-setup-advanced) for instructions.
+</Accordion>
 
 <Note>
-  There are no compression ratio or BERT threshold settings. Claude Token Compression is fully lossless by design. Just enable it and go.
+  There are no compression ratio or quality threshold settings. Claude Token Compression is fully lossless by design.
 </Note>
-
-
-## Integration with Claude Code
-
-
-<ClaudeCodeIntegration />
-
-
-## Benefits of Using Claude Code with Edgee
-
-Once you have configured Edgee for Claude Code, you can start using Claude Code normally.
-You will immediately see the savings by going to the console, on the dashboard or in the logs.
-
-See [Claude Code integration](/integrations/claude-code) for more instructions.
