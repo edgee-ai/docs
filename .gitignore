@@ -20,3 +20,4 @@ nbproject
 node_modules
 .direnv
 .claude
+.gstack/
