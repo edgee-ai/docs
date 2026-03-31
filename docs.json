@@ -104,6 +104,7 @@
             "group": "Features",
             "pages": [
               "features/cli",
+              "features/fleet",
               "features/claude-compression",
               "features/codex-compression",
               "features/agentic-compression",
