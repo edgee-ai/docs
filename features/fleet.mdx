@@ -1,0 +1,193 @@
+---
+title: Fleet
+description: Deploy, monitor, and optimize coding agents across your entire engineering team from one place.
+icon: users
+---
+
+Fleet gives engineering managers a centralized view of every coding agent running in their organization.
+Invite teammates, enroll their preferred AI coding tool (Claude Code, Codex, or OpenCode) through the Edgee gateway,
+and track per-member usage,cost, tokens, and requests, all in one dashboard.
+
+**Token compression** is enabled automatically on enrollment so every team member benefits from day one.
+
+## What You Can Do
+
+<CardGroup cols={2}>
+  <Card title="Enroll coding agents" icon="user-plus">
+    Assign a Claude Code, Codex, or OpenCode to any team member in a few clicks.
+    Setup instructions are generated automatically for them to get started immediately.
+  </Card>
+
+  <Card title="Track usage per member" icon="chart-bar">
+    See how much each agent is spending, how many tokens it's consuming, and how active
+    it has been, ranked by contribution and filterable by time range.
+  </Card>
+
+  <Card title="Auto-enable compression" icon="zap">
+    Token compression is turned on automatically when you enroll an agent.
+    No manual configuration needed, savings start on the first request.
+  </Card>
+
+  <Card title="Manage keys centrally" icon="key-round">
+    Toggle compression, enable debug mode, reveal API keys, or unenroll an agent
+    without leaving the Fleet dashboard.
+  </Card>
+</CardGroup>
+
+## How It Works
+
+Each organization member can have one agent type enrolled (Claude Code, Codex, OpenCode).
+These "coding agents" are linked to the member's email address, that's what groups agents
+into member cards on the Fleet dashboard. When you enroll an agent for a member, Edgee:
+
+1. Creates a dedicated API key of the appropriate type
+2. Automatically enables token compression for that agent
+3. Generates ready-to-use setup instructions the member can run immediately
+
+<Frame>
+  <img className="block dark:hidden" src="/images/fleet/fleet-overview-light.png" alt="Fleet dashboard overview" />
+  <img className="hidden dark:block" src="/images/fleet/fleet-overview-dark.png" alt="Fleet dashboard overview (dark mode)" />
+</Frame>
+
+## Getting Started
+
+<Steps>
+  <Step title="Invite your team members">
+    Go to **Fleet** in the sidebar and click **Invite a member**. Enter their email address
+    and assign a role (Member or Admin). They will receive an invitation email and appear
+    as a pending card until they accept.
+
+    <Note>
+      If the team member already has an account in your organization, skip this step, they
+      already appear in the member grid.
+    </Note>
+  </Step>
+
+  <Step title="Enroll a coding agent">
+    On a member's card, click **+ New coding agent** (or the enroll button on a pending
+    invitation card once they've accepted). Select the agent type:
+
+    - **Claude Code**: Anthropic's official AI coding CLI
+    - **Codex**: OpenAI's software engineering agent
+    - **OpenCode**: open-source multi-model coding agent
+
+    Click **Enroll**. Edgee creates the API key and prepares setup instructions.
+
+    <Frame>
+      <img className="block dark:hidden" src="/images/fleet/fleet-enroll-light.png" alt="Enrollment dialog with agent selection" />
+      <img className="hidden dark:block" src="/images/fleet/fleet-enroll-dark.png" alt="Enrollment dialog with agent selection (dark mode)" />
+    </Frame>
+  </Step>
+
+  <Step title="Share setup instructions with the member">
+    After enrollment, the dialog shows step-by-step instructions:
+
+    1. Install the Edgee CLI
+    2. Run `edgee launch claude` (or `codex` / `opencode`)
+
+    Use **Copy instructions** to copy the full setup block as plain text and send it
+    to the team member directly. They can be up and running in under a minute.
+  </Step>
+</Steps>
+
+## The Fleet Dashboard
+
+### Overview Chart
+
+The top of the page shows an aggregated bar chart of your organization's total AI usage
+over the selected time range. Hover over any bar to see the exact value for that period.
+
+### Member Cards
+
+Each enrolled team member gets a card showing:
+
+- **Agent badges**: which coding agents are active for that member
+- **Rank badge**: top 3 members by the selected metric receive a #1 (gold), #2 (silver), or #3 (bronze) badge
+- **Activity status**: when the agent was last used (or a pulsing indicator if used in the last hour)
+- **Period metric**: cost, token count, or request count for the selected time range
+- **Mini chart**: a sparkline of activity distribution over the time range
+
+<Frame>
+  <img className="block dark:hidden" src="/images/fleet/fleet-member-card-light.png" alt="Member card with usage stats and mini chart" />
+  <img className="hidden dark:block" src="/images/fleet/fleet-member-card-dark.png" alt="Member card with usage stats and mini chart (dark mode)" />
+</Frame>
+
+### Sorting and Time Range
+
+Use the controls in the header to adjust what's shown:
+
+| Control | Options |
+|---------|---------|
+| **Sort by** | Cost · Tokens · Requests |
+| **Time range** | Last 24h · 7d · 30d · 90d · custom date range |
+
+Changing the sort metric re-ranks the member cards and updates the overview chart accordingly.
+
+## Usage Metrics
+
+Fleet tracks three metrics per member and for the organization as a whole:
+
+| Metric | Description |
+|--------|-------------|
+| **Cost** | Accumulated spend in USD for the selected period |
+| **Tokens** | Total input + output tokens across all requests |
+| **Requests** | Number of individual API requests made |
+
+All metrics respect the selected time range. Lifetime totals (across all time) are also
+used to determine whether a member has "never used" their agent key.
+
+## Managing Enrolled Agents
+
+Click the settings icon on any agent badge in a member card to open the management dialog.
+
+<Frame>
+  <img className="block dark:hidden" src="/images/fleet/fleet-manage-light.png" alt="Agent management dialog" />
+  <img className="hidden dark:block" src="/images/fleet/fleet-manage-dark.png" alt="Agent management dialog (dark mode)" />
+</Frame>
+
+### Token Compression
+
+Toggle agentic token compression on or off for this specific key. Compression is enabled
+automatically on enrollment, you can disable it here if needed for a particular member or agent.
+
+<Tip>
+  Compression settings apply per key. Disabling it for one member does not affect compression
+  for other members or other keys in your organization.
+</Tip>
+
+### Debug Mode
+
+Enable debug mode to capture full request and response payloads for this key. Useful when a
+team member reports unexpected behavior, debug logs appear in the [Logs](/features/observability) page
+with a bug icon for easy filtering.
+
+<Note>
+  Debug mode captures raw request data. Enable it only temporarily and for specific keys,
+  as it may capture sensitive prompt content.
+</Note>
+
+### Unenrolling an Agent
+
+To remove a coding agent key, click **Unenroll coding agent** in the management dialog.
+You will be asked to confirm. Unenrolling permanently deletes the API key, the member
+will need to be re-enrolled with a new key to use the gateway again.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Edgee CLI" icon="terminal" href="/features/cli">
+    Learn how team members use `edgee launch claude` to start a session through the gateway.
+  </Card>
+
+  <Card title="Agentic Compression" icon="/images/icons/agentic-comp.svg" href="/features/agentic-compression">
+    Understand how token compression works and how to tune compression rate and semantic threshold.
+  </Card>
+
+  <Card title="Observability" icon="eye" href="/features/observability">
+    Explore session-level logs, request traces, and cost breakdowns across your entire team.
+  </Card>
+
+  <Card title="Alerts & Budgets" icon="bell" href="/features/alerts">
+    Set spending limits and receive alerts when a member or the organization exceeds a threshold.
+  </Card>
+</CardGroup>
