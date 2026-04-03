@@ -1,0 +1,62 @@
+---
+title: Retry & Fallback
+description: Automatic retry and provider fallback for resilient LLM routing.
+icon: repeat
+---
+
+When a provider request fails, Edgee automatically retries and falls back to the next available provider — transparently, without any changes to your code.
+
+## How it works
+
+Every request goes through an ordered list of providers. Edgee tries each one in sequence, retrying transient failures before moving on. If all providers are exhausted without success, the error from the last attempt is returned to the caller.
+
+```
+Primary provider  ──► (retry once on transient error) ──► success
+        │ (failure)
+        ▼
+Fallback provider 1 ──► success
+        │ (failure)
+        ▼
+Fallback provider 2 ──► success
+        │ (failure)
+        ▼
+Return error
+```
+
+## Provider ordering
+
+Fallback order is determined automatically by each provider's **success rate**, computed from recent request history. Providers with higher success rates are tried first. When multiple providers have the same score, they are shuffled randomly for load distribution.
+
+If you use [BYOK](/features/byok) keys, only your own provider keys are eligible — Edgee's shared providers are not used as fallbacks. If no BYOK key is available for a model, shared providers are used instead.
+
+## Retry behavior
+
+Edgee distinguishes three categories of error:
+
+| Category | Errors | Behavior |
+|----------|--------|----------|
+| **Retry then fallback** | Rate limit (429), Service unavailable (5xx) | Retry the same provider once, then fall back |
+| **Immediate fallback** | Timeout (408, 504), Credential not found, Stream parse error | Skip retry, move to next provider immediately |
+| **Terminal** | Invalid token (401), Configuration error | Return error immediately — no retry, no fallback |
+
+The **primary provider** gets up to 2 attempts (1 initial + 1 retry). **Fallback providers** get 1 attempt each.
+
+There is no backoff delay between attempts.
+
+## Streaming
+
+For streaming responses, retries are only possible **before any chunks have been sent to the client**. Once the first chunk is delivered, the connection is committed and errors propagate directly — the request cannot be retried or rerouted mid-stream.
+
+## Response headers
+
+A successful response includes the following header when a fallback was used:
+
+```
+X-Edgee-Fallback-Used: true
+```
+
+This lets you detect in your application or logs that the primary provider was bypassed.
+
+## Observability
+
+All failed attempts — retries and fallbacks — are recorded in the [observability dashboard](/features/observability) as separate events with zero token cost. This gives you full visibility into provider health and which fallback paths are being exercised.
