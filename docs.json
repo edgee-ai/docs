@@ -111,6 +111,7 @@
               "features/observability",
               "features/debug",
               "features/byok",
+              "features/retry-and-fallback",
               "features/alerts"
             ]
           },

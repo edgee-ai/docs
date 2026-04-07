@@ -4,6 +4,6 @@
     "links": "mintlify broken-links"
   },
   "dependencies": {
-    "mintlify": "^4.2.462"
+    "mintlify": "^4.2.475"
   }
 }
