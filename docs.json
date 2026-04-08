@@ -112,7 +112,17 @@
               "features/debug",
               "features/byok",
               "features/retry-and-fallback",
-              "features/alerts"
+              "features/alerts",
+              {
+                "group": "Console API",
+                "icon": "key-round",
+                "pages": [
+                  "features/console-api-setup",
+                  "features/console-api-export-logs",
+                  "features/console-api-manage-gateway-api-keys",
+                  "features/console-api-provider-keys"
+                ]
+              }
             ]
           },
           {

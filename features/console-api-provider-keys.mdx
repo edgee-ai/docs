@@ -1,0 +1,167 @@
+---
+title: 'BYOK Setup'
+description: 'Create and manage custom provider keys (BYOK)'
+openapi: 'POST /v1/organizations/{orgId}/provider-keys'
+---
+
+Create and manage custom provider keys (BYOK - Bring Your Own Key) for AWS Bedrock, Google Vertex AI, Azure, and other LLM providers. This allows you to use your own credentials instead of Edgee's shared keys.
+
+## Request Body
+
+<ParamField body="provider" type="string" required>
+  The provider type. Supported values: `anthropic`, `openai`, `google_vertex_ai`, `mistral`, `deepseek`, `xai`, `zai`, `bedrock`, `azure`
+</ParamField>
+
+<ParamField body="provider_key" type="string" required>
+  The credentials for the provider. Format depends on the provider type:
+  - **Standard providers** (anthropic, openai, mistral, deepseek, xai, zai): API key as string
+  - **Bedrock**: JSON string with region-keyed credentials
+  - **Azure**: JSON string with endpoint and api_key
+  - **Google Vertex AI**: Service account JSON string
+</ParamField>
+
+<ParamField body="name" type="string" required>
+  A descriptive name for this provider key (e.g., "Production Vertex AI Key"). Max 100 characters.
+</ParamField>
+
+<ParamField body="api_key_ids" type="array" required>
+  Array of Edgee API key IDs to assign this provider key to. Leave empty to create an organization-level provider key that applies to all API keys.
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="string">
+  Unique identifier for the provider key
+</ResponseField>
+
+<ResponseField name="provider" type="string">
+  The provider type (e.g., "google_vertex_ai")
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  The name of the provider key
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the provider key was created
+</ResponseField>
+
+<ResponseField name="created_by" type="string">
+  User ID of who created the provider key
+</ResponseField>
+
+## Examples
+
+<RequestExample>
+
+```bash Google Vertex AI
+curl -X POST https://api.edgee.app/v1/organizations/{orgId}/provider-keys \
+  -H "Authorization: Bearer <your_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "google_vertex_ai",
+    "provider_key": "{\"type\":\"service_account\",\"project_id\":\"my-project\",\"private_key\":\"...\"}",
+    "name": "Production Vertex AI",
+    "api_key_ids": []
+  }'
+```
+
+```bash AWS Bedrock (Multi-region)
+curl -X POST https://api.edgee.app/v1/organizations/{orgId}/provider-keys \
+  -H "Authorization: Bearer <your_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "bedrock",
+    "provider_key": "{\"global\":{\"access_key_id\":\"AKIA...\",\"secret_access_key\":\"...\"},\"us-east-1\":{\"access_key_id\":\"AKIA...\",\"secret_access_key\":\"...\"}}",
+    "name": "AWS Bedrock Production",
+    "api_key_ids": []
+  }'
+```
+
+```bash Azure
+curl -X POST https://api.edgee.app/v1/organizations/{orgId}/provider-keys \
+  -H "Authorization: Bearer <your_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "azure",
+    "provider_key": "{\"endpoint\":\"https://your-resource.openai.azure.com/\",\"api_key\":\"your-api-key\"}",
+    "name": "Azure OpenAI",
+    "api_key_ids": []
+  }'
+```
+
+```bash With API Key Assignment
+curl -X POST https://api.edgee.app/v1/organizations/{orgId}/provider-keys \
+  -H "Authorization: Bearer <your_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "openai",
+    "provider_key": "sk-proj-...",
+    "name": "OpenAI - Development",
+    "api_key_ids": ["key-id-1", "key-id-2"]
+  }'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json
+{
+  "id": "pk_1a2b3c4d5e6f7g8h",
+  "provider": "google_vertex_ai",
+  "name": "Production Vertex AI",
+  "created_at": "2026-04-08T10:00:00Z",
+  "created_by": "user_abc123"
+}
+```
+
+</ResponseExample>
+
+## Tips
+
+- **Organization-level keys**: Leave `api_key_ids` empty to apply the provider key to your entire organization
+- **API-key-specific assignments**: Specify API key IDs to restrict the provider key to specific API keys only
+- **Security**: Never commit provider credentials to version control. Use environment variables or secure credential management systems
+- **Multi-region Bedrock**: For AWS Bedrock, you can specify different credentials for different regions. Use `"global"` as the key for a default region.
+
+## Credential Formats
+
+### Google Vertex AI
+Provide the entire service account JSON as a string:
+```json
+{
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "private_key_id": "key-id",
+  "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-account@your-project.iam.gserviceaccount.com",
+  "client_id": "123456789",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token"
+}
+```
+
+### AWS Bedrock
+Provide region-keyed credentials:
+```json
+{
+  "global": {
+    "access_key_id": "AKIA...",
+    "secret_access_key": "..."
+  },
+  "us-east-1": {
+    "access_key_id": "AKIA...",
+    "secret_access_key": "..."
+  }
+}
+```
+
+### Azure
+Provide endpoint and API key:
+```json
+{
+  "endpoint": "https://your-resource.openai.azure.com/",
+  "api_key": "your-api-key"
+}
+```

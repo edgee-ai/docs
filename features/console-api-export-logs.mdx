@@ -1,0 +1,70 @@
+---
+title: 'Export Cost Data'
+description: 'Export AI Gateway usage and cost data'
+openapi: 'GET /v1/organizations/{orgId}/logs/export'
+---
+
+Export your organization's AI Gateway usage and cost data for analysis, reporting, or billing purposes. You can export data in CSV or JSON format with flexible filtering options.
+
+## Query Parameters
+
+<ParamField query="period" type="string" default="24h">
+  Time range for the export. Examples: `1h`, `24h`, `7d`, `30d`
+</ParamField>
+
+<ParamField query="from_date" type="string">
+  Start date in ISO 8601 format (e.g., `2026-04-01`). Overrides the `period` parameter if provided.
+</ParamField>
+
+<ParamField query="to_date" type="string">
+  End date in ISO 8601 format (e.g., `2026-04-08`). Overrides the `period` parameter if provided.
+</ParamField>
+
+<ParamField query="format" type="string" default="csv">
+  Export format. Options: `csv` or `json`
+</ParamField>
+
+<ParamField query="api_key_id[]" type="string">
+  Filter by specific API key IDs. This parameter can be repeated multiple times to include multiple keys.
+</ParamField>
+
+<ParamField query="tags[]" type="string">
+  Filter by tags. This parameter can be repeated multiple times to include multiple tags.
+</ParamField>
+
+## Examples
+
+<RequestExample>
+
+```bash Using Period
+curl "https://api.edgee.app/v1/organizations/{orgId}/logs/export?period=7d&format=csv" \
+  -H "Authorization: Bearer <your_api_token>"
+```
+
+```bash Using Date Range
+curl "https://api.edgee.app/v1/organizations/{orgId}/logs/export?from_date=2026-04-01&to_date=2026-04-08&format=json" \
+  -H "Authorization: Bearer <your_api_token>"
+```
+
+```bash With Filters
+curl "https://api.edgee.app/v1/organizations/{orgId}/logs/export?period=30d&format=csv&api_key_id[]=key1&api_key_id[]=key2&tags[]=production" \
+  -H "Authorization: Bearer <your_api_token>"
+```
+
+</RequestExample>
+
+## Response
+
+The response is a CSV or JSON file containing your usage and cost data, ready for download or further processing.
+
+**CSV format** includes columns for:
+- Timestamp
+- API Key
+- Model
+- Provider
+- Input Tokens
+- Output Tokens
+- Cost
+- Tags
+
+**JSON format** includes an array of usage records with the same information as CSV.
