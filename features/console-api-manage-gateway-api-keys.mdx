@@ -1,0 +1,195 @@
+---
+title: 'Manage Gateway API Keys'
+description: 'Create, list, update, and delete AI Gateway API keys'
+openapi: 'POST /v1/organizations/{orgId}/api_keys'
+---
+
+Manage your AI Gateway API keys programmatically. Gateway API keys are used to authenticate requests to the Edgee AI Gateway API (`https://api.edgee.ai`) for making LLM requests.
+
+<Warning>
+  These endpoints manage **Gateway API keys** for the AI Gateway API (`api.edgee.ai`), not the Console API tokens. Do not confuse these two systems.
+</Warning>
+
+## Request Body
+
+<ParamField body="name" type="string" required>
+  A descriptive name for this API key (e.g., "Production Backend", "Development Client")
+</ParamField>
+
+<ParamField body="type" type="string" default="api">
+  The type of API key. Options: `api` (for Gateway requests) or `coding_agent` (for coding assistants)
+</ParamField>
+
+<ParamField body="coding_assistant" type="string">
+  Required if `type` is `coding_agent`. Specifies which coding assistant this key is for.
+  
+  Options: `claude_code`, `opencode`, `codex`
+</ParamField>
+
+<ParamField body="models" type="array">
+  Optional list of model restrictions. If specified, this key can only access these models. Leave empty for no restrictions.
+  
+  Example: `["anthropic/claude-opus-4-6", "openai/gpt-5.2"]`
+</ParamField>
+
+<ParamField body="max_usage" type="integer">
+  Optional monthly usage limit in USD. If specified, this key will stop working after reaching this cost threshold.
+</ParamField>
+
+<ParamField body="expires_in_days" type="integer">
+  Optional expiration time in days from creation. After this period, the key will stop working.
+</ParamField>
+
+<ParamField body="email" type="string">
+  Optional email address associated with this key (for organization/billing tracking).
+</ParamField>
+
+## Response
+
+<ResponseField name="object" type="string">
+  The object type (always "ai_gateway_api_key")
+</ResponseField>
+
+<ResponseField name="id" type="string">
+  Unique identifier for this API key
+</ResponseField>
+
+<ResponseField name="organization_id" type="string">
+  The organization this key belongs to
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  The name of this API key
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  The type of API key ("api" or "coding_agent")
+</ResponseField>
+
+<ResponseField name="coding_assistant" type="string">
+  The coding assistant this key is for (if type is "coding_agent")
+</ResponseField>
+
+<ResponseField name="models" type="array">
+  List of model restrictions (if any)
+</ResponseField>
+
+<ResponseField name="max_usage" type="integer">
+  Monthly usage limit in USD (if set)
+</ResponseField>
+
+<ResponseField name="active" type="boolean">
+  Whether this key is currently active
+</ResponseField>
+
+<ResponseField name="debug_mode" type="boolean">
+  Whether debug mode is enabled for this key
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp when the key was created
+</ResponseField>
+
+<ResponseField name="expires_at" type="string">
+  ISO 8601 timestamp when the key will expire (if set)
+</ResponseField>
+
+<ResponseField name="last_used_at" type="string">
+  ISO 8601 timestamp of the last usage (if ever used)
+</ResponseField>
+
+<ResponseField name="key" type="string">
+  The actual API key (only shown once at creation or when using the reveal endpoint)
+</ResponseField>
+
+## Examples
+
+<RequestExample>
+
+```bash Create API Key
+curl -X POST "https://api.edgee.app/v1/organizations/{orgId}/api_keys" \
+  -H "Authorization: Bearer <your_console_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production Backend",
+    "type": "api",
+    "models": ["anthropic/claude-opus-4-6", "openai/gpt-5.2"],
+    "max_usage": 1000,
+    "expires_in_days": 90
+  }'
+```
+
+```bash Create Coding Agent Key
+curl -X POST "https://api.edgee.app/v1/organizations/{orgId}/api_keys" \
+  -H "Authorization: Bearer <your_console_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Claude Code Development",
+    "type": "coding_agent",
+    "coding_assistant": "claude_code",
+    "email": "user@example.com"
+  }'
+```
+
+```bash List All Keys
+curl "https://api.edgee.app/v1/organizations/{orgId}/api_keys" \
+  -H "Authorization: Bearer <your_console_api_token>"
+```
+
+```bash Update Key
+curl -X POST "https://api.edgee.app/v1/organizations/{orgId}/api_keys/{apiKeyId}" \
+  -H "Authorization: Bearer <your_console_api_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production Backend - Updated",
+    "active": false
+  }'
+```
+
+```bash Delete Key
+curl -X DELETE "https://api.edgee.app/v1/organizations/{orgId}/api_keys/{apiKeyId}" \
+  -H "Authorization: Bearer <your_console_api_token>"
+```
+
+```bash Reveal Key
+curl "https://api.edgee.app/v1/organizations/{orgId}/api_keys/{apiKeyId}/reveal" \
+  -H "Authorization: Bearer <your_console_api_token>"
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json
+{
+  "object": "ai_gateway_api_key",
+  "id": "key_abc123xyz",
+  "organization_id": "org_12345",
+  "name": "Production Backend",
+  "type": "api",
+  "models": ["anthropic/claude-opus-4-6", "openai/gpt-5.2"],
+  "max_usage": 1000,
+  "active": true,
+  "debug_mode": false,
+  "created_at": "2026-04-08T10:00:00Z",
+  "expires_at": "2026-07-07T10:00:00Z",
+  "last_used_at": "2026-04-08T12:30:00Z",
+  "key": "ek_live_abc123xyz..."
+}
+```
+
+</ResponseExample>
+
+## Tips
+
+- **API Keys vs Console Tokens**: Gateway API keys are used to authenticate requests to the Gateway API (`api.edgee.ai`), while Console tokens authenticate requests to the Console API (`api.edgee.app`)
+- **Model Restrictions**: Use the `models` field to restrict which models a key can access, useful for controlling access and managing costs
+- **Usage Limits**: Set `max_usage` to automatically disable a key after spending a certain amount
+- **Expiration**: Use `expires_in_days` to automatically revoke keys after a set period for security rotation
+- **Key Visibility**: Once created, the key is only shown once. Use the reveal endpoint if you need to see it again, but the key must already exist
+
+## Next Steps
+
+- Learn how to [authenticate to the Gateway API](/api-reference/authentication)
+- Explore [Chat Completions](/api-reference/chat-completion) to make LLM requests
+- Set up [alerts](/features/alerts) to monitor costs associated with your API keys
