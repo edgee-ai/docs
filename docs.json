@@ -189,16 +189,11 @@
         "icon": "terminal",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Gateway API",
             "pages": [
               "api-reference/index",
               "api-reference/authentication",
-              "api-reference/errors"
-            ]
-          },
-          {
-            "group": "Endpoints",
-            "pages": [
+              "api-reference/errors",
               "api-reference/chat-completion",
               "api-reference/messages",
               "api-reference/responses",
