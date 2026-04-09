@@ -201,6 +201,7 @@
             "pages": [
               "api-reference/chat-completion",
               "api-reference/messages",
+              "api-reference/responses",
               "api-reference/models",
               "api-reference/count-tokens"
             ]
