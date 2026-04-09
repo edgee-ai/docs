@@ -202,7 +202,6 @@
           },
           {
             "group": "Console API",
-            "icon": "key-round",
             "pages": [
               {
                 "page": "features/console-api-setup",
