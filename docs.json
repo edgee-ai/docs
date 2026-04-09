@@ -204,7 +204,10 @@
             "group": "Console API",
             "icon": "key-round",
             "pages": [
-              "features/console-api-setup",
+              {
+                "page": "features/console-api-setup",
+                "icon": "key-round"
+              },
               "features/console-api-export-logs",
               "features/console-api-manage-gateway-api-keys",
               "features/console-api-provider-keys"
