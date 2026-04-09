@@ -187,11 +187,13 @@
       {
         "tab": "API Reference",
         "icon": "terminal",
+        "pages": [
+          "api-reference/index"
+        ],
         "groups": [
           {
             "group": "Gateway API",
             "pages": [
-              "api-reference/index",
               "api-reference/authentication",
               "api-reference/errors",
               "api-reference/chat-completion",
