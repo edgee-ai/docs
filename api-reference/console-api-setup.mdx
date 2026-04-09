@@ -1,6 +1,7 @@
 ---
-title: 'Setup & Authentication'
-description: 'Getting started with the Edgee Console API - create tokens and authenticate requests'
+title: "Setup & Authentication"
+description: "Getting started with the Edgee Console API - create tokens and authenticate requests"
+icon: key-round
 ---
 
 ## What is the Console API?
@@ -13,13 +14,14 @@ The Edgee Console API is a management API that allows you to programmatically in
 
 <Warning>
   **Important: Console API vs Gateway API**
-  
-  Do not confuse the Console API with the AI Gateway API:
-  
-  - **Console API** (`https://api.edgee.app`) - For managing your organization, exporting data, and configuring provider keys
-  - **AI Gateway API** (`https://api.edgee.ai`) - For making LLM requests (chat completions, messages, token counting)
-  
-  The Console API uses tokens created in the Console settings, while the AI Gateway API uses API keys created in the API Keys section. They are separate systems with different purposes.
+
+Do not confuse the Console API with the AI Gateway API:
+
+- **Console API** (`https://api.edgee.app`) - For managing your organization, exporting data, and configuring provider keys
+- **AI Gateway API** (`https://api.edgee.ai`) - For making LLM requests (chat completions, messages, token counting)
+
+The Console API uses tokens created in the Console settings, while the AI Gateway API uses API keys created in the API Keys section. They are separate systems with different purposes.
+
 </Warning>
 
 ## Base URL
@@ -36,16 +38,19 @@ To use the Console API, you need to create an API token from your organization's
 
 <Steps>
   <Step title="Navigate to API Keys">
-    Log in to the [Edgee Console](https://www.edgee.ai) and go to the **API Keys** section in your account settings.
+    Log in to the [Edgee Console](https://www.edgee.ai) and go to the **API
+    Keys** section in your account settings.
   </Step>
   <Step title="Click Create API Key">
     Click the **Create API Key** button to generate a new token.
   </Step>
   <Step title="Name Your Token">
-    Give your API key a descriptive name (e.g., "Production", "Development", "Integration") to identify its purpose.
+    Give your API key a descriptive name (e.g., "Production", "Development",
+    "Integration") to identify its purpose.
   </Step>
   <Step title="Copy and Secure Your Token">
-    Copy the token immediately and store it securely. The token will only be displayed once and cannot be retrieved later.
+    Copy the token immediately and store it securely. The token will only be
+    displayed once and cannot be retrieved later.
   </Step>
 </Steps>
 
@@ -60,12 +65,14 @@ Authorization: Bearer <your_api_token>
 ### Examples
 
 **Basic Request:**
+
 ```bash
 curl "https://api.edgee.app/v1/organizations/{orgId}/logs/export?period=7d&format=csv" \
   -H "Authorization: Bearer ek_live_..."
 ```
 
 **With Environment Variable:**
+
 ```bash
 export EDGEE_CONSOLE_API_TOKEN="ek_live_..."
 
@@ -86,14 +93,14 @@ In the Edgee Console, you can manage all your API keys:
 
 <Warning>
   Your API tokens carry many privileges, so be sure to keep them secure!
-  
-  - Never commit tokens to version control
-  - Don't share tokens in publicly accessible areas
-  - Don't expose them in client-side code
-  - Store them in environment variables or secure credential management systems
-  - Revoke tokens if you suspect they've been compromised
-  - Create separate tokens for different environments (development, staging, production)
-  - Rotate your tokens regularly as part of your security practices
+
+- Never commit tokens to version control
+- Don't share tokens in publicly accessible areas
+- Don't expose them in client-side code
+- Store them in environment variables or secure credential management systems
+- Revoke tokens if you suspect they've been compromised
+- Create separate tokens for different environments (development, staging, production)
+- Rotate your tokens regularly as part of your security practices
 </Warning>
 
 ## Error Handling
@@ -118,6 +125,8 @@ If your token doesn't have permission to access a resource, you'll receive a `40
 
 ## Next Steps
 
-- Explore [Export Cost Data](/features/console-api-export-logs) to get usage and cost information
-- Learn how to [Manage Gateway API Keys](/features/console-api-manage-gateway-api-keys) for your Gateway requests
-- Set up [BYOK](/features/console-api-provider-keys) to manage custom provider keys
+- Explore [Export Cost Data](/api-reference/console-api-export-logs) to get usage and cost information
+- Learn how to [Manage Gateway API Keys](/api-reference/console-api-manage-gateway-api-keys) for your Gateway requests
+- Set up [BYOK](/api-reference/console-api-provider-keys) to manage custom provider keys
+
+<EdgeeSdk />
