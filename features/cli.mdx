@@ -57,47 +57,45 @@ edgee --version
 
 ## Quick Start
 
-Get up and running in under a minute:
+Launch your coding agent
 
-<Steps>
-  <Step title="Initialize">
-    ```bash
-    edgee init
-    ```
-    This walks you through provider selection and authentication. A browser window opens for you to log in or create your Edgee account.
-  </Step>
-
-  <Step title="Launch your tool">
+<Tabs>
+  <Tab title="Claude Code">
     ```bash
     edgee launch claude
     ```
-    That's it. Claude Code is now running with Edgee compression and observability enabled.
-  </Step>
-</Steps>
+  </Tab>
+  <Tab title="Codex">
+    ```bash
+    edgee launch codex
+    ```
+  </Tab>
+  <Tab title="OpenCode">
+    ```bash
+    edgee launch opencode
+    ```
+  </Tab>
+</Tabs>
 
+That's it. Your coding agent is now running with Edgee compression and observability enabled.
 After your session ends, the CLI prints a link to view your session analytics in the Edgee Console.
 
 ## Commands
 
-### `edgee init`
+### Anthentication commands
 
-Interactive setup wizard. Prompts you to select a provider (Claude Code or Codex), opens a browser for authentication,
-and saves your credentials locally.
-
-```bash
-edgee init
-```
-
-### `edgee auth login`
+#### `edgee auth login`
 
 Authenticate with Edgee for a specific provider. Opens a browser window for OAuth-based login. Your API key and credentials
 are saved to `~/.config/edgee/credentials.toml`.
+
+If you want to use multiple Edgee profiles, you can add `--profile <profile-name>` to this command to declare the profile you want to use.
 
 ```bash
 edgee auth login
 ```
 
-### `edgee auth status`
+#### `edgee auth status`
 
 Display the current authentication status for all configured providers, including the logged-in email and connection mode.
 
@@ -105,7 +103,32 @@ Display the current authentication status for all configured providers, includin
 edgee auth status
 ```
 
-### `edgee launch claude`
+#### `edgee auth list`
+
+List all configured profiles. Yes, because you can have multiple Edgee profiles, using `--profile <profile-name>` when you log in.
+
+```bash
+edgee auth list
+```
+
+#### `edgee auth switch`
+
+Switch to a different profile.
+
+```bash
+edgee auth switch
+```
+
+### Launch commands
+
+Launch your coding agent.
+
+```bash
+edgee launch
+```
+
+
+#### `edgee launch claude`
 
 Launch Claude Code with all Edgee configuration automatically injected. The CLI sets the required environment variables
 (`ANTHROPIC_BASE_URL`, authentication headers, session ID) and starts Claude Code.
@@ -127,7 +150,7 @@ on first launch:
 - **Claude Pro/Max**: uses your Anthropic subscription, Edgee compresses traffic to extend session duration
 - **API Billing**: uses Edgee API keys for direct billing, reducing token costs
 
-### `edgee launch codex`
+#### `edgee launch codex`
 
 Launch Codex with Edgee routing automatically configured. The CLI passes the required provider configuration to Codex
 and starts a new session.
@@ -147,7 +170,26 @@ Connection modes for Codex:
 - **ChatGPT Plus/Pro**: uses your OpenAI subscription with Edgee compression
 - **API Billing**: uses Edgee API keys for direct billing
 
-### `edgee reset`
+
+### Other commands
+
+#### `edgee stats`
+
+Show the stats of your latest sessions.
+```bash
+edgee stats
+```
+
+#### `edgee alias`
+
+Install shell aliases for Edgee launch commands, so you won't need to launch `edgee launch <tool>` every time.
+
+```bash
+edgee alias
+```
+
+
+#### `edgee reset`
 
 Reset your credentials and connection mode for a provider. Useful if you need to switch accounts, change your connection mode,
 or re-authenticate.
@@ -156,7 +198,7 @@ or re-authenticate.
 edgee reset
 ```
 
-### `edgee self-update`
+#### `edgee self-update`
 
 Check for updates and install the latest version of the Edgee CLI.
 
