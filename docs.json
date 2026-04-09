@@ -189,16 +189,11 @@
         "icon": "terminal",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Gateway API",
             "pages": [
               "api-reference/index",
               "api-reference/authentication",
-              "api-reference/errors"
-            ]
-          },
-          {
-            "group": "Gateway API",
-            "pages": [
+              "api-reference/errors",
               "api-reference/chat-completion",
               "api-reference/messages",
               "api-reference/responses",
@@ -209,13 +204,10 @@
           {
             "group": "Console API",
             "pages": [
-              {
-                "page": "features/console-api-setup",
-                "icon": "key-round"
-              },
-              "features/console-api-export-logs",
-              "features/console-api-manage-gateway-api-keys",
-              "features/console-api-provider-keys"
+              "api-reference/console-api-setup",
+              "api-reference/console-api-export-logs",
+              "api-reference/console-api-manage-gateway-api-keys",
+              "api-reference/console-api-provider-keys"
             ]
           }
         ]
@@ -430,9 +422,7 @@
                   },
                   {
                     "group": "Server Side Tagging",
-                    "pages": [
-                      "proxy/components/js-gateway/google-tag-gateway"
-                    ]
+                    "pages": ["proxy/components/js-gateway/google-tag-gateway"]
                   }
                 ]
               },

@@ -1,7 +1,7 @@
 ---
 title: 'Manage Gateway API Keys'
 description: 'Create, list, update, and delete AI Gateway API keys'
-openapi: 'POST /v1/organizations/{orgId}/api_keys'
+api: 'POST /v1/organizations/{orgId}/api_keys'
 ---
 
 Manage your AI Gateway API keys programmatically. Gateway API keys are used to authenticate requests to the Edgee AI Gateway API (`https://api.edgee.ai`) for making LLM requests.
@@ -193,3 +193,5 @@ curl "https://api.edgee.app/v1/organizations/{orgId}/api_keys/{apiKeyId}/reveal"
 - Learn how to [authenticate to the Gateway API](/api-reference/authentication)
 - Explore [Chat Completions](/api-reference/chat-completion) to make LLM requests
 - Set up [alerts](/features/alerts) to monitor costs associated with your API keys
+
+<EdgeeSdk />
