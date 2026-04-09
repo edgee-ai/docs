@@ -1,0 +1,437 @@
+---
+title: 'Responses'
+description: 'Create responses using the OpenAI Responses API format'
+openapi: 'POST /v1/responses'
+---
+
+Creates a response using the OpenAI Responses API format (`POST /v1/responses`). This endpoint is compatible with OpenAI's Responses API, making it easy to use with tools like the Codex CLI.
+
+## Overview
+
+The `/v1/responses` endpoint implements OpenAI's Responses API format, which differs from the Chat Completions endpoint in several ways:
+
+- **Input**: Accepts either a plain string or a flat array of typed input items (messages, tool calls, tool outputs)
+- **Tools format**: Flat structure `{"type":"function","name":"...","description":"...","parameters":{...}}` instead of the nested `{"type":"function","function":{...}}` used by Chat Completions
+- **Output**: Returns an `output` array of typed items instead of a `choices` array
+- **Instructions**: Supports a separate `instructions` field as an alternative to a system message in the input array
+
+Use this endpoint when:
+- Using tools or SDKs that target the OpenAI Responses API (e.g. Codex CLI)
+- Building agentic workflows that pass tool calls and tool outputs in a flat item array
+
+For general use and multi-provider support, the [Chat Completions](/api-reference/chat-completion) endpoint is recommended.
+
+## Authentication
+
+```bash
+Authorization: Bearer <api_key>
+```
+
+See the [Authentication](/api-reference/authentication) page for more details.
+
+## Request Format
+
+<ParamField body="model" type="string" required>
+  The model ID to use, with provider prefix.
+
+  Examples: `openai/gpt-4o`, `anthropic/claude-sonnet-4-6`, `google/gemini-2.0-flash`
+</ParamField>
+
+<ParamField body="input" type="string | array" required>
+  The input to the model. Either:
+  - A plain string (treated as a single user message)
+  - An array of input items (messages, function calls, function call outputs)
+
+  <Expandable title="Input item types">
+    **Message item** — a regular conversation turn:
+    ```json
+    {
+      "role": "user" | "assistant" | "system" | "developer",
+      "content": "string or array of content parts"
+    }
+    ```
+
+    Content can be a string or an array of typed parts:
+    - `{"type": "input_text", "text": "..."}` — user input text
+    - `{"type": "output_text", "text": "..."}` — assistant output text
+    - `{"type": "text", "text": "..."}` — generic text part
+
+    **Function call item** — an assistant tool call (to include in conversation history):
+    ```json
+    {
+      "type": "function_call",
+      "call_id": "call_abc123",
+      "name": "get_weather",
+      "arguments": "{\"location\": \"Paris\"}"
+    }
+    ```
+
+    **Function call output item** — the result of a tool call:
+    ```json
+    {
+      "type": "function_call_output",
+      "call_id": "call_abc123",
+      "output": "{\"temperature\": 22}"
+    }
+    ```
+  </Expandable>
+</ParamField>
+
+<ParamField body="instructions" type="string">
+  System-level instruction prepended to the conversation. An alternative to including a `system` role message in the `input` array.
+</ParamField>
+
+<ParamField body="stream" type="boolean" default={false}>
+  Whether to stream the response as Server-Sent Events (SSE).
+</ParamField>
+
+<ParamField body="max_output_tokens" type="integer">
+  Maximum number of tokens to generate.
+</ParamField>
+
+<ParamField body="tools" type="array">
+  Tools available to the model. Uses the Responses API flat format (no nested `function` key).
+
+  <Expandable title="Tool object">
+    <ParamField body="type" type="string" required>
+      Must be `"function"`.
+    </ParamField>
+
+    <ParamField body="name" type="string" required>
+      The name of the function.
+    </ParamField>
+
+    <ParamField body="description" type="string">
+      Description of what the function does.
+    </ParamField>
+
+    <ParamField body="parameters" type="object">
+      JSON Schema object describing the function's parameters.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="tool_choice" type="string | object">
+  Controls tool selection:
+  - `"auto"` — model decides whether to call a tool (default)
+  - `"none"` — model must not call any tool
+  - `"required"` — model must call a tool
+  - `{"type": "function", "name": "tool_name"}` — model must call the specified tool
+</ParamField>
+
+<ParamField body="temperature" type="number">
+  Sampling temperature between 0 and 2. Higher values produce more random outputs.
+</ParamField>
+
+<ParamField body="top_p" type="number">
+  Nucleus sampling probability. Alternative to temperature.
+</ParamField>
+
+## Edgee Extensions
+
+<ParamField body="tags" type="array">
+  List of string tags for categorizing and filtering requests in analytics and logs.
+</ParamField>
+
+<ParamField body="enable_debug" type="boolean">
+  Enable debug mode to include additional information in the response.
+</ParamField>
+
+<ParamField body="compression_model" type="string">
+  Model to use for token compression. See [Token Compression](/features/agentic-compression).
+</ParamField>
+
+<ParamField body="edgee_tool_ids" type="array">
+  List of Edgee-managed tool IDs to include automatically.
+</ParamField>
+
+## Response Format
+
+### Non-Streaming Response
+
+<ResponseField name="id" type="string">
+  Unique identifier for the response, prefixed with `resp_`.
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always `"response"`.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Always `"completed"` for non-streaming responses.
+</ResponseField>
+
+<ResponseField name="created_at" type="number">
+  Unix timestamp (as a float) of when the response was created.
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  The model used to generate the response.
+</ResponseField>
+
+<ResponseField name="output" type="array">
+  Array of output items produced by the model.
+
+  <Expandable title="Output item">
+    <ResponseField name="id" type="string">
+      Item identifier, prefixed with `msg_`.
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      `"message"` for text responses, `"function_call"` for tool calls.
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Always `"completed"`.
+    </ResponseField>
+
+    <ResponseField name="role" type="string">
+      Always `"assistant"`.
+    </ResponseField>
+
+    <ResponseField name="content" type="array">
+      Array of content parts within this output item.
+
+      - `{"type": "output_text", "text": "..."}` — text response
+      - `{"type": "function_call", "id": "...", "name": "...", "arguments": "..."}` — tool call
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="usage" type="object">
+  Token usage statistics.
+
+  <Expandable title="Usage object">
+    <ResponseField name="input_tokens" type="integer">
+      Tokens in the input.
+    </ResponseField>
+
+    <ResponseField name="output_tokens" type="integer">
+      Tokens in the output.
+    </ResponseField>
+
+    <ResponseField name="total_tokens" type="integer">
+      Total tokens used.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### Streaming Response
+
+When `stream: true`, the response is sent as Server-Sent Events (SSE). Each event is a JSON object with a `type` field.
+
+**Event sequence for a text response:**
+
+| Event type | Description |
+|---|---|
+| `response.created` | Stream opened; initial response object with `status: "in_progress"` |
+| `response.output_item.added` | A new output item started (message or function call) |
+| `response.content_part.added` | A new content part started within an output item |
+| `response.output_text.delta` | Incremental text chunk |
+| `response.output_text.done` | Text content complete |
+| `response.content_part.done` | Content part complete |
+| `response.output_item.done` | Output item complete |
+| `response.completed` | Stream complete; final response object with usage |
+
+**Additional events for tool calls:**
+
+| Event type | Description |
+|---|---|
+| `response.output_item.added` | New function call item started |
+| `response.function_call_arguments.delta` | Incremental arguments chunk |
+| `response.function_call_arguments.done` | Arguments complete |
+| `response.output_item.done` | Function call item complete |
+
+## Special Headers
+
+<ParamField header="X-Edgee-Enable-Compression" type="boolean">
+  Enable token compression to reduce token usage. See [Token Compression](/features/agentic-compression).
+</ParamField>
+
+<ParamField header="X-edgee-tags" type="string">
+  Comma-separated list of tags for analytics and logs.
+
+  Example: `X-edgee-tags: production,agent,codex`
+</ParamField>
+
+<ParamField header="X-Edgee-Debug" type="boolean">
+  Enable debug mode for additional response information.
+</ParamField>
+
+## Examples
+
+### Basic Text Input
+
+<CodeGroup>
+```bash cURL
+curl 'https://api.edgee.ai/v1/responses' \
+  -H "Authorization: Bearer $EDGEE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "openai/gpt-4o",
+    "input": "What is the capital of France?"
+  }'
+```
+
+```python Python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_EDGEE_API_KEY",
+    base_url="https://api.edgee.ai/v1"
+)
+
+response = client.responses.create(
+    model="openai/gpt-4o",
+    input="What is the capital of France?"
+)
+
+print(response.output[0].content[0].text)
+```
+
+```typescript TypeScript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: process.env.EDGEE_API_KEY,
+  baseURL: 'https://api.edgee.ai/v1'
+});
+
+const response = await client.responses.create({
+  model: 'openai/gpt-4o',
+  input: 'What is the capital of France?'
+});
+
+console.log(response.output[0].content[0].text);
+```
+</CodeGroup>
+
+### With Instructions and Message Array
+
+<CodeGroup>
+```bash cURL
+curl 'https://api.edgee.ai/v1/responses' \
+  -H "Authorization: Bearer $EDGEE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "openai/gpt-4o",
+    "instructions": "You are a helpful assistant that responds concisely.",
+    "input": [
+      { "role": "user", "content": "Summarize the water cycle in one sentence." }
+    ]
+  }'
+```
+</CodeGroup>
+
+### Streaming
+
+<CodeGroup>
+```bash cURL
+curl 'https://api.edgee.ai/v1/responses' \
+  -H "Authorization: Bearer $EDGEE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "openai/gpt-4o",
+    "stream": true,
+    "input": "Write a short poem about the ocean."
+  }'
+```
+
+```python Python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_EDGEE_API_KEY",
+    base_url="https://api.edgee.ai/v1"
+)
+
+with client.responses.stream(
+    model="openai/gpt-4o",
+    input="Write a short poem about the ocean."
+) as stream:
+    for event in stream:
+        if event.type == "response.output_text.delta":
+            print(event.delta, end="", flush=True)
+```
+</CodeGroup>
+
+### With Tools
+
+<CodeGroup>
+```bash cURL
+curl 'https://api.edgee.ai/v1/responses' \
+  -H "Authorization: Bearer $EDGEE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "openai/gpt-4o",
+    "input": "What is the weather in Paris?",
+    "tools": [
+      {
+        "type": "function",
+        "name": "get_weather",
+        "description": "Get current weather for a location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "City name"
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }'
+```
+</CodeGroup>
+
+### Multi-Turn with Tool Results
+
+<CodeGroup>
+```bash cURL
+curl 'https://api.edgee.ai/v1/responses' \
+  -H "Authorization: Bearer $EDGEE_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "openai/gpt-4o",
+    "input": [
+      { "role": "user", "content": "What is the weather in Paris?" },
+      {
+        "type": "function_call",
+        "call_id": "call_abc123",
+        "name": "get_weather",
+        "arguments": "{\"location\": \"Paris\"}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "call_abc123",
+        "output": "{\"temperature\": 22, \"condition\": \"sunny\"}"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "get_weather",
+        "description": "Get current weather for a location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": { "type": "string" }
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }'
+```
+</CodeGroup>
+
+## Error Handling
+
+See the [Errors](/api-reference/errors) page for details on error responses.
+
+## Related Endpoints
+
+- [Chat Completions](/api-reference/chat-completion) — OpenAI-compatible endpoint for multi-provider support
+- [Anthropic Messages](/api-reference/messages) — Native Anthropic Messages API format
