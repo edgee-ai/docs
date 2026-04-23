@@ -1,10 +1,11 @@
 ---
-title: Fleet
+title: Team management
+sidebarTitle: Team management
 description: Deploy, monitor, and optimize coding agents across your entire engineering team from one place.
 icon: users
 ---
 
-Fleet gives engineering managers a centralized view of every coding agent running in their organization.
+Team management gives engineering managers a centralized view of every coding agent running in their organization.
 Invite teammates, enroll their preferred AI coding tool (Claude Code, Codex, or OpenCode) through the Edgee gateway,
 and track per-member usage,cost, tokens, and requests, all in one dashboard.
 
@@ -30,7 +31,7 @@ and track per-member usage,cost, tokens, and requests, all in one dashboard.
 
   <Card title="Manage keys centrally" icon="key-round">
     Toggle compression, enable debug mode, reveal API keys, or unenroll an agent
-    without leaving the Fleet dashboard.
+    without leaving the Team dashboard.
   </Card>
 </CardGroup>
 
@@ -38,22 +39,22 @@ and track per-member usage,cost, tokens, and requests, all in one dashboard.
 
 Each organization member can have one agent type enrolled (Claude Code, Codex, OpenCode).
 These "coding agents" are linked to the member's email address, that's what groups agents
-into member cards on the Fleet dashboard. When you enroll an agent for a member, Edgee:
+into member cards on the Team dashboard. When you enroll an agent for a member, Edgee:
 
 1. Creates a dedicated API key of the appropriate type
 2. Automatically enables token compression for that agent
 3. Generates ready-to-use setup instructions the member can run immediately
 
 <Frame>
-  <img className="block dark:hidden" src="/images/fleet/fleet-overview-light.png" alt="Fleet dashboard overview" />
-  <img className="hidden dark:block" src="/images/fleet/fleet-overview-dark.png" alt="Fleet dashboard overview (dark mode)" />
+  <img className="block dark:hidden" src="/images/team/team-overview-light.png" alt="Fleet dashboard overview" />
+  <img className="hidden dark:block" src="/images/team/team-overview-dark.png" alt="Fleet dashboard overview (dark mode)" />
 </Frame>
 
 ## Getting Started
 
 <Steps>
   <Step title="Invite your team members">
-    Go to **Fleet** in the sidebar and click **Invite a member**. Enter their email address
+    Go to **Team** in the sidebar and click **Invite a member**. Enter their email address
     and assign a role (Member or Admin). They will receive an invitation email and appear
     as a pending card until they accept.
 
@@ -74,8 +75,8 @@ into member cards on the Fleet dashboard. When you enroll an agent for a member,
     Click **Enroll**. Edgee creates the API key and prepares setup instructions.
 
     <Frame>
-      <img className="block dark:hidden" src="/images/fleet/fleet-enroll-light.png" alt="Enrollment dialog with agent selection" />
-      <img className="hidden dark:block" src="/images/fleet/fleet-enroll-dark.png" alt="Enrollment dialog with agent selection (dark mode)" />
+      <img className="block dark:hidden" src="/images/team/team-enroll-light.png" alt="Enrollment dialog with agent selection" />
+      <img className="hidden dark:block" src="/images/team/team-enroll-dark.png" alt="Enrollment dialog with agent selection (dark mode)" />
     </Frame>
   </Step>
 
@@ -90,7 +91,7 @@ into member cards on the Fleet dashboard. When you enroll an agent for a member,
   </Step>
 </Steps>
 
-## The Fleet Dashboard
+## The Team Dashboard
 
 ### Overview Chart
 
@@ -108,8 +109,8 @@ Each enrolled team member gets a card showing:
 - **Mini chart**: a sparkline of activity distribution over the time range
 
 <Frame>
-  <img className="block dark:hidden" src="/images/fleet/fleet-member-card-light.png" alt="Member card with usage stats and mini chart" />
-  <img className="hidden dark:block" src="/images/fleet/fleet-member-card-dark.png" alt="Member card with usage stats and mini chart (dark mode)" />
+  <img className="block dark:hidden" src="/images/team/team-member-card-light.png" alt="Member card with usage stats and mini chart" />
+  <img className="hidden dark:block" src="/images/team/team-member-card-dark.png" alt="Member card with usage stats and mini chart (dark mode)" />
 </Frame>
 
 ### Sorting and Time Range
@@ -125,7 +126,7 @@ Changing the sort metric re-ranks the member cards and updates the overview char
 
 ## Usage Metrics
 
-Fleet tracks three metrics per member and for the organization as a whole:
+Team management tracks three metrics per member and for the organization as a whole:
 
 | Metric | Description |
 |--------|-------------|
@@ -141,8 +142,8 @@ used to determine whether a member has "never used" their agent key.
 Click the settings icon on any agent badge in a member card to open the management dialog.
 
 <Frame>
-  <img className="block dark:hidden" src="/images/fleet/fleet-manage-light.png" alt="Agent management dialog" />
-  <img className="hidden dark:block" src="/images/fleet/fleet-manage-dark.png" alt="Agent management dialog (dark mode)" />
+  <img className="block dark:hidden" src="/images/team/team-manage-light.png" alt="Agent management dialog" />
+  <img className="hidden dark:block" src="/images/team/team-manage-dark.png" alt="Agent management dialog (dark mode)" />
 </Frame>
 
 ### Token Compression
@@ -191,3 +192,5 @@ will need to be re-enrolled with a new key to use the gateway again.
     Set spending limits and receive alerts when a member or the organization exceeds a threshold.
   </Card>
 </CardGroup>
+
+<EdgeeSdk />
