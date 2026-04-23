@@ -8,6 +8,9 @@
     "light": "#C876FA",
     "dark": "#8924A6"
   },
+  "appearance": {
+    "default": "dark"
+  },
   "favicon": "/favicon.svg",
   "icons": {
     "library": "lucide"
