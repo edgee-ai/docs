@@ -1,0 +1,74 @@
+---
+title: Cursor
+description: Use Edgee with Cursor to access any model through a single API key, with cost tracking and token compression.
+icon: /images/icons/cursor.svg
+---
+
+Edgee's OpenAI-compatible API works seamlessly with Cursor, letting you route AI requests through Edgee to gain observability, cut costs, and access any provider's models from one place.
+
+## Setup
+
+<Steps>
+  <Step title="Open Cursor Settings">
+    In Cursor, go to **Settings → Cursor Settings → Models**.
+  </Step>
+
+  <Step title="Configure your API key">
+    Scroll down to the **API Keys** section and do the following:
+
+    1. Enable **OpenAI API Key**
+    2. Paste in your **Edgee API key**
+    3. Enable **Override OpenAI Base URL**
+    4. Set the base URL to:
+
+    ```
+    https://api.edgee.ai/v1
+    ```
+
+    <Note>
+      You can find your Edgee API key in the [Edgee Console](https://www.edgee.ai).
+    </Note>
+  </Step>
+
+  <Step title="Add a model">
+    Scroll up to **Add or search model** and enter any model from the [Edgee model list](/api-reference/models).
+
+    Click **Add**, then toggle it on.
+
+    <Warning>
+      You must use model IDs from the Edgee model list. Cursor lets you type any string, but only models supported by Edgee will work.
+    </Warning>
+  </Step>
+</Steps>
+
+You're set. Cursor will now route requests through Edgee.
+
+<Note>
+  Token compression is only available when routing through Edgee. You can use your own provider keys via [BYOK](/features/byok) — compression still applies as long as requests go through Edgee.
+</Note>
+
+## Benefits
+
+<CardGroup cols={2}>
+  <Card title="Any model, one key" icon="key">
+    Access models from OpenAI, Anthropic, Mistral, and more using a single Edgee API key.
+  </Card>
+
+  <Card title="Cost reduction" icon="dollar-sign">
+    Edgee's token compression reduces costs by up to 30% on supported models with no change to output quality.
+  </Card>
+
+  <Card title="Observability" icon="chart-line">
+    Every request is logged in the Edgee Console with token counts, latency, and cost breakdowns.
+  </Card>
+
+  <Card title="Reliability" icon="shield-check">
+    Automatic retry and fallback across providers keeps your Cursor sessions running even when a provider has issues.
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+- Browse the [model list](/api-reference/models) to see all available models
+- Set up [observability](/features/observability) to monitor usage and costs
+- Explore [retry and fallback](/features/retry-and-fallback) for resilient routing
