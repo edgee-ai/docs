@@ -107,6 +107,7 @@
             "group": "Features",
             "pages": [
               "features/cli",
+              "features/sessions",
               "features/team",
               "features/claude-compression",
               "features/codex-compression",

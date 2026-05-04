@@ -1,0 +1,109 @@
+---
+title: Sessions
+sidebarTitle: Sessions
+description: Every coding session, captured. Inspect tokens, costs, and compression — and share the report with one link.
+icon: activity
+---
+
+A **session** is one run of your coding agent through Edgee. Every time you `edgee launch claude`, `edgee launch codex`,
+or `edgee launch opencode`, the CLI assigns a unique session ID and captures every request that flows through the gateway
+during that run. When the session ends, you get a link to a detailed report.
+
+<Frame>
+  <img src="/images/session.png" alt="Edgee session page" />
+</Frame>
+
+## What's tracked
+
+Each session records:
+
+- **Tokens** — input, output, total, with per-model breakdown
+- **Cost** — dollar cost computed from real-time provider pricing
+- **Compression** — tokens saved, % reduction, and savings broken down by tool
+- **Requests** — count, errors, average response time, request cadence over time
+- **Duration** — first to last request
+- **Models used** — distribution across Claude, GPT, etc.
+
+## Two views: private and public
+
+Every session has two URLs.
+
+### Private view (org)
+
+`/~/<org-slug>/sessions/<session-id>` — visible only to authenticated members of your organization.
+This is the full view: editable session name, GitHub repo / PRs / commits, request-level logs, error breakdown,
+CLI version, request cadence sparkline.
+
+### Public view
+
+`/sessions/<session-id>` — anyone with the URL can view.
+
+The public page shows:
+
+- Your name and avatar (from the API key's owner)
+- Total requests, tokens, cost, duration
+- Models used and compression savings
+- Per-tool compression breakdown
+
+It does **not** show: session name, GitHub metadata, PR / commit links, individual request payloads, or error details.
+
+<Warning>
+  Sharing a session URL exposes your name, avatar, total cost, tokens, and model usage to anyone who opens the link.
+  Don't share it if any of these are sensitive. The URL is unguessable but unauthenticated — treat it like a public Gist.
+</Warning>
+
+## Sharing
+
+From the session page in the console, click **Share** to:
+
+- **Copy link** to the public URL
+- **Post to X / LinkedIn** with a pre-filled card
+- **Open Graph preview** — when posted to social platforms, the link unfurls into a card showing compression % or
+  token / cost / request stats
+
+Public sessions are also eligible for the [leaderboard](https://www.edgee.ai/leaderboard) — top sessions by
+compression savings, tokens, or cost over the last day, week, or month.
+
+## Enriching sessions with MCP tools
+
+When you run Claude Code or Codex through Edgee, the agent has access to four MCP tools that attach metadata to
+the running session. Use them to make the session report self-documenting: which repo, which PR, which commits.
+
+| Tool | What it does |
+|------|--------------|
+| `setSessionName` | Set a human-readable name (defaults to "Untitled Session") |
+| `setSessionGitHubRepo` | Link the session to a GitHub repo (e.g. `owner/repo`). Requires the org to have linked the repo via the Edgee GitHub App — otherwise silently ignored. |
+| `addSessionPullRequest` | Attach a PR URL or `#number` to the session |
+| `addSessionCommit` | Attach a commit SHA or commit URL to the session |
+
+All four require the session ID, which the CLI exposes to the agent automatically.
+
+### Example: agent self-tags its work
+
+In a `CLAUDE.md` or system prompt, you can instruct the agent:
+
+```md
+At the start of the session, call setSessionName with a 3-6 word summary of the task.
+After every commit, call addSessionCommit with the commit SHA.
+After creating or editing a PR, call addSessionPullRequest with the PR URL.
+```
+
+The session report will then show the task name, the linked repo, every commit made during the session, and any PRs touched —
+without you typing anything in the console.
+
+<Note>
+  `addSessionPullRequest` and `addSessionCommit` are append-only and de-duped. Calling them multiple times with the
+  same value is safe.
+</Note>
+
+## Finding past sessions
+
+- **CLI** — `edgee stats` lists your most recent sessions
+- **Console** — `/~/<org-slug>/sessions` shows the full list with filtering and search
+- **End-of-run link** — every `edgee launch` prints the session URL when the agent exits
+
+## Next steps
+
+- [Edgee CLI](/features/cli) — launch agents and start a session
+- [Observability](/features/observability) — aggregate metrics across all sessions
+- [Team management](/features/team) — see sessions across your whole team
