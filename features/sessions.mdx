@@ -64,15 +64,55 @@ From the session page in the console, click **Share** to:
 Public sessions are also eligible for the [leaderboard](https://www.edgee.ai/leaderboard) — top sessions by
 compression savings, tokens, or cost over the last day, week, or month.
 
+## Linking sessions to GitHub
+
+Sessions can be tied to the actual code work they produced — the repository, the pull requests opened or edited,
+and the commits made. Once linked, the session report shows clickable links to GitHub right next to the token
+and cost stats.
+
+### Prerequisite: install the Edgee GitHub App
+
+Repository linking only works for repos your organization has connected via the **Edgee GitHub App**. Without the
+App, calls to `setSessionGitHubRepo` are silently ignored (the API returns `ignored`) and no repo appears on the
+session page.
+
+To install:
+
+1. Go to **Settings → Integrations → GitHub** in the Edgee Console
+2. Click **Install GitHub App** and select the org and repos you want to link
+3. Approve on GitHub
+
+Repos selected during install become eligible. You can update the selection from GitHub's App settings later.
+
+### What gets shown
+
+Once a session has GitHub metadata attached, the private session page displays:
+
+- **Repo** — `owner/repo`, linked to GitHub
+- **Pull requests** — every PR URL or `#number` attached during the session, clickable
+- **Commits** — every commit SHA or commit URL, clickable
+
+This makes the session a self-contained record of "what the agent did" — code-level changes alongside
+token / cost / compression metrics.
+
+### How metadata gets attached
+
+There are two paths:
+
+- **Automatic, by the agent** — Claude Code or Codex calls the MCP tools below during the session
+- **Manual** — you call the [Triggers API](https://docs.edgee.ai/api-reference) or use a custom script
+
+The agent path is the common one. The MCP tools are documented in the next section.
+
 ## Enriching sessions with MCP tools
 
 When you run Claude Code or Codex through Edgee, the agent has access to four MCP tools that attach metadata to
-the running session. Use them to make the session report self-documenting: which repo, which PR, which commits.
+the running session.
 
 | Tool | What it does |
 |------|--------------|
 | `setSessionName` | Set a human-readable name (defaults to "Untitled Session") |
-| `setSessionGitHubRepo` | Link the session to a GitHub repo (e.g. `owner/repo`). Requires the org to have linked the repo via the Edgee GitHub App — otherwise silently ignored. |
+| `setSessionGitHubRepo` | Link the session to a GitHub repo (e.g. `owner/repo`). Requires the org to have the Edgee GitHub App installed for that repo — otherwise silently ignored. |
 | `addSessionPullRequest` | Attach a PR URL or `#number` to the session |
 | `addSessionCommit` | Attach a commit SHA or commit URL to the session |
 
