@@ -124,6 +124,7 @@
               "integrations/claude-code",
               "integrations/codex",
               "integrations/opencode",
+              "integrations/cursor",
               "integrations/anthropic-sdk",
               "integrations/openai-sdk",
               "integrations/langchain"
