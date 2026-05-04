@@ -97,12 +97,8 @@ token / cost / compression metrics.
 
 ### How metadata gets attached
 
-There are two paths:
-
-- **Automatic, by the agent** — Claude Code or Codex calls the MCP tools below during the session
-- **Manual** — you call the [Triggers API](https://docs.edgee.ai/api-reference) or use a custom script
-
-The agent path is the common one. The MCP tools are documented in the next section.
+The agent attaches GitHub metadata itself: Claude Code or Codex calls the MCP tools below during the session.
+The MCP tools are documented in the next section.
 
 ## Enriching sessions with MCP tools
 
