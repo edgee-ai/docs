@@ -137,6 +137,44 @@ Team management tracks three metrics per member and for the organization as a wh
 All metrics respect the selected time range. Lifetime totals (across all time) are also
 used to determine whether a member has "never used" their agent key.
 
+## GitHub activity
+
+When your organization installs the **Edgee GitHub App** and your agents tag their sessions with the
+repo and pull request they're working on, the team dashboard rolls those sessions up into per-repo and
+per-PR breakdowns. Engineering leaders can answer "which repo is consuming the most tokens this week?"
+or "how much did we spend on PR #1234?" without leaving the page.
+
+<Note>
+  Sessions are tagged via four MCP tools (`setSessionGitHubRepo`, `addSessionPullRequest`,
+  `addSessionCommit`, `setSessionName`) that the agent calls during the run. See
+  [Sessions → Linking sessions to GitHub](/features/sessions#linking-sessions-to-github)
+  for the install steps and the agent-side configuration.
+</Note>
+
+### Top repositories
+
+The right column of the dashboard surfaces a compact **Top repositories** list ranked by session count
+in the selected period. Click a row to open the repo on GitHub.
+
+If GitHub isn't connected yet, the widget shows a "Connect GitHub" prompt linking to
+**Settings → Integrations → GitHub**. If GitHub is connected but no agent has tagged a session in the
+selected period, it shows "No repository activity in this period" — switch the time range to widen the
+window.
+
+### Repository and pull request cards
+
+Below the team leaderboard, two card grids show per-repo and per-PR activity for the selected period:
+
+- **Repositories** — one card per linked repo with active sessions in the period. Each card shows the
+  primary metric (cost / tokens / requests, switches with the dashboard sort), session count,
+  total tokens, requests, cost, savings, and last activity. Click to open the repo on GitHub.
+- **Pull requests** — one card per `(repo, PR)` pair touched by an agent in the period. Same fields as
+  the repo card. Click to open the pull request on GitHub.
+
+Both sections track the dashboard's time range and sort metric — change the period and the cards
+refetch with a brief pulse indicator. Sessions are attributed to a repo or PR only when the agent
+actually called the matching MCP tool during that session.
+
 ## Managing Enrolled Agents
 
 Click the settings icon on any agent badge in a member card to open the management dialog.
